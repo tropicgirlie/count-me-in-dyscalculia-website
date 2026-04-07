@@ -176,14 +176,14 @@ export function ToolsAppsPage() {
               <span className="text-gradient">Tools That Help</span>
             </h1>
 
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <p className="text-lg text-foreground/80 leading-relaxed">
               Practical apps and assistive technology designed for brains that process numbers differently. 
               From calculators that speak aloud to timers you can see, not read.
             </p>
 
             {/* Search */}
             <div className="max-w-md mx-auto relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-foreground/70" />
               <input
                 type="text"
                 placeholder="Search tools..."
@@ -207,7 +207,7 @@ export function ToolsAppsPage() {
                 className={`px-4 py-2 rounded-full text-sm transition-all duration-200 ${
                   selectedCategory === cat
                     ? "bg-primary text-white shadow-lg"
-                    : "bg-card border text-muted-foreground hover:text-foreground hover:border-primary/40"
+                    : "bg-card border text-foreground/80 hover:text-foreground hover:border-primary/40"
                 }`}
                 style={{ fontWeight: 500 }}
               >
@@ -221,7 +221,7 @@ export function ToolsAppsPage() {
       {/* Results Count */}
       <section className="py-6">
         <div className="container-custom">
-          <p className="text-center text-muted-foreground text-sm">
+          <p className="text-center text-foreground/70 text-sm">
             {filtered.length} {filtered.length === 1 ? "tool" : "tools"} found
           </p>
         </div>
@@ -269,7 +269,7 @@ export function ToolsAppsPage() {
                       </div>
                     </div>
 
-                    <p className="text-muted-foreground leading-relaxed mb-4">
+                    <p className="text-foreground/80 leading-relaxed mb-4">
                       {tool.description}
                     </p>
 
@@ -277,14 +277,14 @@ export function ToolsAppsPage() {
                       <p className="text-sm text-primary mb-1" style={{ fontWeight: 600 }}>
                         Best for
                       </p>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-sm text-foreground/70">
                         {tool.bestFor}
                       </p>
                     </div>
 
                     <div className="space-y-2 mb-4">
                       {tool.features.slice(0, 3).map((feature, i) => (
-                        <div key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <div key={i} className="flex items-center gap-2 text-sm text-foreground/70">
                           <CheckCircle className="h-3.5 w-3.5 text-primary flex-shrink-0" />
                           {feature}
                         </div>
@@ -292,7 +292,7 @@ export function ToolsAppsPage() {
                     </div>
 
                     <div className="flex items-center justify-between pt-4 border-t border-border/30">
-                      <span className="text-xs text-muted-foreground">
+                      <span className="text-xs text-foreground/70">
                         {tool.platform}
                       </span>
                       <a

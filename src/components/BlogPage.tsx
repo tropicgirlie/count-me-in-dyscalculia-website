@@ -178,7 +178,7 @@ export function BlogPage() {
                 className={`px-4 py-2 rounded-full text-sm transition-all duration-200 ${
                   selectedCategory === cat
                     ? "bg-primary text-white shadow-lg"
-                    : "bg-card border text-muted-foreground hover:text-foreground hover:border-primary/40"
+                    : "bg-card border text-foreground/80 hover:text-foreground hover:border-primary/40"
                 }`}
                 style={{ fontWeight: 500 }}
               >
@@ -215,18 +215,18 @@ export function BlogPage() {
                       >
                         {post.category}
                       </Badge>
-                      <span className="text-xs text-muted-foreground flex items-center gap-1">
+                      <span className="text-xs text-foreground/70 flex items-center gap-1">
                         <Clock className="h-3 w-3" />
                         {post.readTime}
                       </span>
-                      <span className="text-xs text-muted-foreground">
+                      <span className="text-xs text-foreground/70">
                         {post.date}
                       </span>
                     </div>
                     <h3 className="text-xl mb-3 group-hover:text-primary transition-colors">
                       {post.title}
                     </h3>
-                    <p className="text-muted-foreground leading-relaxed">
+                    <p className="text-foreground/80 leading-relaxed">
                       {post.excerpt}
                     </p>
                     <div className="mt-4">
@@ -254,7 +254,7 @@ export function BlogPage() {
 
           {filtered.length === 0 ? (
             <div className="text-center py-16">
-              <p className="text-lg text-muted-foreground mb-4">
+              <p className="text-lg text-foreground/80 mb-4">
                 No articles match your search.
               </p>
               <Button
@@ -292,7 +292,7 @@ export function BlogPage() {
                       >
                         {post.category}
                       </Badge>
-                      <span className="text-xs text-muted-foreground flex items-center gap-1">
+                      <span className="text-xs text-foreground/70 flex items-center gap-1">
                         <Clock className="h-3 w-3" />
                         {post.readTime}
                       </span>
@@ -300,7 +300,7 @@ export function BlogPage() {
                     <h3 className="text-base mb-2 group-hover:text-primary transition-colors" style={{ fontWeight: 600 }}>
                       {post.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
+                    <p className="text-sm text-foreground/80 leading-relaxed line-clamp-3">
                       {post.excerpt}
                     </p>
                     <div className="mt-3">
@@ -322,7 +322,7 @@ export function BlogPage() {
         <div className="container-custom">
           <div className="text-center p-12 bg-gradient-to-r from-primary/5 to-accent/5 rounded-2xl border">
             <h2 className="text-3xl mb-4">Stay in the Loop</h2>
-            <p className="text-muted-foreground mb-8 max-w-2xl mx-auto text-lg leading-relaxed">
+            <p className="text-foreground/80 mb-8 max-w-2xl mx-auto text-lg leading-relaxed">
               New articles, strategies, and resources, delivered with care and
               zero spam. Join the Count Me In community.
             </p>
@@ -336,7 +336,7 @@ export function BlogPage() {
                 Subscribe
               </Button>
             </div>
-            <p className="text-xs text-muted-foreground mt-3">
+            <p className="text-xs text-foreground/70 mt-3">
               No spam, ever. Unsubscribe anytime.
             </p>
           </div>

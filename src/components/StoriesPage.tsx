@@ -1,5 +1,4 @@
 import { Link } from "react-router";
-import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 import {
@@ -89,18 +88,20 @@ export function StoriesPage() {
   return (
     <div>
       {/* Hero */}
-      <section className="pt-24 pb-16 relative overflow-hidden">
-        <div className="absolute inset-0 gradient-mesh" />
-        <div className="absolute top-32 right-0 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-[100px] pointer-events-none" />
+      <section className="pt-24 pb-16 relative overflow-hidden bg-[#F6EFE2]">
+        <div className="absolute inset-0 opacity-55">
+          <img src="/abstracthero.png" alt="" className="h-full w-full object-cover object-center" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#F6EFE2]/90 via-[#F6EFE2]/82 to-[#F6EFE2]" />
+        </div>
         <div className="container-custom relative z-10">
           <div className="text-center space-y-5 max-w-2xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/[0.08] border border-accent/15">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full tape-label">
               <Heart className="h-3.5 w-3.5 text-accent" />
               <span className="text-[13px] text-accent" style={{ fontWeight: 500 }}>Stories & Faces of Dyscalculia</span>
             </div>
 
             <h1 className="text-[2.5rem] lg:text-[3.25rem] leading-[1.05] tracking-tight">
-              <span className="text-gradient">You're Not Alone</span>
+              <span className="text-[#173F46]">You're Not Alone</span>
             </h1>
 
             <p className="text-lg text-muted-foreground leading-relaxed">
@@ -114,10 +115,10 @@ export function StoriesPage() {
 
       {/* Famous People */}
       <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-muted/20 to-background" />
+        <div className="absolute inset-0 bg-[#F6EFE2]/35" />
         <div className="container-custom relative z-10">
           <div className="text-center mb-14 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/[0.08] border border-primary/15">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full tape-label">
               <Sparkles className="h-3.5 w-3.5 text-primary" />
               <span className="text-[13px] text-primary" style={{ fontWeight: 500 }}>Famous Faces</span>
             </div>
@@ -129,13 +130,10 @@ export function StoriesPage() {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {famousPeople.map((person) => (
-              <Card
-                key={person.name}
-                className="border-0 shadow-custom hover:shadow-hover transition-all duration-300 hover:-translate-y-1"
-              >
+              <Card key={person.name} className="paper-card transition-all duration-300 hover:-translate-y-1 hover:shadow-custom">
                 <CardContent className="p-7">
                   <div className="flex items-start gap-4 mb-4">
-                    <div className="p-2.5 bg-primary/10 rounded-xl flex-shrink-0">
+                    <div className="relative z-10 p-2.5 bg-primary/10 rounded-xl flex-shrink-0">
                       <person.icon className="h-5 w-5 text-primary" />
                     </div>
                     <div>
@@ -146,7 +144,7 @@ export function StoriesPage() {
                     </div>
                   </div>
 
-                  <blockquote className="text-sm leading-relaxed italic text-foreground/80 mb-4 pl-4 border-l-2 border-primary/20">
+                  <blockquote className="relative z-10 text-sm leading-relaxed italic text-foreground/80 mb-4 pl-4 border-l-2 border-primary/20">
                     "{person.quote}"
                   </blockquote>
 
@@ -172,7 +170,7 @@ export function StoriesPage() {
       {/* CTA */}
       <section className="py-20">
         <div className="container-custom">
-          <div className="text-center p-12 bg-gradient-to-r from-primary/5 to-accent/5 rounded-2xl border">
+          <div className="text-center p-12 paper-surface rounded-2xl">
             <h2 className="text-3xl mb-4">Think This Might Be You?</h2>
             <p className="text-muted-foreground mb-8 max-w-2xl mx-auto text-lg leading-relaxed">
               Reading these stories and seeing yourself in them? Our self-check

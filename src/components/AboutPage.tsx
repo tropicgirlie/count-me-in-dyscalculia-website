@@ -1,8 +1,6 @@
 import { useRef } from "react";
 import { Link } from "react-router";
-import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Heart, BookOpen, Users, ArrowRight, Lightbulb, Globe } from "lucide-react";
 import { usePageMeta } from "../lib/usePageMeta";
 
@@ -93,9 +91,12 @@ export function AboutPage() {
   return (
     <div>
       {/* Hero */}
-      <section className="pt-24 pb-20 relative overflow-hidden">
-        <div className="absolute inset-0 gradient-mesh" />
-        <div className="absolute top-32 -right-32 w-[500px] h-[500px] bg-primary/[0.04] rounded-full blur-[100px] pointer-events-none" />
+      <section className="pt-24 pb-20 relative overflow-hidden bg-[#F6EFE2]">
+        <div className="absolute inset-0 opacity-70">
+          <img src="/differentbydesign2.png" alt="" className="h-full w-full object-cover object-center" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#F6EFE2] via-[#F6EFE2]/88 to-[#F6EFE2]/35" />
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent" />
+        </div>
 
         <div className="container-custom relative z-10">
           <div
@@ -103,14 +104,14 @@ export function AboutPage() {
             className={`grid lg:grid-cols-2 gap-12 lg:gap-16 items-center transition-all duration-1000 ${heroAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
           >
             <div className="space-y-7">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/[0.08] border border-primary/15">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full tape-label">
                 <span className="w-2 h-2 bg-primary rounded-full" />
                 <span className="text-[13px] text-primary" style={{ fontWeight: 500 }}>About Count Me In</span>
               </div>
 
               <div className="space-y-4">
                 <h1 className="text-[2.5rem] lg:text-[3.25rem] leading-[1.05] tracking-tight">
-                  <span className="text-gradient">A late diagnosis</span>
+                  <span className="text-[#173F46]">A late diagnosis</span>
                   <span className="block mt-2 text-muted-foreground text-xl lg:text-2xl" style={{ fontWeight: 500 }}>
                     turned into a mission for clarity
                   </span>
@@ -140,13 +141,12 @@ export function AboutPage() {
             </div>
 
             <div className="flex items-center justify-center">
-              <div className="relative rounded-3xl overflow-hidden shadow-elevated w-full max-w-md lg:max-w-full">
-                <ImageWithFallback
-                  src="https://images.unsplash.com/photo-1742210959222-cfedb9cfa88a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b21hbiUyMHdvcmtpbmclMjBsYXB0b3AlMjBjb3p5JTIwaG9tZSUyMG9mZmljZXxlbnwxfHx8fDE3NzMwOTY3NTd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                  alt="Woman working on a laptop at a cozy home office"
-                  className="w-full"
+              <div className="relative paper-surface rounded-3xl p-2 overflow-hidden w-full max-w-md lg:max-w-full">
+                <img
+                  src="/differentbydesign2.png"
+                  alt="A calm workspace with visual planning supports, a calculator, checklist, and color-coded information."
+                  className="w-full rounded-2xl"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-foreground/5 to-transparent" />
               </div>
             </div>
           </div>
@@ -155,13 +155,13 @@ export function AboutPage() {
 
       {/* Timeline */}
       <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-muted/20 to-background" />
+        <div className="absolute inset-0 bg-[#F6EFE2]/35" />
         <div className="container-custom relative z-10">
           <div
             ref={timelineAnim.ref}
             className={`text-center mb-16 transition-all duration-700 ${timelineAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
           >
-            <p className="text-xs text-primary uppercase tracking-widest mb-3" style={{ fontWeight: 600 }}>The journey</p>
+            <p className="mx-auto mb-3 inline-flex rounded-full px-3 py-1.5 text-xs uppercase tracking-widest tape-label" style={{ fontWeight: 600 }}>The journey</p>
             <h2 className="text-3xl lg:text-4xl tracking-tight mb-4">My Journey to Diagnosis</h2>
             <p className="text-muted-foreground max-w-md mx-auto">
               The winding road from 'bad at maths' to understanding dyscalculia
@@ -208,7 +208,7 @@ export function AboutPage() {
             ref={valuesAnim.ref}
             className={`text-center mb-14 transition-all duration-700 ${valuesAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
           >
-            <p className="text-xs text-primary uppercase tracking-widest mb-3" style={{ fontWeight: 600 }}>Our principles</p>
+            <p className="mx-auto mb-3 inline-flex rounded-full px-3 py-1.5 text-xs uppercase tracking-widest tape-label" style={{ fontWeight: 600 }}>Our principles</p>
             <h2 className="text-3xl lg:text-4xl tracking-tight mb-4">What Drives Count Me In</h2>
             <p className="text-muted-foreground max-w-md mx-auto">
               The principles behind every resource, article, and recommendation
@@ -219,14 +219,14 @@ export function AboutPage() {
             {values.map((value, index) => (
               <div
                 key={index}
-                className={`p-7 rounded-2xl bg-gradient-to-br ${value.gradient} border border-border/30 hover:border-border/60 transition-all duration-300 hover:shadow-custom hover:-translate-y-1 ${valuesAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+                className={`paper-card p-7 rounded-2xl transition-all duration-300 hover:shadow-custom hover:-translate-y-1 ${valuesAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
-                <div className={`w-11 h-11 rounded-xl ${value.iconColor} flex items-center justify-center mb-4`}>
+                <div className={`relative z-10 w-11 h-11 rounded-xl ${value.iconColor} flex items-center justify-center mb-4`}>
                   <value.icon className="h-5 w-5" />
                 </div>
-                <h3 className="text-[15px] mb-2" style={{ fontWeight: 600 }}>{value.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <h3 className="relative z-10 text-[15px] mb-2 text-[#173F46]" style={{ fontWeight: 600 }}>{value.title}</h3>
+                <p className="relative z-10 text-sm text-[#496568] leading-relaxed">
                   {value.description}
                 </p>
               </div>
@@ -237,13 +237,13 @@ export function AboutPage() {
 
       {/* About Luana */}
       <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-muted/20 to-background" />
+        <div className="absolute inset-0 bg-[#F6EFE2]/35" />
         <div className="container-custom relative z-10">
           <div
             ref={luanaAnim.ref}
             className={`max-w-2xl mx-auto text-center space-y-6 transition-all duration-700 ${luanaAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/[0.08] border border-accent/15">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full tape-label">
               <span className="w-2 h-2 bg-accent rounded-full" />
               <span className="text-[13px] text-accent" style={{ fontWeight: 500 }}>The person behind it</span>
             </div>
@@ -283,7 +283,7 @@ export function AboutPage() {
       {/* CTA */}
       <section className="py-20">
         <div className="container-custom">
-          <div className="text-center p-12 lg:p-16 rounded-3xl bg-gradient-to-br from-primary/[0.06] via-background to-accent/[0.04] border border-primary/10">
+          <div className="text-center p-12 lg:p-16 rounded-3xl paper-surface">
             <h2 className="text-3xl tracking-tight mb-4">Ready to Explore?</h2>
             <p className="text-muted-foreground mb-8 max-w-lg mx-auto text-lg leading-relaxed">
               Whether you're newly diagnosed, suspecting dyscalculia, or

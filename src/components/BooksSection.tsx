@@ -38,18 +38,18 @@ export function BooksSection() {
 
   return (
     <section className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-background to-muted/10" />
+      <div className="absolute inset-0 bg-[#F6EFE2]/25" />
       <div className="container-custom relative z-10">
         {/* Section Header */}
         <div
           ref={headerAnim.ref}
           className={`text-center mb-14 transition-all duration-700 ${headerAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/[0.08] border border-primary/15 mb-5">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full tape-label mb-5">
             <Library className="h-3.5 w-3.5 text-primary" />
             <span className="text-[13px] text-primary" style={{ fontWeight: 500 }}>Essential Reading</span>
           </div>
-          <h2 className="text-3xl lg:text-4xl tracking-tight mb-5">Essential Reading on Dyscalculia</h2>
+          <h2 className="text-3xl lg:text-4xl tracking-tight mb-5 text-[#173F46]">Essential Reading on Dyscalculia</h2>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
             Carefully curated selection of valuable books, from academic research to practical guides.
           </p>
@@ -60,12 +60,12 @@ export function BooksSection() {
           {books.map((book, index) => (
             <div
               key={index}
-              className={`group p-0 rounded-2xl bg-card border border-border/40 hover:border-primary/20 overflow-hidden transition-all duration-300 hover:shadow-custom hover:-translate-y-1 ${gridAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+              className={`group p-0 paper-card rounded-2xl hover:border-primary/20 overflow-hidden transition-all duration-300 hover:shadow-custom hover:-translate-y-1 ${gridAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
               style={{ transitionDelay: `${index * 60}ms` }}
             >
               <div className="flex flex-col md:flex-row">
                 {/* Book Cover */}
-                <div className="md:w-44 h-56 md:h-auto relative overflow-hidden bg-gradient-to-br from-muted to-muted/50 flex-shrink-0">
+                <div className="md:w-44 h-56 md:h-auto relative overflow-hidden bg-[#D7E6E3] flex-shrink-0">
                   <ImageWithFallback
                     src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400"
                     alt={`${book.title} book cover`}
@@ -130,7 +130,7 @@ export function BooksSection() {
         </div>
 
         {/* Free Resources */}
-        <div className="rounded-3xl bg-gradient-to-br from-muted/40 to-muted/20 border border-border/30 p-8 lg:p-10">
+        <div className="paper-surface rounded-3xl p-8 lg:p-10">
           <div className="text-center mb-8">
             <h3 className="text-xl lg:text-2xl tracking-tight mb-3" style={{ fontWeight: 600 }}>Free Resources</h3>
             <p className="text-sm text-muted-foreground max-w-lg mx-auto">
@@ -188,7 +188,7 @@ export function BooksSection() {
                 href={resource.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block p-4 bg-card rounded-xl border border-border/30 hover:border-primary/20 hover:shadow-custom transition-all duration-300 group hover:-translate-y-0.5"
+                className="block p-4 paper-card rounded-xl hover:shadow-custom transition-all duration-300 group hover:-translate-y-0.5"
               >
                 <div className="flex items-start justify-between mb-2">
                   <h4 className="text-sm group-hover:text-primary transition-colors" style={{ fontWeight: 600 }}>

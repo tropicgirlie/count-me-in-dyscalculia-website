@@ -157,14 +157,14 @@ export function AccommodationsSection() {
 
   return (
     <section className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-background to-muted/20" />
+      <div className="absolute inset-0 bg-[#F6EFE2]/35" />
       <div className="container-custom relative z-10">
         {/* Section Header */}
         <div
           ref={headerAnim.ref}
           className={`text-center mb-14 transition-all duration-700 ${headerAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/[0.08] border border-primary/15 mb-5">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full tape-label mb-5">
             <Sparkles className="h-3.5 w-3.5 text-primary" />
             <span className="text-[13px] text-primary" style={{ fontWeight: 500 }}>Practical Support</span>
           </div>
@@ -175,7 +175,7 @@ export function AccommodationsSection() {
         </div>
 
         {/* Pro tip */}
-        <div className="mb-12 p-5 rounded-2xl bg-primary/[0.04] border border-primary/10 flex items-start gap-4 max-w-4xl mx-auto">
+        <div className="mb-12 p-5 paper-surface rounded-2xl flex items-start gap-4 max-w-4xl mx-auto">
           <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
             <Lightbulb className="h-5 w-5 text-primary" />
           </div>
@@ -198,7 +198,7 @@ export function AccommodationsSection() {
                 className={`w-full flex items-center gap-3 p-3.5 rounded-xl text-left transition-all duration-300 group
                   ${expandedCategory === cat.id
                     ? 'bg-primary text-white shadow-sm'
-                    : 'bg-card border border-border/40 hover:border-border/60 hover:shadow-custom'
+                    : 'paper-card hover:shadow-custom'
                   }`}
               >
                 <div className={`p-2 rounded-lg transition-colors ${
@@ -227,7 +227,7 @@ export function AccommodationsSection() {
                 {categories
                   .find(c => c.id === expandedCategory)
                   ?.strategies.map((strategy, idx) => (
-                    <div key={idx} className="p-6 rounded-2xl bg-card border border-border/40 hover:border-border/60 transition-all duration-300 hover:shadow-custom">
+                    <div key={idx} className="p-6 paper-card rounded-2xl hover:border-border/60 transition-all duration-300 hover:shadow-custom">
                       <div className="flex items-start gap-3">
                         <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                         <div className="space-y-3 flex-1">
@@ -242,7 +242,7 @@ export function AccommodationsSection() {
                             <div className="flex flex-wrap items-center gap-1.5">
                               <Smartphone className="h-3.5 w-3.5 text-muted-foreground/40 mr-0.5" />
                               {strategy.tools.map((tool, tIdx) => (
-                                <span key={tIdx} className="text-[11px] text-muted-foreground bg-muted/50 px-2.5 py-1 rounded-full border border-border/30">
+                                <span key={tIdx} className="text-[11px] text-[#496568] bg-white/60 px-2.5 py-1 rounded-full border border-[#173F46]/10">
                                   {tool}
                                 </span>
                               ))}
@@ -262,7 +262,7 @@ export function AccommodationsSection() {
         </div>
 
         {/* Bottom CTA */}
-        <div className="text-center mt-20 p-10 rounded-3xl bg-gradient-to-br from-primary/[0.06] to-accent/[0.04] border border-primary/10">
+        <div className="text-center mt-20 p-10 paper-surface rounded-3xl">
           <h3 className="text-xl mb-3" style={{ fontWeight: 600 }}>Want the complete accommodation toolkit?</h3>
           <p className="text-muted-foreground mb-6 max-w-lg mx-auto">
             "Numbers Out of Place" includes printable templates, workplace accommodation letter drafts,

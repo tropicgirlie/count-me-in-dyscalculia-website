@@ -3,7 +3,6 @@ import { Link } from "react-router";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
 import {
   ExternalLink,
   ArrowRight,
@@ -166,19 +165,19 @@ export function GetAssessedPage() {
     <div>
       {/* Hero */}
       <section className="pt-24 pb-16 relative overflow-hidden">
-        <div className="absolute inset-0 gradient-mesh" />
+        <div className="absolute inset-0 bg-[#F6EFE2]/60" />
         <div className="absolute top-32 -left-32 w-[500px] h-[500px] bg-primary/[0.04] rounded-full blur-[100px] pointer-events-none" />
         <div className="container-custom relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-7">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/[0.08] border border-primary/15">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full tape-label">
                 <span className="w-2 h-2 bg-primary rounded-full" />
                 <span className="text-[13px] text-primary" style={{ fontWeight: 500 }}>Get Assessed</span>
               </div>
 
               <div className="space-y-3">
                 <h1 className="text-[2.5rem] lg:text-[3.25rem] leading-[1.05] tracking-tight">
-                  <span className="text-gradient">Professional Assessment</span>
+                  <span className="text-[#173F46]">Professional Assessment</span>
                 </h1>
                 <p className="text-xl text-muted-foreground" style={{ fontWeight: 500 }}>
                   The key to understanding and support
@@ -210,11 +209,11 @@ export function GetAssessedPage() {
             </div>
 
             <div className="flex items-center justify-center">
-              <div className="relative bg-gradient-to-br from-primary/5 to-accent/5 rounded-2xl p-5 overflow-hidden w-full max-w-md lg:max-w-full">
-                <ImageWithFallback
-                  src="https://images.unsplash.com/photo-1593444286621-98245b7d4530?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwc3ljaG9sb2d5JTIwYXNzZXNzbWVudCUyMG9mZmljZSUyMHByb2Zlc3Npb25hbHxlbnwxfHx8fDE3NzMwOTY3NTh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                  alt="Professional office setting representing a supportive assessment environment"
-                  className="w-full rounded-lg shadow-2xl"
+              <div className="relative paper-surface rounded-2xl p-2 overflow-hidden w-full max-w-md lg:max-w-full">
+                <img
+                  src="/differentbydesign2.png"
+                  alt="A calm workspace with visual planning supports, calculator, checklist, and color-coded information."
+                  className="w-full rounded-xl"
                 />
               </div>
             </div>
@@ -223,7 +222,7 @@ export function GetAssessedPage() {
       </section>
 
       {/* Steps */}
-      <section className="py-20 bg-muted/20 border-y border-border/30">
+      <section className="py-20 bg-[#F6EFE2]/35">
         <div className="container-custom">
           <div className="text-center mb-12">
             <h2 className="text-3xl mb-4">How to Get Assessed</h2>
@@ -234,10 +233,7 @@ export function GetAssessedPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
             {steps.map((step, index) => (
-              <Card
-                key={index}
-                className="border-0 shadow-custom hover:shadow-hover transition-all duration-300 hover:-translate-y-1"
-              >
+              <Card key={index} className="paper-card transition-all duration-300 hover:-translate-y-1 hover:shadow-custom">
                 <CardContent className="p-6 text-center">
                   <div className="p-3 bg-primary/10 rounded-xl w-fit mx-auto mb-4">
                     <step.icon className="h-6 w-6 text-primary" />
@@ -272,7 +268,7 @@ export function GetAssessedPage() {
                 className={`px-4 py-2.5 rounded-full text-sm transition-all duration-200 ${
                   selectedRegion === region
                     ? "bg-primary text-white shadow-lg"
-                    : "bg-card border text-muted-foreground hover:text-foreground hover:border-primary/40"
+                    : "paper-card text-muted-foreground hover:text-foreground hover:border-primary/40"
                 }`}
                 style={{ fontWeight: 500 }}
               >
@@ -283,10 +279,7 @@ export function GetAssessedPage() {
 
           <div className="space-y-4 max-w-4xl mx-auto">
             {filtered.map((provider) => (
-              <Card
-                key={provider.name}
-                className="shadow-custom hover:shadow-hover transition-all duration-200"
-              >
+              <Card key={provider.name} className="paper-card transition-all duration-200 hover:shadow-custom">
                 <CardContent className="p-6">
                   <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
                     <div className="flex-1">
@@ -363,7 +356,7 @@ export function GetAssessedPage() {
           </div>
 
           {/* Pricing Disclaimer */}
-          <div className="max-w-4xl mx-auto mt-8 p-4 bg-muted/50 rounded-xl border border-muted">
+          <div className="max-w-4xl mx-auto mt-8 p-4 paper-surface rounded-xl">
             <div className="flex gap-3">
               <AlertTriangle className="h-5 w-5 text-muted-foreground flex-shrink-0 mt-0.5" />
               <p className="text-sm text-muted-foreground">
@@ -378,7 +371,7 @@ export function GetAssessedPage() {
       </section>
 
       {/* What to Expect */}
-      <section className="py-20 bg-muted/20 border-y border-border/30">
+      <section className="py-20 bg-[#F6EFE2]/35">
         <div className="container-custom max-w-3xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl mb-4">What to Expect</h2>
@@ -405,7 +398,7 @@ export function GetAssessedPage() {
                   "You'll receive a detailed report with findings, a diagnosis (if applicable), and tailored recommendations for accommodations and strategies.",
               },
             ].map((item, i) => (
-              <Card key={i} className="shadow-custom">
+              <Card key={i} className="paper-card">
                 <CardContent className="p-6">
                   <h3 className="text-lg mb-2" style={{ fontWeight: 600 }}>{item.title}</h3>
                   <p className="text-muted-foreground leading-relaxed">
@@ -421,7 +414,7 @@ export function GetAssessedPage() {
       {/* CTA */}
       <section className="py-20">
         <div className="container-custom">
-          <div className="text-center p-12 bg-gradient-to-r from-primary/5 to-accent/5 rounded-2xl border">
+          <div className="text-center p-12 paper-surface rounded-2xl">
             <h2 className="text-3xl mb-4">Not Sure Yet?</h2>
             <p className="text-muted-foreground mb-8 max-w-2xl mx-auto text-lg leading-relaxed">
               That's completely okay. Start with our self-check to reflect on

@@ -34,9 +34,11 @@ const StorePage = lazy(() =>
 const AdminPage = lazy(() =>
   import("./components/AdminPage").then((m) => ({ default: m.AdminPage }))
 );
-
 const ToolsAppsPage = lazy(() =>
   import("./components/ToolsAppsPage").then((m) => ({ default: m.ToolsAppsPage }))
+);
+const ContactPage = lazy(() =>
+  import("./components/ContactPage").then((m) => ({ default: m.ContactPage }))
 );
 
 export const router = createBrowserRouter([
@@ -50,23 +52,12 @@ export const router = createBrowserRouter([
       { path: "get-assessed", Component: GetAssessedPage },
       { path: "stories", Component: StoriesPage },
       { path: "blog", Component: BlogPage },
+      { path: "tools", Component: ToolsAppsPage },
+      { path: "ebook", Component: EbookPage },
+      { path: "free-resources", Component: FreeResourcesPage },
+      { path: "store", Component: StorePage },
+      { path: "contact", Component: ContactPage },
     ],
-  },
-  {
-    path: "/tools",
-    Component: ToolsAppsPage,
-  },
-  {
-    path: "/ebook",
-    Component: EbookPage,
-  },
-  {
-    path: "/free-resources",
-    Component: FreeResourcesPage,
-  },
-  {
-    path: "/store",
-    Component: StorePage,
   },
   {
     path: "/admin",

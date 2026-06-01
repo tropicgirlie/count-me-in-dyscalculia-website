@@ -68,11 +68,11 @@ export function TrustStrip() {
 
   return (
     <section className="py-20 relative overflow-hidden" ref={ref}>
-      <div className="absolute inset-0 bg-gradient-to-b from-background to-muted/20" />
+      <div className="absolute inset-0 bg-[#F6EFE2]/35" />
       <div className="container-custom relative z-10">
         <div className={`text-center mb-14 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-          <p className="text-xs text-primary uppercase tracking-widest mb-3" style={{ fontWeight: 600 }}>The facts</p>
-          <h2 className="text-3xl lg:text-4xl tracking-tight mb-4">What you need to know</h2>
+          <p className="mx-auto mb-3 inline-flex rounded-full px-3 py-1.5 text-xs uppercase tracking-widest tape-label" style={{ fontWeight: 600 }}>The facts</p>
+          <h2 className="text-3xl lg:text-4xl tracking-tight mb-4 text-[#173F46]">What you need to know</h2>
           <p className="text-muted-foreground max-w-md mx-auto">
             Evidence-based facts from leading researchers and healthcare providers
           </p>
@@ -82,15 +82,15 @@ export function TrustStrip() {
           {stats.map((stat, index) => (
             <div 
               key={index}
-              className={`text-center p-6 lg:p-8 rounded-2xl bg-card border border-border/50 hover:border-primary/20 transition-all duration-500 group hover:shadow-custom hover:-translate-y-1 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+              className={`text-center p-6 lg:p-8 paper-card rounded-2xl hover:border-primary/20 transition-all duration-500 group hover:shadow-custom hover:-translate-y-1 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-primary/[0.08] text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+              <div className="relative z-10 inline-flex items-center justify-center w-11 h-11 rounded-xl bg-primary/[0.08] text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-all duration-300">
                 <stat.icon className="h-5 w-5" />
               </div>
               
               <div className="space-y-1.5">
-                <div className="text-2xl lg:text-3xl text-primary tracking-tight" style={{ fontWeight: 700 }}>{stat.number}</div>
+                <div className="relative z-10 text-2xl lg:text-3xl text-primary tracking-tight" style={{ fontWeight: 700 }}>{stat.number}</div>
                 <h3 className="text-sm text-foreground" style={{ fontWeight: 600 }}>{stat.label}</h3>
                 <p className="text-xs text-muted-foreground">{stat.description}</p>
               </div>

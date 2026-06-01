@@ -164,16 +164,16 @@ export function ToolsAppsPage() {
     <div>
       {/* Hero */}
       <section className="pt-24 pb-16 relative overflow-hidden">
-        <div className="absolute inset-0 gradient-mesh" />
+        <div className="absolute inset-0 bg-[#F6EFE2]/60" />
         <div className="container-custom relative z-10">
           <div className="text-center space-y-5 max-w-2xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/[0.08] border border-primary/15">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full tape-label">
               <Wrench className="h-3.5 w-3.5 text-primary" />
               <span className="text-[13px] text-primary" style={{ fontWeight: 500 }}>Assistive Technology</span>
             </div>
 
             <h1 className="text-[2.5rem] lg:text-[3.25rem] leading-[1.05] tracking-tight">
-              <span className="text-gradient">Tools That Help</span>
+              <span className="text-[#173F46]">Tools That Help</span>
             </h1>
 
             <p className="text-lg text-foreground/80 leading-relaxed">
@@ -189,7 +189,7 @@ export function ToolsAppsPage() {
                 placeholder="Search tools..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-11 pr-4 py-3 bg-card border border-border/60 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                className="w-full pl-11 pr-4 py-3 paper-card rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
               />
             </div>
           </div>
@@ -207,7 +207,7 @@ export function ToolsAppsPage() {
                 className={`px-4 py-2 rounded-full text-sm transition-all duration-200 ${
                   selectedCategory === cat
                     ? "bg-primary text-white shadow-lg"
-                    : "bg-card border text-foreground/80 hover:text-foreground hover:border-primary/40"
+                    : "paper-card text-foreground/80 hover:text-foreground hover:border-primary/40"
                 }`}
                 style={{ fontWeight: 500 }}
               >
@@ -246,10 +246,7 @@ export function ToolsAppsPage() {
           ) : (
             <div className="grid md:grid-cols-2 gap-6">
               {filtered.map((tool) => (
-                <Card
-                  key={tool.id}
-                  className="shadow-custom hover:shadow-hover transition-all duration-300 overflow-hidden group"
-                >
+                <Card key={tool.id} className="paper-card overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-custom group">
                   <CardContent className="p-6">
                     <div className="flex items-start justify-between gap-4 mb-4">
                       <div>
@@ -273,7 +270,7 @@ export function ToolsAppsPage() {
                       {tool.description}
                     </p>
 
-                    <div className="bg-primary/[0.04] rounded-xl p-4 mb-4">
+                    <div className="paper-surface rounded-xl p-4 mb-4">
                       <p className="text-sm text-primary mb-1" style={{ fontWeight: 600 }}>
                         Best for
                       </p>
@@ -315,9 +312,9 @@ export function ToolsAppsPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-muted/30 border-y border-border/30">
+      <section className="py-20 bg-[#F6EFE2]/35">
         <div className="container-custom">
-          <div className="text-center p-12 lg:p-16 rounded-3xl bg-gradient-to-br from-primary/[0.06] via-background to-accent/[0.04] border border-primary/10">
+          <div className="text-center p-12 lg:p-16 rounded-3xl paper-surface">
             <h2 className="text-3xl tracking-tight mb-4">Have a Tool to Recommend?</h2>
             <p className="text-muted-foreground mb-8 max-w-lg mx-auto text-lg leading-relaxed">
               We're always looking for new assistive technology that helps adults with dyscalculia. 
@@ -339,21 +336,21 @@ export function ToolsAppsPage() {
           <h2 className="text-2xl mb-8 text-center">Related Resources</h2>
           <div className="grid sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
             <Link to="/self-check">
-              <div className="group p-6 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 border border-transparent hover:border-border/50 transition-all duration-300 hover:shadow-custom text-center">
+              <div className="group p-6 rounded-2xl paper-card hover:border-border/50 transition-all duration-300 hover:shadow-custom text-center">
                 <Brain className="h-8 w-8 text-primary mx-auto mb-3" />
                 <h3 className="text-[15px] mb-1" style={{ fontWeight: 600 }}>Self-Check Quiz</h3>
                 <p className="text-sm text-muted-foreground">Wondering if you might have dyscalculia?</p>
               </div>
             </Link>
             <Link to="/get-assessed">
-              <div className="group p-6 rounded-2xl bg-gradient-to-br from-accent/10 to-accent/5 border border-transparent hover:border-border/50 transition-all duration-300 hover:shadow-custom text-center">
+              <div className="group p-6 rounded-2xl paper-card hover:border-border/50 transition-all duration-300 hover:shadow-custom text-center">
                 <CheckCircle className="h-8 w-8 text-accent mx-auto mb-3" />
                 <h3 className="text-[15px] mb-1" style={{ fontWeight: 600 }}>Get Assessed</h3>
                 <p className="text-sm text-muted-foreground">Find professionals who diagnose dyscalculia</p>
               </div>
             </Link>
             <Link to="/blog">
-              <div className="group p-6 rounded-2xl bg-gradient-to-br from-blue-500/10 to-blue-500/5 border border-transparent hover:border-border/50 transition-all duration-300 hover:shadow-custom text-center">
+              <div className="group p-6 rounded-2xl paper-card hover:border-border/50 transition-all duration-300 hover:shadow-custom text-center">
                 <Smartphone className="h-8 w-8 text-blue-600 mx-auto mb-3" />
                 <h3 className="text-[15px] mb-1" style={{ fontWeight: 600 }}>App Reviews</h3>
                 <p className="text-sm text-muted-foreground">Detailed reviews on our blog</p>

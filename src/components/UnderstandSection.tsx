@@ -93,18 +93,18 @@ export function UnderstandSection() {
 
   return (
     <section className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-muted/30 to-background" />
+      <div className="absolute inset-0 bg-[#F6EFE2]/45" />
       <div className="container-custom relative z-10">
         {/* Section Header */}
         <div
           ref={headerAnim.ref}
           className={`text-center mb-16 transition-all duration-700 ${headerAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/[0.08] border border-primary/15 mb-5">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full tape-label mb-5">
             <Brain className="h-3.5 w-3.5 text-primary" />
             <span className="text-[13px] text-primary" style={{ fontWeight: 500 }}>Understanding Dyscalculia</span>
           </div>
-          <h2 className="text-3xl lg:text-4xl tracking-tight mb-5">What is dyscalculia?</h2>
+          <h2 className="text-3xl lg:text-4xl tracking-tight mb-5 text-[#173F46]">What is dyscalculia?</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             A specific learning difference that affects how people process numbers, time, and mathematical concepts.
             It's not about intelligence. It's about how the brain works differently.
@@ -118,14 +118,14 @@ export function UnderstandSection() {
             {keyPoints.map((point, index) => (
               <div
                 key={index}
-                className={`p-7 rounded-2xl bg-gradient-to-br ${point.gradient} border border-border/30 hover:border-border/60 transition-all duration-300 hover:shadow-custom hover:-translate-y-1 ${cardsAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+                className={`paper-card p-7 rounded-2xl transition-all duration-300 hover:shadow-custom hover:-translate-y-1 ${cardsAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
-                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl border ${point.iconColor} mb-5`}>
+                <div className={`relative z-10 inline-flex items-center justify-center w-12 h-12 rounded-xl border ${point.iconColor} mb-5`}>
                   <point.icon className="h-6 w-6" />
                 </div>
-                <h4 className="text-[15px] mb-2" style={{ fontWeight: 600 }}>{point.title}</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed">{point.description}</p>
+                <h4 className="relative z-10 text-[15px] mb-2 text-[#173F46]" style={{ fontWeight: 600 }}>{point.title}</h4>
+                <p className="relative z-10 text-sm text-[#496568] leading-relaxed">{point.description}</p>
               </div>
             ))}
           </div>
@@ -144,7 +144,7 @@ export function UnderstandSection() {
             {visibleMisconceptions.map((item, index) => (
               <div
                 key={index}
-                className={`p-5 rounded-2xl bg-card border border-border/40 hover:border-border/60 transition-all duration-300 hover:shadow-custom ${mythsAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+                className={`p-5 paper-card rounded-2xl hover:border-border/60 transition-all duration-300 hover:shadow-custom ${mythsAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
                 style={{ transitionDelay: `${index * 80}ms` }}
               >
                 <div className="flex items-start gap-3">
@@ -188,7 +188,7 @@ export function UnderstandSection() {
             {comorbidities.map((condition, index) => (
               <div
                 key={index}
-                className={`text-center p-6 rounded-2xl bg-card border border-border/40 hover:border-primary/20 transition-all duration-300 hover:shadow-custom ${comorbAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+                className={`text-center p-6 paper-card rounded-2xl hover:border-primary/20 transition-all duration-300 hover:shadow-custom ${comorbAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
                 style={{ transitionDelay: `${index * 80}ms` }}
               >
                 <div className="text-2xl text-primary mb-1" style={{ fontWeight: 700 }}>{condition.percentage}</div>
@@ -212,7 +212,7 @@ export function UnderstandSection() {
             {treatments.map((item, idx) => (
               <div
                 key={idx}
-                className={`p-6 rounded-2xl bg-card border border-border/40 hover:border-border/60 transition-all duration-300 hover:shadow-custom ${treatmentAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+                className={`p-6 paper-card rounded-2xl hover:border-border/60 transition-all duration-300 hover:shadow-custom ${treatmentAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
                 style={{ transitionDelay: `${idx * 80}ms` }}
               >
                 <div className="flex items-start gap-4">
@@ -239,7 +239,7 @@ export function UnderstandSection() {
         </div>
 
         {/* Bottom CTA */}
-        <div className="text-center p-10 rounded-3xl bg-gradient-to-br from-primary/[0.06] to-accent/[0.04] border border-primary/10">
+        <div className="text-center p-10 paper-surface rounded-3xl">
           <h3 className="text-xl mb-3" style={{ fontWeight: 600 }}>Ready to learn more?</h3>
           <p className="text-muted-foreground mb-6 max-w-lg mx-auto">
             Explore accommodation strategies or browse our curated reading list.

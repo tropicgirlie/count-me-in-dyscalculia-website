@@ -56,15 +56,15 @@ export function TrustedSourcesSection() {
 
   return (
     <section className="py-24 relative overflow-hidden" ref={ref}>
-      <div className="absolute inset-0 bg-gradient-to-b from-muted/20 to-background" />
+      <div className="absolute inset-0 bg-[#F6EFE2]/35" />
       <div className="container-custom relative z-10">
         {/* Section Header */}
         <div className={`text-center mb-14 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/[0.08] border border-primary/15 mb-5">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full tape-label mb-5">
             <Shield className="h-3.5 w-3.5 text-primary" />
             <span className="text-[13px] text-primary" style={{ fontWeight: 500 }}>Evidence-Based Information</span>
           </div>
-          <h2 className="text-3xl lg:text-4xl tracking-tight mb-4">Trusted Sources</h2>
+          <h2 className="text-3xl lg:text-4xl tracking-tight mb-4 text-[#173F46]">Trusted Sources</h2>
           <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed">
             Our content is based on peer-reviewed research and guidelines from leading healthcare organizations.
           </p>
@@ -78,7 +78,7 @@ export function TrustedSourcesSection() {
               href={source.link !== "#" ? source.link : undefined}
               target={source.link !== "#" ? "_blank" : undefined}
               rel={source.link !== "#" ? "noopener noreferrer" : undefined}
-              className={`group block p-5 rounded-2xl bg-card border border-border/40 hover:border-primary/20 transition-all duration-300 hover:shadow-custom hover:-translate-y-1 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+              className={`group block p-5 paper-card rounded-2xl hover:border-primary/20 transition-all duration-300 hover:shadow-custom hover:-translate-y-1 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
               style={{ transitionDelay: `${index * 80}ms` }}
             >
               <div className="flex items-start justify-between mb-3">
@@ -108,7 +108,7 @@ export function TrustedSourcesSection() {
         </div>
 
         {/* Disclaimer */}
-        <div className="p-5 rounded-2xl bg-muted/30 border border-border/30">
+        <div className="p-5 rounded-2xl paper-surface">
           <p className="text-sm text-muted-foreground max-w-4xl mx-auto text-center leading-relaxed">
             <strong className="text-foreground">Medical Disclaimer:</strong> This information is for educational purposes only and is not a substitute for professional medical advice. Always consult with qualified healthcare professionals.
           </p>

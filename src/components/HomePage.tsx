@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router";
 import { TrustStrip } from "./TrustStrip";
 import { TrustedSourcesSection } from "./TrustedSourcesSection";
@@ -6,8 +6,7 @@ import { UnderstandSection } from "./UnderstandSection";
 import { BooksSection } from "./BooksSection";
 import { AccommodationsSection } from "./AccommodationsSection";
 import { Button } from "./ui/button";
-import { ArrowRight, BookOpen, Lightbulb, Heart, Wrench, Brain, Sparkles, Smartphone } from "lucide-react";
-import heroImage from "figma:asset/7981c074fe56bc94aa5e0ff2db2f3f841442433f.png";
+import { ArrowRight, BookOpen, Lightbulb, Heart, Wrench, Brain, PlayCircle, Smartphone } from "lucide-react";
 import { usePageMeta, useJsonLd } from "../lib/usePageMeta";
 
 function useInView(_threshold = 0.15) {
@@ -37,42 +36,26 @@ export function HomePage() {
   const heroAnim = useInView(0.1);
   const cardsAnim = useInView();
   const audienceAnim = useInView();
-  const [shuffleNums, setShuffleNums] = useState([4, 7, 6, 2]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setShuffleNums(prev => prev.map(n => {
-        if (Math.random() > 0.6) {
-          const swaps: Record<number, number> = { 4: 7, 7: 4, 6: 9, 9: 6, 2: 5, 5: 2 };
-          return swaps[n] ?? n;
-        }
-        return n;
-      }));
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+  const [showNarration, setShowNarration] = useState(false);
 
   return (
     <>
       {/* Hero Section */}
-      <section className="relative pt-24 pb-20 lg:pb-28 overflow-hidden">
-        {/* Background decoration */}
-        <div className="absolute inset-0 gradient-mesh" />
-        <div className="absolute top-32 -right-32 w-[500px] h-[500px] bg-primary/[0.04] rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute -bottom-20 -left-20 w-[400px] h-[400px] bg-accent/[0.03] rounded-full blur-[80px] pointer-events-none" />
-
-        {/* Floating number decorations */}
-        <div className="absolute top-40 left-[10%] text-primary/[0.06] text-[120px] select-none pointer-events-none animate-float" style={{ fontWeight: 700 }}>7</div>
-        <div className="absolute bottom-32 right-[15%] text-accent/[0.06] text-[100px] select-none pointer-events-none animate-float-delayed" style={{ fontWeight: 700 }}>3</div>
-
+      <section className="relative min-h-[650px] overflow-hidden bg-[#F6EFE2] pt-20 sm:min-h-[680px] lg:min-h-[760px] lg:pt-24">
+        <img
+          src="/abstracthero.png"
+          alt="A tactile collage of number supports, place value notes, memory prompts, and gentle reminders for dyscalculia."
+          className="absolute inset-0 h-full w-full object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#F6EFE2] via-[#F6EFE2]/82 to-[#F6EFE2]/10" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent" />
         <div className="container-custom relative z-10">
           <div
             ref={heroAnim.ref}
-            className={`grid lg:grid-cols-2 gap-12 lg:gap-20 items-center animate-fade-up`}
+            className="grid min-h-[570px] items-center animate-fade-up sm:min-h-[600px] lg:min-h-[640px]"
           >
-            {/* Left – Content */}
-            <div className="space-y-8">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/[0.08] border border-primary/15">
+            <div className="min-w-0 max-w-2xl space-y-7 py-12 lg:py-14">
+              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-white/70 px-3 py-1.5 shadow-sm backdrop-blur">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary/60 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
@@ -81,96 +64,118 @@ export function HomePage() {
               </div>
 
               <div className="space-y-5">
-                <h1 className="text-[2.75rem] lg:text-[3.5rem] leading-[1.05] tracking-tight">
-                  <span className="text-gradient">Clarity</span> for
-                  <br />dyscalculia
+                <h1 className="max-w-[calc(100vw-3rem)] text-[2.08rem] leading-[1.08] tracking-[-0.025em] text-[#173F46] sm:max-w-2xl sm:text-[4rem] sm:leading-[0.98] sm:tracking-[-0.03em] lg:text-[4.75rem]">
+                  <span className="block">Numbers can move.</span>
+                  <span className="block">Support can hold</span>
+                  <span className="block">them still.</span>
                 </h1>
-                <p className="text-lg text-muted-foreground leading-relaxed max-w-lg">
-                  Practical tools, stories, and research to help adults navigate life with dyscalculia and ADHD.
-                  From workplace strategies to everyday accommodations.
+                <p className="max-w-[29ch] text-base leading-relaxed text-[#2F4F52] sm:max-w-lg sm:text-lg">
+                  Count Me In blends artful explanation with practical tools for adults navigating dyscalculia, ADHD, working memory, time, and number stress.
                 </p>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex flex-col gap-3 sm:flex-row">
                 <a href="#understand">
-                  <Button className="bg-primary hover:bg-primary/90 text-white px-7 py-3 rounded-full shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 group h-12">
-                    Explore Resources
+                  <Button className="h-12 w-full max-w-80 bg-[#173F46] px-7 py-3 text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#225966] hover:shadow-lg group sm:w-auto sm:max-w-none">
+                    Start with support
                     <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </a>
-                <Link to="/ebook">
-                  <Button variant="outline" className="border-1.5 border-primary/25 text-primary hover:bg-primary/5 px-7 py-3 rounded-full transition-all duration-300 h-12">
-                    The Book, July 2026
-                  </Button>
-                </Link>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setShowNarration((value) => !value)}
+                  className="border-1.5 h-12 w-full max-w-80 border-[#173F46]/25 bg-white/65 px-7 py-3 text-[#173F46] backdrop-blur transition-all duration-300 hover:bg-white sm:w-auto sm:max-w-none"
+                  aria-expanded={showNarration}
+                >
+                  <PlayCircle className="mr-2 h-4 w-4" />
+                  Listen to guided version
+                </Button>
               </div>
 
-              {/* Trust chips */}
+              {showNarration && (
+                <div className="max-w-sm rounded-2xl border border-[#173F46]/15 bg-white/85 p-4 shadow-elevated backdrop-blur animate-fade-up">
+                  <audio
+                    src="/narration-audio.mp3"
+                    controls
+                    preload="metadata"
+                    className="w-full"
+                    aria-label="Optional narration for the Count Me In hero experience"
+                  />
+                  <p className="mt-2 text-xs leading-relaxed text-[#496568]">
+                    Optional audio. Use the controls above to play, pause, or adjust volume.
+                  </p>
+                </div>
+              )}
+
               <div className="flex flex-wrap items-center gap-3 pt-1">
-                {["Evidence-based", "Expert-reviewed", "Community-supported"].map(label => (
-                  <span key={label} className="inline-flex items-center gap-1.5 text-xs text-muted-foreground bg-muted/60 px-3 py-1.5 rounded-full">
-                    <span className="w-1 h-1 bg-primary rounded-full" />
+                {["Gentle explanation", "Practical scaffolds", "Adult neurodivergent support"].map(label => (
+                  <span key={label} className="inline-flex items-center gap-1.5 rounded-full bg-white/70 px-3 py-1.5 text-xs text-[#496568] shadow-sm backdrop-blur">
+                    <span className="w-1 h-1 rounded-full bg-accent" />
                     {label}
                   </span>
                 ))}
-              </div>
-            </div>
-
-            {/* Right – Hero visual */}
-            <div className="flex items-center justify-center">
-              <div className="relative w-full max-w-lg">
-                {/* Main image */}
-                <div className="relative rounded-3xl overflow-hidden shadow-elevated">
-                  <img
-                    src={heroImage}
-                    alt="Floating 3D numbers in coral and teal colours representing how numbers feel out of place with dyscalculia"
-                    className="w-full"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/10 to-transparent" />
-                </div>
-
-                {/* Floating card – number scramble */}
-                <div className="absolute -bottom-5 -left-5 bg-white rounded-2xl shadow-elevated p-4 border border-border/50 animate-fade-up">
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="w-6 h-6 rounded-lg bg-accent/10 flex items-center justify-center">
-                      <Sparkles className="h-3.5 w-3.5 text-accent" />
-                    </div>
-                    <span className="text-[11px] text-muted-foreground" style={{ fontWeight: 600 }}>Numbers scramble</span>
-                  </div>
-                  <div className="flex gap-1.5">
-                    {shuffleNums.map((n, i) => (
-                      <span
-                        key={i}
-                        className="w-9 h-9 rounded-lg bg-accent/[0.08] text-accent flex items-center justify-center text-sm transition-all duration-500"
-                        style={{ fontWeight: 700 }}
-                      >
-                        {n}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Floating card – stat */}
-                <div className="absolute -top-4 -right-4 bg-white rounded-2xl shadow-elevated px-4 py-3 border border-border/50 animate-fade-up" style={{ animationDelay: '0.3s' }}>
-                  <div className="text-xs text-muted-foreground mb-0.5">Often occurs with</div>
-                  <div className="text-primary text-lg" style={{ fontWeight: 700 }}>ADHD · 40–60%</div>
-                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Working Memory Feature */}
+      <section className="bg-background py-16 lg:py-20">
+        <div className="container-custom">
+          <div className="grid min-w-0 items-center gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:gap-14">
+            <div className="min-w-0 space-y-6">
+              <p className="text-xs uppercase tracking-widest text-primary" style={{ fontWeight: 600 }}>Inside the calculation</p>
+              <div className="space-y-4">
+                <h2 className="w-80 max-w-full text-3xl tracking-tight text-foreground lg:w-auto lg:max-w-lg lg:text-5xl">
+                  Working memory is the quiet workspace.
+                </h2>
+                <p className="w-80 max-w-full text-muted-foreground leading-relaxed lg:w-auto lg:max-w-xl">
+                  The goal is not to make math feel dramatic. It is to show why small supports matter: visible steps, stable place value, fewer pieces at once, and more time to think.
+                </p>
+              </div>
+              <div className="grid w-80 max-w-full gap-3 sm:grid-cols-2 lg:w-auto lg:max-w-none">
+                {[
+                  "Color-code groups",
+                  "Keep place value visible",
+                  "Move left to right",
+                  "Use clear boundaries",
+                ].map((item) => (
+                  <div key={item} className="paper-card rounded-xl px-4 py-3 text-sm text-[#173F46]">
+                    {item}
+                  </div>
+                ))}
+              </div>
+              <Link to="/self-check">
+                <Button variant="outline" className="border-primary/25 text-primary hover:bg-primary/5">
+                  Try the self-check
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+              </Link>
+            </div>
+            <div className="min-w-0 overflow-hidden rounded-[1.5rem] paper-surface p-2">
+              <img
+                src="/workingmemoryduringcalculation.png"
+                alt="An educational collage showing working memory slots, place value, step-by-step calculation supports, and visual scaffolds."
+                loading="lazy"
+                className="w-full rounded-[1.1rem]"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Bento-style Quick Nav */}
-      <section className="py-20">
+      <section className="py-16">
         <div className="container-custom">
           <div
             ref={cardsAnim.ref}
             className={`transition-all duration-700 ${cardsAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
           >
             <div className="text-center mb-12">
-              <p className="text-xs text-primary uppercase tracking-widest mb-3" style={{ fontWeight: 600 }}>Resources</p>
-              <h2 className="text-3xl lg:text-4xl tracking-tight mb-4">Everything you need</h2>
+              <p className="mx-auto mb-3 inline-flex rounded-full px-3 py-1.5 text-xs uppercase tracking-widest tape-label" style={{ fontWeight: 600 }}>Resources</p>
+              <h2 className="text-3xl lg:text-4xl tracking-tight mb-4 text-[#173F46]">Everything you need</h2>
               <p className="text-muted-foreground max-w-md mx-auto">Jump to the section that matters most to you</p>
             </div>
 
@@ -183,12 +188,12 @@ export function HomePage() {
                 { icon: Wrench, label: "Accommodations", desc: "Practical strategies for work and daily life", href: "#accommodations", gradient: "from-orange-500/10 to-orange-500/5", iconColor: "text-orange-600 bg-orange-100" },
               ].map((card, i) => {
                 const inner = (
-                  <div className={`group relative p-6 rounded-2xl bg-gradient-to-br ${card.gradient} border border-transparent hover:border-border/50 transition-all duration-300 hover:shadow-custom hover:-translate-y-1 h-full`}>
-                    <div className={`w-10 h-10 rounded-xl ${card.iconColor} flex items-center justify-center mb-4`}>
+                  <div className="group paper-card relative h-full rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-custom">
+                    <div className={`w-10 h-10 rounded-xl ${card.iconColor} flex items-center justify-center mb-4 relative z-10`}>
                       <card.icon className="h-5 w-5" />
                     </div>
-                    <h3 className="text-[15px] mb-1.5 group-hover:text-primary transition-colors" style={{ fontWeight: 600 }}>{card.label}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
+                    <h3 className="relative z-10 text-[15px] mb-1.5 text-[#173F46] group-hover:text-primary transition-colors" style={{ fontWeight: 600 }}>{card.label}</h3>
+                    <p className="relative z-10 text-sm text-[#496568] leading-relaxed">{card.desc}</p>
                     <ArrowRight className="h-4 w-4 text-muted-foreground/40 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300 absolute top-6 right-6" />
                   </div>
                 );
@@ -204,15 +209,15 @@ export function HomePage() {
 
       {/* Audience Cards */}
       <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-muted/30 to-background" />
+        <div className="absolute inset-0 bg-[#F6EFE2]/45" />
         <div className="container-custom relative z-10">
           <div
             ref={audienceAnim.ref}
             className={`transition-all duration-700 ${audienceAnim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
           >
             <div className="text-center mb-12">
-              <p className="text-xs text-primary uppercase tracking-widest mb-3" style={{ fontWeight: 600 }}>Who this helps</p>
-              <h2 className="text-3xl lg:text-4xl tracking-tight mb-4">Designed for different needs</h2>
+              <p className="mx-auto mb-3 inline-flex rounded-full px-3 py-1.5 text-xs uppercase tracking-widest tape-label" style={{ fontWeight: 600 }}>Who this helps</p>
+              <h2 className="text-3xl lg:text-4xl tracking-tight mb-4 text-[#173F46]">Designed for different needs</h2>
               <p className="text-muted-foreground max-w-md mx-auto">
                 Resources for different audiences navigating dyscalculia
               </p>
@@ -244,13 +249,13 @@ export function HomePage() {
               ].map((item, i) => (
                 <div
                   key={i}
-                  className={`relative p-8 bg-gradient-to-b ${item.gradient} rounded-2xl border border-border/40 hover:border-border/60 transition-all duration-300 hover:shadow-custom hover:-translate-y-1 group`}
+                  className="paper-card relative rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-custom group"
                 >
-                  <div className={`w-12 h-12 rounded-xl ${item.iconColor} flex items-center justify-center mb-5`}>
+                  <div className={`relative z-10 w-12 h-12 rounded-xl ${item.iconColor} flex items-center justify-center mb-5`}>
                     <item.icon className="h-6 w-6" />
                   </div>
-                  <h3 className="text-[15px] mb-2" style={{ fontWeight: 600 }}>{item.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
+                  <h3 className="relative z-10 text-[15px] mb-2 text-[#173F46]" style={{ fontWeight: 600 }}>{item.title}</h3>
+                  <p className="relative z-10 text-sm text-[#496568] leading-relaxed">{item.description}</p>
                 </div>
               ))}
             </div>

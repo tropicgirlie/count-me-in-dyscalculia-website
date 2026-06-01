@@ -363,7 +363,7 @@ export function SelfCheckPage() {
     const result = getResultLevel();
     return (
       <div>
-        <section className="pt-28 pb-20 bg-gradient-to-b from-background to-muted/30">
+        <section className="pt-28 pb-20 bg-[#F6EFE2]/45">
           <div className="container-custom max-w-3xl">
             <div className="text-center mb-12">
               <Badge variant="outline" className="text-primary border-primary/40 bg-primary/5 px-4 py-1.5 mb-6">
@@ -376,7 +376,7 @@ export function SelfCheckPage() {
             </div>
 
             {/* Main Result */}
-            <Card className={`border-2 ${result.bg} mb-8`}>
+            <Card className={`paper-surface border-2 ${result.bg} mb-8`}>
               <CardContent className="p-8 text-center">
                 <div className={`text-2xl mb-2 ${result.color}`} style={{ fontWeight: 600 }}>
                   {result.level}
@@ -388,7 +388,7 @@ export function SelfCheckPage() {
             </Card>
 
             {/* Category Breakdown */}
-            <Card className="shadow-custom mb-8">
+            <Card className="paper-card mb-8">
               <CardContent className="p-8">
                 <h3 className="text-xl mb-6">Breakdown by Area</h3>
                 <div className="space-y-4">
@@ -400,7 +400,7 @@ export function SelfCheckPage() {
                           <span style={{ fontWeight: 500 }}>{cat}</span>
                           <span className="text-muted-foreground">{score}%</span>
                         </div>
-                        <div className="h-3 bg-muted rounded-full overflow-hidden">
+                        <div className="h-3 paper-card rounded-full overflow-hidden">
                           <div
                             className="h-full bg-primary rounded-full transition-all duration-500"
                             style={{ width: `${score}%` }}
@@ -414,7 +414,7 @@ export function SelfCheckPage() {
             </Card>
 
             {/* Disclaimer */}
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 mb-8">
+            <div className="paper-surface rounded-xl p-6 mb-8">
               <div className="flex gap-3">
                 <AlertTriangle className="h-5 w-5 text-amber-600 flex-shrink-0 mt-0.5" />
                 <div>
@@ -431,36 +431,6 @@ export function SelfCheckPage() {
                 </div>
               </div>
             </div>
-
-            {/* Email Capture - Added for lead generation */}
-            <Card className="shadow-custom border border-accent/20 overflow-hidden mb-8">
-              <div className="bg-accent/[0.06] border-b border-accent/15 px-8 py-5 flex items-center gap-3">
-                <Mail className="h-5 w-5 text-accent flex-shrink-0" />
-                <div>
-                  <p className="text-base text-foreground" style={{ fontWeight: 600 }}>
-                    Get your results via email
-                  </p>
-                  <p className="text-sm text-muted-foreground mt-0.5">
-                    Plus receive practical strategies and resources for navigating dyscalculia
-                  </p>
-                </div>
-              </div>
-              <CardContent className="p-8">
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <input
-                    type="email"
-                    placeholder="your@email.com"
-                    className="flex-1 px-5 py-3 bg-muted/50 border border-border/60 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent transition-all"
-                  />
-                  <Button className="bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-full shadow-md whitespace-nowrap">
-                    Send My Results
-                  </Button>
-                </div>
-                <p className="text-xs text-muted-foreground mt-3">
-                  No spam, ever. Unsubscribe anytime. We respect your privacy.
-                </p>
-              </CardContent>
-            </Card>
 
             {/* Primary CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
@@ -481,8 +451,8 @@ export function SelfCheckPage() {
             </div>
 
             {/* Download & Share Section */}
-            <Card className="shadow-custom border border-primary/15 overflow-hidden">
-              <div className="bg-primary/[0.06] border-b border-primary/15 px-8 py-5 flex items-center gap-3">
+            <Card className="paper-card overflow-hidden">
+              <div className="paper-surface px-8 py-5 flex items-center gap-3">
                 <Share2 className="h-5 w-5 text-primary flex-shrink-0" />
                 <div>
                   <p className="text-base text-foreground" style={{ fontWeight: 600 }}>
@@ -546,7 +516,7 @@ export function SelfCheckPage() {
                 </div>
 
                 {/* Tip */}
-                <div className="mt-6 flex gap-3 items-start bg-muted/50 rounded-xl p-4">
+                <div className="mt-6 flex gap-3 items-start paper-surface rounded-xl p-4">
                   <ClipboardList className="h-4 w-4 text-muted-foreground flex-shrink-0 mt-0.5" />
                   <p className="text-xs text-muted-foreground leading-relaxed">
                     <span style={{ fontWeight: 600 }}>Tip for your appointment:</span> Sharing these results gives your assessor useful context before your session. It can save time and help focus the conversation on the areas that matter most to you.
@@ -565,10 +535,10 @@ export function SelfCheckPage() {
     <div>
       {/* Hero */}
       <section className="pt-24 pb-12 relative overflow-hidden">
-        <div className="absolute inset-0 gradient-mesh" />
+        <div className="absolute inset-0 bg-[#F6EFE2]/60" />
         <div className="container-custom relative z-10">
           <div className="text-center space-y-5 mb-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/[0.08] border border-primary/15">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full tape-label">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary/60 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
@@ -577,7 +547,7 @@ export function SelfCheckPage() {
             </div>
 
             <h1 className="text-[2.5rem] lg:text-[3.25rem] leading-[1.05] tracking-tight">
-              <span className="text-gradient">Could This Be Dyscalculia?</span>
+              <span className="text-[#173F46]">Could This Be Dyscalculia?</span>
             </h1>
 
             <p className="text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
@@ -588,7 +558,7 @@ export function SelfCheckPage() {
           </div>
 
           {/* Disclaimer */}
-          <div className="max-w-2xl mx-auto bg-amber-50 border border-amber-200 rounded-xl p-4 mb-8">
+          <div className="max-w-2xl mx-auto paper-surface rounded-xl p-4 mb-8">
             <div className="flex gap-3">
               <Info className="h-5 w-5 text-amber-600 flex-shrink-0 mt-0.5" />
               <p className="text-sm text-amber-700">
@@ -611,7 +581,7 @@ export function SelfCheckPage() {
                 {totalAnswered}/{questions.length} answered
               </span>
             </div>
-            <div className="h-2 bg-muted rounded-full overflow-hidden">
+            <div className="h-2 paper-card rounded-full overflow-hidden">
               <div
                 className="h-full bg-primary rounded-full transition-all duration-300"
                 style={{
@@ -661,7 +631,7 @@ export function SelfCheckPage() {
             {sectionQuestions.map((question, index) => (
               <Card
                 key={question.id}
-                className={`shadow-custom transition-all duration-200 ${
+                className={`paper-card transition-all duration-200 ${
                   answers[question.id] !== undefined
                     ? "border-primary/20"
                     : ""

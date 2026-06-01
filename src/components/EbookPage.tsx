@@ -1,7 +1,6 @@
 import { Link } from "react-router";
 import { Button } from "./ui/button";
 import { CheckCircle, BookOpen, Clock, Mail, PenLine, Sparkles } from "lucide-react";
-import bookCover from "figma:asset/a726afb90ad457b7241a0ddc6454faf3faf915cb.png";
 import { usePageMeta, useJsonLd } from "../lib/usePageMeta";
 
 export function EbookPage() {
@@ -163,9 +162,9 @@ export function EbookPage() {
             <div className="relative flex items-center justify-center">
               <div className="relative rotate-[-1.5deg] overflow-hidden rounded-3xl p-3 paper-surface">
                 <img
-                  src={bookCover}
-                  alt="Numbers Out of Place ebook cover by Luana Micheau"
-                  className="mx-auto w-full max-w-md rounded-2xl shadow-elevated"
+                  src="/bookcover.png"
+                  alt="Numbers Out of Place book cover by Luana Micheau"
+                  className="mx-auto aspect-square w-full max-w-md rounded-2xl object-cover shadow-elevated"
                 />
               </div>
               <div className="absolute -top-4 -right-4">

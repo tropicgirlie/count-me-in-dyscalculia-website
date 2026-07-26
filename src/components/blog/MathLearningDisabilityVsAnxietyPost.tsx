@@ -4,15 +4,15 @@ import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
 import { Link } from "react-router";
 import { 
-  ArrowLeft, 
-  Clock, 
-  AlertTriangle, 
-  CheckCircle, 
-  Brain,
-  HeartPulse,
-  GraduationCap,
-  ArrowRight
-} from "lucide-react";
+  MdArrowBack as ArrowLeft, 
+  MdOutlineSchedule as Clock, 
+  MdOutlineWarningAmber as AlertTriangle, 
+  MdOutlineCheckCircle as CheckCircle, 
+  MdOutlinePsychology as Brain,
+  MdOutlineMonitorHeart as HeartPulse,
+  MdOutlineSchool as GraduationCap,
+  MdArrowForward as ArrowRight
+} from "react-icons/md";
 
 export function MathLearningDisabilityVsAnxietyPost() {
   usePageMeta({

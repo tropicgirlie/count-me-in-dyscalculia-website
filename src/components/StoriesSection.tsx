@@ -1,5 +1,5 @@
 import { Card } from "./ui/card";
-import { Quote } from "lucide-react";
+import { MdOutlineFormatQuote as Quote } from "react-icons/md";
 
 export function StoriesSection() {
   return (

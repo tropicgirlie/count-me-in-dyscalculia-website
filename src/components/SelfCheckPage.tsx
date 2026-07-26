@@ -1,23 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { Badge } from "./ui/badge";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./ui/button";
-import { Card, CardContent } from "./ui/card";
 import {
-  CheckCircle,
-  Circle,
-  ArrowRight,
-  ArrowLeft,
-  AlertTriangle,
-  RotateCcw,
-  Info,
-  Download,
-  Mail,
-  Copy,
-  Check,
-  Share2,
-  ClipboardList,
-} from "lucide-react";
+  MdArrowForward,
+  MdArrowBack,
+  MdOutlineWarningAmber,
+  MdOutlineRotateLeft,
+  MdOutlineInfo,
+  MdOutlineDownload,
+  MdOutlineMail,
+  MdOutlineContentCopy,
+  MdCheck,
+  MdOutlineShare,
+  MdOutlineAssignment,
+} from "react-icons/md";
 import { usePageMeta } from "../lib/usePageMeta";
 
 interface Question {
@@ -27,90 +24,32 @@ interface Question {
 }
 
 const questions: Question[] = [
-  {
-    id: 1,
-    text: "I frequently struggle to estimate how long tasks will take",
-    category: "Time",
-  },
-  {
-    id: 2,
-    text: "I find it hard to read analogue clocks quickly",
-    category: "Time",
-  },
-  {
-    id: 3,
-    text: "I often lose track of time and arrive late or too early",
-    category: "Time",
-  },
-  {
-    id: 4,
-    text: "Splitting a bill at a restaurant causes me significant anxiety",
-    category: "Numbers",
-  },
-  {
-    id: 5,
-    text: "I transpose or mix up numbers when writing them down (e.g. 36 instead of 63)",
-    category: "Numbers",
-  },
-  {
-    id: 6,
-    text: "I struggle to remember PINs, phone numbers, or sequences of numbers",
-    category: "Numbers",
-  },
-  {
-    id: 7,
-    text: "I have difficulty understanding percentages, fractions, or ratios",
-    category: "Numbers",
-  },
-  {
-    id: 8,
-    text: "I find it hard to follow directions involving distances or measurements",
-    category: "Spatial",
-  },
-  {
-    id: 9,
-    text: "I often confuse left and right",
-    category: "Spatial",
-  },
-  {
-    id: 10,
-    text: "I struggle with reading maps or estimating distances",
-    category: "Spatial",
-  },
-  {
-    id: 11,
-    text: "I feel intense anxiety or panic when asked to do mental arithmetic",
-    category: "Emotional",
-  },
-  {
-    id: 12,
-    text: "I avoid situations where I might need to count or calculate in front of others",
-    category: "Emotional",
-  },
-  {
-    id: 13,
-    text: "I have developed elaborate workarounds to avoid dealing with numbers",
-    category: "Daily Life",
-  },
-  {
-    id: 14,
-    text: "I find budgeting and managing finances overwhelming",
-    category: "Daily Life",
-  },
-  {
-    id: 15,
-    text: "I struggle to follow recipes that require measurement conversions",
-    category: "Daily Life",
-  },
+  { id: 1, text: "I frequently struggle to estimate how long tasks will take", category: "Time" },
+  { id: 2, text: "I find it hard to read analogue clocks quickly", category: "Time" },
+  { id: 3, text: "I often lose track of time and arrive late or too early", category: "Time" },
+  { id: 4, text: "Splitting a bill at a restaurant causes me significant anxiety", category: "Numbers" },
+  { id: 5, text: "I transpose or mix up numbers when writing them down (e.g. 36 instead of 63)", category: "Numbers" },
+  { id: 6, text: "I struggle to remember PINs, phone numbers, or sequences of numbers", category: "Numbers" },
+  { id: 7, text: "I have difficulty understanding percentages, fractions, or ratios", category: "Numbers" },
+  { id: 8, text: "I find it hard to follow directions involving distances or measurements", category: "Spatial" },
+  { id: 9, text: "I often confuse left and right", category: "Spatial" },
+  { id: 10, text: "I struggle with reading maps or estimating distances", category: "Spatial" },
+  { id: 11, text: "I feel intense anxiety or panic when asked to do mental arithmetic", category: "Emotional" },
+  { id: 12, text: "I avoid situations where I might need to count or calculate in front of others", category: "Emotional" },
+  { id: 13, text: "I have developed elaborate workarounds to avoid dealing with numbers", category: "Daily Life" },
+  { id: 14, text: "I find budgeting and managing finances overwhelming", category: "Daily Life" },
+  { id: 15, text: "I struggle to follow recipes that require measurement conversions", category: "Daily Life" },
 ];
 
 const responseOptions = [
-  { value: 0, label: "Never", color: "bg-muted text-muted-foreground" },
-  { value: 1, label: "Rarely", color: "bg-blue-50 text-blue-700 border-blue-200" },
-  { value: 2, label: "Sometimes", color: "bg-amber-50 text-amber-700 border-amber-200" },
-  { value: 3, label: "Often", color: "bg-orange-50 text-orange-700 border-orange-200" },
-  { value: 4, label: "Always", color: "bg-red-50 text-red-700 border-red-200" },
+  { value: 0, label: "Never", key: "1" },
+  { value: 1, label: "Rarely", key: "2" },
+  { value: 2, label: "Sometimes", key: "3" },
+  { value: 3, label: "Often", key: "4" },
+  { value: 4, label: "Always", key: "5" },
 ];
+
+const ease = [0.16, 1, 0.3, 1] as const;
 
 export function SelfCheckPage() {
   usePageMeta({
@@ -118,38 +57,39 @@ export function SelfCheckPage() {
     description: "Take this free 15-question dyscalculia self-check to reflect on common traits. Not diagnostic. Helps you decide if a professional assessment is worth exploring.",
   });
 
+  const [started, setStarted] = useState(false);
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [showResults, setShowResults] = useState(false);
-  const [currentSection, setCurrentSection] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [copied, setCopied] = useState(false);
 
   const categories = [...new Set(questions.map((q) => q.category))];
-  const sectionQuestions = questions.filter(
-    (q) => q.category === categories[currentSection]
-  );
+  const question = questions[currentIndex];
 
   const totalAnswered = Object.keys(answers).length;
   const totalScore = Object.values(answers).reduce((a, b) => a + b, 0);
   const maxScore = questions.length * 4;
   const percentage = Math.round((totalScore / maxScore) * 100);
+  const allAnswered = totalAnswered === questions.length;
 
   const handleAnswer = (questionId: number, value: number) => {
     setAnswers((prev) => ({ ...prev, [questionId]: value }));
-  };
-
-  const handleNext = () => {
-    if (currentSection < categories.length - 1) {
-      setCurrentSection((prev) => prev + 1);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    if (currentIndex < questions.length - 1) {
+      window.setTimeout(() => setCurrentIndex((i) => i + 1), 320);
     }
   };
 
-  const handlePrev = () => {
-    if (currentSection > 0) {
-      setCurrentSection((prev) => prev - 1);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
+  // Keyboard answering: 1–5
+  useEffect(() => {
+    if (!started || showResults) return;
+    const onKey = (e: KeyboardEvent) => {
+      const opt = responseOptions.find((o) => o.key === e.key);
+      if (opt) handleAnswer(question.id, opt.value);
+      if (e.key === "ArrowLeft" && currentIndex > 0) setCurrentIndex((i) => i - 1);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  });
 
   const handleShowResults = () => {
     setShowResults(true);
@@ -159,7 +99,8 @@ export function SelfCheckPage() {
   const handleReset = () => {
     setAnswers({});
     setShowResults(false);
-    setCurrentSection(0);
+    setStarted(false);
+    setCurrentIndex(0);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -199,10 +140,7 @@ export function SelfCheckPage() {
 
   const getCategoryScore = (category: string) => {
     const catQuestions = questions.filter((q) => q.category === category);
-    const catScore = catQuestions.reduce(
-      (sum, q) => sum + (answers[q.id] || 0),
-      0
-    );
+    const catScore = catQuestions.reduce((sum, q) => sum + (answers[q.id] || 0), 0);
     const catMax = catQuestions.length * 4;
     return Math.round((catScore / catMax) * 100);
   };
@@ -331,7 +269,6 @@ export function SelfCheckPage() {
       setCopied(true);
       setTimeout(() => setCopied(false), 3000);
     } catch {
-      // Fallback
       const ta = document.createElement("textarea");
       ta.value = generateResultsText();
       document.body.appendChild(ta);
@@ -348,371 +285,342 @@ export function SelfCheckPage() {
     const subject = encodeURIComponent("My Dyscalculia Self-Check Results – Count Me In");
     const body = encodeURIComponent(
       `Hi,\n\nI recently completed the Count Me In dyscalculia self-check tool and wanted to share my results ahead of our appointment.\n\n` +
-      `OVERALL RESULT: ${result.level}\n` +
-      `Score: ${totalScore} / ${maxScore} (${percentage}%)\n\n` +
-      `BREAKDOWN BY AREA:\n` +
-      categories.map((cat) => `  ${cat}: ${getCategoryScore(cat)}%`).join("\n") +
-      `\n\n${result.description}\n\n` +
-      `Please note this is a reflective self-check, not a clinical diagnostic. I look forward to discussing this with you.\n\n` +
-      `Full results generated at countmein.site/self-check`
+        `OVERALL RESULT: ${result.level}\n` +
+        `Score: ${totalScore} / ${maxScore} (${percentage}%)\n\n` +
+        `BREAKDOWN BY AREA:\n` +
+        categories.map((cat) => `  ${cat}: ${getCategoryScore(cat)}%`).join("\n") +
+        `\n\n${result.description}\n\n` +
+        `Please note this is a reflective self-check, not a clinical diagnostic. I look forward to discussing this with you.\n\n` +
+        `Full results generated at countmein.site/self-check`
     );
     window.open(`mailto:?subject=${subject}&body=${body}`);
   };
 
+  /* ---------------- Results view ---------------- */
   if (showResults) {
     const result = getResultLevel();
     return (
       <div>
-        <section className="pt-28 pb-20 bg-[#F6EFE2]/45">
+        <section className="pt-32 pb-20 bg-paper/45 min-h-screen">
           <div className="container-custom max-w-3xl">
-            <div className="text-center mb-12">
-              <Badge variant="outline" className="text-primary border-primary/40 bg-primary/5 px-4 py-1.5 mb-6">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease }}
+              className="text-center mb-12"
+            >
+              <span className="inline-flex rounded-full px-3.5 py-1.5 text-xs uppercase tracking-widest tape-label mb-6" style={{ fontWeight: 600 }}>
                 Your Results
-              </Badge>
-              <h2 className="text-4xl mb-4">Self-Check Results</h2>
-              <p className="text-lg text-muted-foreground">
-                Based on your {totalAnswered} responses
-              </p>
-            </div>
+              </span>
+              <h2 className="font-display text-4xl lg:text-5xl text-ink mb-4" style={{ fontWeight: 520 }}>Self-Check Results</h2>
+              <p className="text-lg text-ink-muted">Based on your {totalAnswered} responses</p>
+            </motion.div>
 
-            {/* Main Result */}
-            <Card className={`paper-surface border-2 ${result.bg} mb-8`}>
-              <CardContent className="p-8 text-center">
-                <div className={`text-2xl mb-2 ${result.color}`} style={{ fontWeight: 600 }}>
-                  {result.level}
-                </div>
-                <p className="text-muted-foreground leading-relaxed max-w-xl mx-auto">
-                  {result.description}
-                </p>
-              </CardContent>
-            </Card>
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease, delay: 0.1 }}
+              className={`rounded-3xl border-2 ${result.bg} mb-8 p-8 sm:p-10 text-center`}
+            >
+              <div className={`font-display text-3xl mb-3 ${result.color}`} style={{ fontWeight: 540 }}>
+                {result.level}
+              </div>
+              <p className="text-ink-muted leading-relaxed max-w-xl mx-auto">{result.description}</p>
+            </motion.div>
 
-            {/* Category Breakdown */}
-            <Card className="paper-card mb-8">
-              <CardContent className="p-8">
-                <h3 className="text-xl mb-6">Breakdown by Area</h3>
-                <div className="space-y-4">
-                  {categories.map((cat) => {
-                    const score = getCategoryScore(cat);
-                    return (
-                      <div key={cat}>
-                        <div className="flex justify-between text-sm mb-1">
-                          <span style={{ fontWeight: 500 }}>{cat}</span>
-                          <span className="text-muted-foreground">{score}%</span>
-                        </div>
-                        <div className="h-3 paper-card rounded-full overflow-hidden">
-                          <div
-                            className="h-full bg-primary rounded-full transition-all duration-500"
-                            style={{ width: `${score}%` }}
-                          />
-                        </div>
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease, delay: 0.18 }}
+              className="paper-card rounded-3xl mb-8 p-8 sm:p-10"
+            >
+              <h3 className="font-display text-2xl text-ink mb-8" style={{ fontWeight: 520 }}>Breakdown by area</h3>
+              <div className="space-y-5">
+                {categories.map((cat, i) => {
+                  const score = getCategoryScore(cat);
+                  return (
+                    <div key={cat}>
+                      <div className="flex justify-between text-sm mb-1.5">
+                        <span className="text-ink" style={{ fontWeight: 500 }}>{cat}</span>
+                        <span className="text-ink-muted tabular-nums">{score}%</span>
                       </div>
-                    );
-                  })}
-                </div>
-              </CardContent>
-            </Card>
+                      <div className="h-2.5 bg-ink/[0.06] rounded-full overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          animate={{ width: `${score}%` }}
+                          transition={{ duration: 0.9, ease, delay: 0.3 + i * 0.1 }}
+                          className="h-full bg-primary rounded-full"
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </motion.div>
 
-            {/* Disclaimer */}
-            <div className="paper-surface rounded-xl p-6 mb-8">
-              <div className="flex gap-3">
-                <AlertTriangle className="h-5 w-5 text-amber-600 flex-shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-sm text-amber-800" style={{ fontWeight: 600 }}>
-                    Important Disclaimer
-                  </p>
-                  <p className="text-sm text-amber-700 mt-1 leading-relaxed">
-                    This self-check is <strong>not a diagnostic tool</strong>.
-                    Only a qualified psychologist or educational professional can
-                    diagnose dyscalculia. This screening is designed to help you
-                    reflect on your experiences and decide if pursuing a formal
-                    assessment might be helpful.
-                  </p>
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease, delay: 0.26 }}
+            >
+              <div className="paper-surface rounded-2xl p-6 mb-8">
+                <div className="flex gap-3">
+                  <MdOutlineWarningAmber className="h-5 w-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm text-amber-800" style={{ fontWeight: 600 }}>Important Disclaimer</p>
+                    <p className="text-sm text-amber-700 mt-1 leading-relaxed">
+                      This self-check is <strong>not a diagnostic tool</strong>. Only a qualified psychologist or educational
+                      professional can diagnose dyscalculia. This screening is designed to help you reflect on your
+                      experiences and decide if pursuing a formal assessment might be helpful.
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Primary CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
-              <Link to="/get-assessed">
-                <Button className="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-full shadow-lg group">
-                  Find Assessment Providers
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+                <Link to="/get-assessed">
+                  <Button className="bg-ink hover:bg-ink-soft text-white px-8 py-3 h-12 rounded-full shadow-lg group">
+                    Find Assessment Providers
+                    <MdArrowForward className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
+                <Button
+                  variant="outline"
+                  className="border-ink/20 text-ink hover:bg-ink/5 px-8 py-3 h-12 rounded-full"
+                  onClick={handleReset}
+                >
+                  <MdOutlineRotateLeft className="mr-2 h-4 w-4" />
+                  Retake Self-Check
                 </Button>
-              </Link>
-              <Button
-                variant="outline"
-                className="border-2 border-primary text-primary hover:bg-primary hover:text-white px-8 py-3 rounded-full"
-                onClick={handleReset}
-              >
-                <RotateCcw className="mr-2 h-4 w-4" />
-                Retake Self-Check
-              </Button>
-            </div>
+              </div>
 
-            {/* Download & Share Section */}
-            <Card className="paper-card overflow-hidden">
-              <div className="paper-surface px-8 py-5 flex items-center gap-3">
-                <Share2 className="h-5 w-5 text-primary flex-shrink-0" />
-                <div>
-                  <p className="text-base text-foreground" style={{ fontWeight: 600 }}>
-                    Save or share your results
-                  </p>
-                  <p className="text-sm text-muted-foreground mt-0.5">
-                    Download a copy or share directly with your assessor. It's a great conversation starter.
-                  </p>
+              <div className="paper-card rounded-3xl overflow-hidden">
+                <div className="paper-surface px-8 py-5 flex items-center gap-3">
+                  <MdOutlineShare className="h-5 w-5 text-primary flex-shrink-0" />
+                  <div>
+                    <p className="text-base text-ink" style={{ fontWeight: 600 }}>Save or share your results</p>
+                    <p className="text-sm text-ink-muted mt-0.5">
+                      Download a copy or share directly with your assessor. It's a great conversation starter.
+                    </p>
+                  </div>
+                </div>
+                <div className="p-8">
+                  <div className="grid sm:grid-cols-3 gap-4">
+                    <button
+                      onClick={handleDownloadResults}
+                      className="group flex flex-col items-center gap-3 rounded-2xl border-2 border-dashed border-primary/25 hover:border-primary hover:bg-primary/[0.04] p-6 text-center transition-all duration-200 cursor-pointer"
+                    >
+                      <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                        <MdOutlineDownload className="h-5 w-5 text-primary" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-ink mb-1" style={{ fontWeight: 600 }}>Download Results</p>
+                        <p className="text-xs text-ink-muted leading-relaxed">Save as PDF, formatted and ready to print</p>
+                      </div>
+                    </button>
+
+                    <button
+                      onClick={handleCopyToClipboard}
+                      className="group flex flex-col items-center gap-3 rounded-2xl border-2 border-dashed border-primary/25 hover:border-primary hover:bg-primary/[0.04] p-6 text-center transition-all duration-200 cursor-pointer"
+                    >
+                      <div className={`h-12 w-12 rounded-full flex items-center justify-center transition-colors ${copied ? "bg-green-100" : "bg-primary/10 group-hover:bg-primary/20"}`}>
+                        {copied ? <MdCheck className="h-5 w-5 text-green-600" /> : <MdOutlineContentCopy className="h-5 w-5 text-primary" />}
+                      </div>
+                      <div>
+                        <p className="text-sm text-ink mb-1" style={{ fontWeight: 600 }}>{copied ? "Copied!" : "Copy Summary"}</p>
+                        <p className="text-xs text-ink-muted leading-relaxed">Copy a plain-text summary to your clipboard</p>
+                      </div>
+                    </button>
+
+                    <button
+                      onClick={handleEmailAssessor}
+                      className="group flex flex-col items-center gap-3 rounded-2xl border-2 border-dashed border-accent/30 hover:border-accent hover:bg-accent/[0.04] p-6 text-center transition-all duration-200 cursor-pointer"
+                    >
+                      <div className="h-12 w-12 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                        <MdOutlineMail className="h-5 w-5 text-accent" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-ink mb-1" style={{ fontWeight: 600 }}>Email Your Assessor</p>
+                        <p className="text-xs text-ink-muted leading-relaxed">Opens your email with results pre-filled and ready to send</p>
+                      </div>
+                    </button>
+                  </div>
+
+                  <div className="mt-6 flex gap-3 items-start paper-surface rounded-xl p-4">
+                    <MdOutlineAssignment className="h-4 w-4 text-ink-muted flex-shrink-0 mt-0.5" />
+                    <p className="text-xs text-ink-muted leading-relaxed">
+                      <span style={{ fontWeight: 600 }}>Tip for your appointment:</span> Sharing these results gives your
+                      assessor useful context before your session. It can save time and help focus the conversation on the
+                      areas that matter most to you.
+                    </p>
+                  </div>
                 </div>
               </div>
-              <CardContent className="p-8">
-                <div className="grid sm:grid-cols-3 gap-4">
-
-                  {/* Download PDF */}
-                  <button
-                    onClick={handleDownloadResults}
-                    className="group flex flex-col items-center gap-3 rounded-2xl border-2 border-dashed border-primary/25 hover:border-primary hover:bg-primary/[0.04] p-6 text-center transition-all duration-200 cursor-pointer"
-                  >
-                    <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                      <Download className="h-5 w-5 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-foreground mb-1" style={{ fontWeight: 600 }}>Download Results</p>
-                      <p className="text-xs text-muted-foreground leading-relaxed">Save as PDF, formatted and ready to print</p>
-                    </div>
-                  </button>
-
-                  {/* Copy to Clipboard */}
-                  <button
-                    onClick={handleCopyToClipboard}
-                    className="group flex flex-col items-center gap-3 rounded-2xl border-2 border-dashed border-primary/25 hover:border-primary hover:bg-primary/[0.04] p-6 text-center transition-all duration-200 cursor-pointer"
-                  >
-                    <div className={`h-12 w-12 rounded-full flex items-center justify-center transition-colors ${copied ? "bg-green-100" : "bg-primary/10 group-hover:bg-primary/20"}`}>
-                      {copied
-                        ? <Check className="h-5 w-5 text-green-600" />
-                        : <Copy className="h-5 w-5 text-primary" />
-                      }
-                    </div>
-                    <div>
-                      <p className="text-sm text-foreground mb-1" style={{ fontWeight: 600 }}>
-                        {copied ? "Copied!" : "Copy Summary"}
-                      </p>
-                      <p className="text-xs text-muted-foreground leading-relaxed">Copy a plain-text summary to your clipboard</p>
-                    </div>
-                  </button>
-
-                  {/* Email Assessor */}
-                  <button
-                    onClick={handleEmailAssessor}
-                    className="group flex flex-col items-center gap-3 rounded-2xl border-2 border-dashed border-accent/30 hover:border-accent hover:bg-accent/[0.04] p-6 text-center transition-all duration-200 cursor-pointer"
-                  >
-                    <div className="h-12 w-12 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
-                      <Mail className="h-5 w-5 text-accent" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-foreground mb-1" style={{ fontWeight: 600 }}>Email Your Assessor</p>
-                      <p className="text-xs text-muted-foreground leading-relaxed">Opens your email with results pre-filled and ready to send</p>
-                    </div>
-                  </button>
-
-                </div>
-
-                {/* Tip */}
-                <div className="mt-6 flex gap-3 items-start paper-surface rounded-xl p-4">
-                  <ClipboardList className="h-4 w-4 text-muted-foreground flex-shrink-0 mt-0.5" />
-                  <p className="text-xs text-muted-foreground leading-relaxed">
-                    <span style={{ fontWeight: 600 }}>Tip for your appointment:</span> Sharing these results gives your assessor useful context before your session. It can save time and help focus the conversation on the areas that matter most to you.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
+            </motion.div>
           </div>
         </section>
       </div>
     );
   }
 
+  /* ---------------- Intro + conversational stepper ---------------- */
   return (
-    <div>
-      {/* Hero */}
-      <section className="pt-24 pb-12 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[#F6EFE2]/60" />
+    <div className="min-h-screen bg-paper/45">
+      <section className="pt-32 pb-24 relative overflow-hidden">
         <div className="container-custom relative z-10">
-          <div className="text-center space-y-5 mb-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full tape-label">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary/60 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-              </span>
-              <span className="text-[13px] text-primary" style={{ fontWeight: 500 }}>Reflective Self-Check</span>
-            </div>
-
-            <h1 className="text-[2.5rem] lg:text-[3.25rem] leading-[1.05] tracking-tight">
-              <span className="text-[#173F46]">Could This Be Dyscalculia?</span>
-            </h1>
-
-            <p className="text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
-              This 15-question self-check helps you reflect on common
-              dyscalculia traits. It's not diagnostic, but it can help you
-              decide if a formal assessment is worth exploring.
-            </p>
-          </div>
-
-          {/* Disclaimer */}
-          <div className="max-w-2xl mx-auto paper-surface rounded-xl p-4 mb-8">
-            <div className="flex gap-3">
-              <Info className="h-5 w-5 text-amber-600 flex-shrink-0 mt-0.5" />
-              <p className="text-sm text-amber-700">
-                This is a reflective tool, not a clinical screener. Only a
-                qualified professional can diagnose dyscalculia.
-              </p>
-            </div>
-          </div>
-
-          {/* Progress */}
-          <div className="max-w-2xl mx-auto mb-8">
-            <div className="flex justify-between text-sm text-muted-foreground mb-2">
-              <span>
-                Section {currentSection + 1} of {categories.length}:{" "}
-                <span style={{ fontWeight: 500 }} className="text-foreground">
-                  {categories[currentSection]}
-                </span>
-              </span>
-              <span>
-                {totalAnswered}/{questions.length} answered
-              </span>
-            </div>
-            <div className="h-2 paper-card rounded-full overflow-hidden">
-              <div
-                className="h-full bg-primary rounded-full transition-all duration-300"
-                style={{
-                  width: `${(totalAnswered / questions.length) * 100}%`,
-                }}
-              />
-            </div>
-            {/* Section tabs */}
-            <div className="flex gap-1.5 mt-4">
-              {categories.map((cat, i) => {
-                const catQuestions = questions.filter(
-                  (q) => q.category === cat
-                );
-                const catAnswered = catQuestions.filter(
-                  (q) => answers[q.id] !== undefined
-                ).length;
-                const allAnswered = catAnswered === catQuestions.length;
-                return (
-                  <button
-                    key={cat}
-                    onClick={() => setCurrentSection(i)}
-                    className={`flex-1 py-2 px-3 rounded-lg text-xs transition-all duration-200 ${
-                      i === currentSection
-                        ? "bg-primary text-white"
-                        : allAnswered
-                        ? "bg-primary/10 text-primary"
-                        : "bg-muted text-muted-foreground hover:bg-muted/80"
-                    }`}
-                    style={{ fontWeight: 500 }}
-                  >
-                    {cat}
-                    {allAnswered && i !== currentSection && (
-                      <CheckCircle className="h-3 w-3 inline ml-1" />
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Questions */}
-      <section className="py-8 pb-20">
-        <div className="container-custom max-w-2xl">
-          <div className="space-y-6">
-            {sectionQuestions.map((question, index) => (
-              <Card
-                key={question.id}
-                className={`paper-card transition-all duration-200 ${
-                  answers[question.id] !== undefined
-                    ? "border-primary/20"
-                    : ""
-                }`}
+          <AnimatePresence mode="wait">
+            {!started ? (
+              <motion.div
+                key="intro"
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}
+                transition={{ duration: 0.6, ease }}
+                className="text-center max-w-2xl mx-auto space-y-6"
               >
-                <CardContent className="p-6">
-                  <div className="flex gap-3 mb-4">
-                    <div className="flex-shrink-0 mt-0.5">
-                      {answers[question.id] !== undefined ? (
-                        <CheckCircle className="h-5 w-5 text-primary" />
-                      ) : (
-                        <Circle className="h-5 w-5 text-muted-foreground/40" />
-                      )}
-                    </div>
-                    <p className="text-base leading-relaxed">
-                      {question.text}
+                <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full tape-label">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary/60 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                  </span>
+                  <span className="text-[13px] text-ink" style={{ fontWeight: 500 }}>Reflective Self-Check</span>
+                </span>
+
+                <h1 className="font-display text-[clamp(2.4rem,6vw,3.75rem)] leading-[1.04] tracking-tight text-ink" style={{ fontWeight: 520 }}>
+                  Could this be <span className="italic" style={{ fontWeight: 400 }}>dyscalculia?</span>
+                </h1>
+
+                <p className="text-lg text-ink-muted max-w-xl mx-auto leading-relaxed">
+                  Fifteen gentle questions, one at a time. Not diagnostic — but it can help you decide
+                  if a formal assessment is worth exploring.
+                </p>
+
+                <div className="max-w-xl mx-auto paper-surface rounded-xl p-4">
+                  <div className="flex gap-3 text-left">
+                    <MdOutlineInfo className="h-5 w-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                    <p className="text-sm text-amber-700">
+                      This is a reflective tool, not a clinical screener. Only a qualified professional can diagnose dyscalculia.
                     </p>
                   </div>
+                </div>
 
-                  <div className="flex flex-wrap gap-2 ml-8">
-                    {responseOptions.map((option) => (
-                      <button
-                        key={option.value}
-                        onClick={() =>
-                          handleAnswer(question.id, option.value)
-                        }
-                        className={`px-4 py-2 rounded-full text-sm border transition-all duration-200 ${
-                          answers[question.id] === option.value
-                            ? "bg-primary text-white border-primary shadow-md"
-                            : `${option.color} hover:shadow-sm`
-                        }`}
-                        style={{ fontWeight: 500 }}
-                      >
-                        {option.label}
-                      </button>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          {/* Navigation */}
-          <div className="flex justify-between mt-10">
-            <Button
-              variant="outline"
-              onClick={handlePrev}
-              disabled={currentSection === 0}
-              className="px-6 py-3 rounded-full"
-            >
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Previous
-            </Button>
-
-            {currentSection < categories.length - 1 ? (
-              <Button
-                onClick={handleNext}
-                className="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-full"
-              >
-                Next Section
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+                <div className="pt-2">
+                  <Button
+                    onClick={() => setStarted(true)}
+                    className="h-[52px] bg-ink hover:bg-ink-soft text-white px-9 rounded-full shadow-lg text-[15px] group"
+                  >
+                    Begin the self-check
+                    <MdArrowForward className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                  <p className="mt-4 text-xs text-ink-muted/70">About 3 minutes · you can go back and change any answer</p>
+                </div>
+              </motion.div>
             ) : (
-              <Button
-                onClick={handleShowResults}
-                disabled={totalAnswered < questions.length}
-                className="bg-accent hover:bg-accent/90 text-white px-8 py-3 rounded-full shadow-lg"
+              <motion.div
+                key="stepper"
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease }}
+                className="max-w-2xl mx-auto"
               >
-                See My Results
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            )}
-          </div>
+                {/* Progress */}
+                <div className="mb-10">
+                  <div className="flex items-center justify-between text-sm text-ink-muted mb-3">
+                    <span>
+                      Question <span className="text-ink tabular-nums" style={{ fontWeight: 600 }}>{currentIndex + 1}</span>
+                      <span className="tabular-nums"> / {questions.length}</span>
+                    </span>
+                    <span className="inline-flex rounded-full bg-white/80 border border-ink/10 px-3 py-1 text-xs text-ink" style={{ fontWeight: 500 }}>
+                      {question.category}
+                    </span>
+                  </div>
+                  <div className="h-1.5 bg-ink/[0.07] rounded-full overflow-hidden">
+                    <motion.div
+                      className="h-full bg-primary rounded-full"
+                      animate={{ width: `${((currentIndex + 1) / questions.length) * 100}%` }}
+                      transition={{ duration: 0.5, ease }}
+                    />
+                  </div>
+                </div>
 
-          {totalAnswered < questions.length &&
-            currentSection === categories.length - 1 && (
-              <p className="text-center text-sm text-muted-foreground mt-4">
-                Please answer all {questions.length} questions to see your
-                results ({questions.length - totalAnswered} remaining)
-              </p>
+                {/* Question card */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={question.id}
+                    initial={{ opacity: 0, x: 36 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -28 }}
+                    transition={{ duration: 0.38, ease }}
+                    className="paper-surface rounded-[1.75rem] p-8 sm:p-12"
+                  >
+                    <p className="font-display text-[clamp(1.5rem,3.4vw,2.1rem)] leading-[1.25] text-ink mb-10" style={{ fontWeight: 500 }}>
+                      {question.text}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2.5" role="radiogroup" aria-label="How often is this true for you?">
+                      {responseOptions.map((option) => {
+                        const selected = answers[question.id] === option.value;
+                        return (
+                          <button
+                            key={option.value}
+                            role="radio"
+                            aria-checked={selected}
+                            onClick={() => handleAnswer(question.id, option.value)}
+                            className={`
+                              px-5 py-2.5 rounded-full text-sm border transition-all duration-200
+                              ${selected
+                                ? "bg-ink text-white border-ink shadow-md scale-[1.03]"
+                                : "bg-white/80 text-ink-muted border-ink/15 hover:border-ink/40 hover:text-ink hover:-translate-y-0.5"
+                              }
+                            `}
+                            style={{ fontWeight: 500 }}
+                          >
+                            {option.label}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <p className="mt-6 text-xs text-ink-muted/60">Tip: press 1–5 to answer</p>
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Navigation */}
+                <div className="flex items-center justify-between mt-8">
+                  <button
+                    onClick={() => setCurrentIndex((i) => Math.max(0, i - 1))}
+                    disabled={currentIndex === 0}
+                    className="inline-flex items-center gap-1.5 text-sm text-ink-muted hover:text-ink disabled:opacity-30 disabled:hover:text-ink-muted transition-colors"
+                  >
+                    <MdArrowBack className="h-4 w-4" />
+                    Back
+                  </button>
+
+                  {currentIndex === questions.length - 1 ? (
+                    <Button
+                      onClick={handleShowResults}
+                      disabled={!allAnswered}
+                      className="bg-accent hover:bg-accent/90 text-white px-8 h-11 rounded-full shadow-lg"
+                    >
+                      See my results
+                      <MdArrowForward className="ml-2 h-4 w-4" />
+                    </Button>
+                  ) : (
+                    <span className="text-xs text-ink-muted/60 tabular-nums">
+                      {totalAnswered} of {questions.length} answered
+                    </span>
+                  )}
+                </div>
+
+                {currentIndex === questions.length - 1 && !allAnswered && (
+                  <p className="text-center text-sm text-ink-muted mt-4">
+                    {questions.length - totalAnswered} question{questions.length - totalAnswered === 1 ? "" : "s"} still
+                    unanswered — use Back to revisit them.
+                  </p>
+                )}
+              </motion.div>
             )}
+          </AnimatePresence>
         </div>
       </section>
     </div>

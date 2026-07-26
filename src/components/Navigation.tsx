@@ -1,22 +1,25 @@
 import { useState, useEffect, useRef, type ReactNode } from "react";
 import { Link, useLocation } from "react-router";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./ui/button";
-import { Menu, X, ArrowRight, ChevronDown, Sun, Moon, Type } from "lucide-react";
+import { MdMenu, MdClose, MdArrowForward, MdExpandMore, MdOutlineLightMode, MdOutlineDarkMode } from "react-icons/md";
 import { useTheme } from "../lib/theme-provider";
 import { useFont } from "../lib/font-provider";
 import logo from "figma:asset/7df1fcf1a964339a60566b3dcb8f4a1327784680.png";
 
+const spring = { type: "spring", stiffness: 380, damping: 32 } as const;
+
 // Theme toggle button component
 function ThemeToggle() {
   const { resolvedTheme, toggleTheme } = useTheme();
-  
+
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+      className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-ink/5 transition-colors"
       aria-label={resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
     >
-      {resolvedTheme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+      {resolvedTheme === "dark" ? <MdOutlineLightMode className="h-4 w-4" /> : <MdOutlineDarkMode className="h-4 w-4" />}
     </button>
   );
 }
@@ -24,24 +27,26 @@ function ThemeToggle() {
 // Dyslexia font toggle button component
 function FontToggle() {
   const { font, toggleDyslexiaFont } = useFont();
-  
+
   return (
     <button
       onClick={toggleDyslexiaFont}
-      className={`p-2 rounded-full transition-colors ${
-        font === "dyslexia" 
-          ? "text-primary bg-primary/10" 
-          : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+      className={`h-9 w-9 rounded-full transition-colors flex items-center justify-center ${
+        font === "dyslexia"
+          ? "text-primary bg-primary/10"
+          : "text-muted-foreground hover:text-foreground hover:bg-ink/5"
       }`}
       aria-label={font === "dyslexia" ? "Switch to default font" : "Switch to dyslexia-friendly font"}
-      title={font === "dyslexia" ? "Dyslexia-friendly font enabled" : "Enable dyslexia-friendly font"}
+      aria-pressed={font === "dyslexia"}
+      title={font === "dyslexia" ? "Dyslexia-friendly font enabled — click to switch back" : "Switch to dyslexia-friendly font (OpenDyslexic)"}
     >
-      <Type className="h-4 w-4" />
+      <span className="text-[15px] leading-none" style={{ fontWeight: 600, letterSpacing: "-0.02em" }} aria-hidden="true">
+        Aa
+      </span>
     </button>
   );
 }
 
-// Dropdown component with descriptions
 interface DropdownItem {
   name: string;
   href: string;
@@ -49,13 +54,13 @@ interface DropdownItem {
   isHash?: boolean;
 }
 
-function NavDropdown({ 
-  label, 
-  items, 
-  active = false 
-}: { 
-  label: string; 
-  items: DropdownItem[]; 
+function NavDropdown({
+  label,
+  items,
+  active = false,
+}: {
+  label: string;
+  items: DropdownItem[];
   active?: boolean;
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -80,24 +85,41 @@ function NavDropdown({
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`relative text-[13px] transition-all duration-200 px-3.5 py-1.5 rounded-full flex items-center gap-1 ${
-          active ? 'text-primary bg-white shadow-sm' : 'text-muted-foreground hover:text-foreground hover:bg-white/80 hover:shadow-sm'
+        className={`relative text-[13px] transition-colors duration-200 px-3.5 py-1.5 rounded-full flex items-center gap-1 ${
+          active ? "text-ink" : "text-ink-muted hover:text-ink"
         }`}
         style={{ fontWeight: 500 }}
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
-        {label}
-        <ChevronDown className={`h-3 w-3 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+        {active && (
+          <motion.span
+            layoutId="nav-active-pill"
+            className="absolute inset-0 rounded-full bg-ink/[0.07]"
+            transition={spring}
+          />
+        )}
+        <span className="relative z-10 flex items-center gap-1">
+          {label}
+          <MdExpandMore className={`h-3.5 w-3.5 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
+        </span>
       </button>
 
-      {isOpen && (
-        <div className="absolute top-full left-0 mt-2 w-56 bg-white/95 backdrop-blur-xl border border-border/50 rounded-2xl shadow-elevated p-2 animate-fade-in z-50">
-          {items.map((item) => (
-            <NavDropdownLink key={item.name} item={item} />
-          ))}
-        </div>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 6, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 4, scale: 0.98 }}
+            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute top-full left-0 mt-3 w-60 bg-white/95 backdrop-blur-xl border border-ink/10 rounded-2xl shadow-elevated p-2 z-50 origin-top"
+          >
+            {items.map((item) => (
+              <NavDropdownLink key={item.name} item={item} />
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -106,13 +128,13 @@ function NavDropdownLink({ item }: { item: DropdownItem }) {
   const location = useLocation();
   const isActive = location.pathname === item.href;
   const baseClasses = `block px-3.5 py-2.5 text-[13px] rounded-xl transition-all duration-200 ${
-    isActive ? 'text-primary bg-primary/5' : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
+    isActive ? "text-primary bg-primary/5" : "text-ink-muted hover:text-ink hover:bg-ink/[0.04]"
   }`;
 
   const content = (
     <>
       <div style={{ fontWeight: 500 }}>{item.name}</div>
-      {item.description && <div className="text-[11px] text-muted-foreground/70 font-normal mt-0.5">{item.description}</div>}
+      {item.description && <div className="text-[11px] text-ink-muted/70 font-normal mt-0.5">{item.description}</div>}
     </>
   );
 
@@ -128,8 +150,6 @@ export function Navigation() {
   const location = useLocation();
   const isHome = location.pathname === "/";
 
-  // Cognitive-load-optimized nav structure
-  // Reduced from 8 items to 3 dropdowns + 1 standalone + CTA
   const learnItems: DropdownItem[] = [
     { name: "What is Dyscalculia?", href: isHome ? "#understand" : "/#understand", isHash: isHome, description: "Learn the basics" },
     { name: "Blog", href: "/blog", description: "Articles & insights" },
@@ -150,16 +170,17 @@ export function Navigation() {
     { name: "Contact", href: "/contact", description: "Get in touch" },
   ];
 
-  const isLearnActive = ["/blog", "/free-resources"].includes(location.pathname) || 
-    (isHome && ["#understand", "#books"].some(h => location.hash === h));
+  const isLearnActive = ["/blog", "/free-resources"].includes(location.pathname) ||
+    (isHome && ["#understand", "#books"].some((h) => location.hash === h));
   const isToolsActive = location.pathname === "/tools" || location.pathname === "/get-assessed" ||
     (isHome && location.hash === "#accommodations");
   const isCommunityActive = ["/stories", "/about", "/contact"].includes(location.pathname);
+  const isSelfCheckActive = location.pathname === "/self-check";
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const handleScroll = () => setScrolled(window.scrollY > 24);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
@@ -167,67 +188,72 @@ export function Navigation() {
   }, [location]);
 
   return (
-    <nav
-      className={`
-        fixed top-0 left-0 right-0 z-50 transition-all duration-500
-        ${scrolled
-          ? 'glass-effect shadow-custom'
-          : 'bg-background/60 backdrop-blur-sm'
-        }
-      `}
+    <motion.nav
+      initial={{ y: -32, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      className="fixed top-3 left-0 right-0 z-50"
       role="navigation"
       aria-label="Main navigation"
     >
-      <div className="max-w-[1200px] mx-auto" style={{ padding: '0 clamp(1.5rem, 4vw, 3rem)' }}>
-        <div className="flex items-center justify-between h-16">
+      <div className="max-w-[1240px] mx-auto" style={{ padding: "0 clamp(0.75rem, 3vw, 1.5rem)" }}>
+        <div
+          className={`
+            flex items-center justify-between h-14 pl-4 pr-2 rounded-full border transition-all duration-500
+            ${scrolled
+              ? "bg-white/85 backdrop-blur-xl border-ink/10 shadow-elevated"
+              : "bg-white/55 backdrop-blur-md border-ink/[0.06]"
+            }
+          `}
+        >
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2.5 group">
+          <Link to="/" className="flex items-center space-x-2.5 group shrink-0">
             <img
               src={logo}
               alt="Count Me In Logo"
-              className="w-9 h-9 rounded-lg transition-all duration-300 group-hover:scale-110 group-hover:rotate-3"
+              className="w-8 h-8 rounded-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
             />
             <div className="flex flex-col">
-              <span className="text-[15px] text-foreground tracking-tight" style={{ fontWeight: 600 }}>Count Me In</span>
-              <span className="text-[10px] text-muted-foreground/60 -mt-0.5 tracking-wide uppercase">Dyscalculia</span>
+              <span className="text-[14px] text-ink tracking-tight leading-tight" style={{ fontWeight: 600 }}>Count Me In</span>
+              <span className="text-[9px] text-ink-muted/70 -mt-px tracking-[0.14em] uppercase">Dyscalculia</span>
             </div>
           </Link>
 
-          {/* Desktop Navigation - Reduced from 8 to 4 items + CTA */}
+          {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center">
-            <div className="flex items-center bg-muted/40 rounded-full px-1 py-1">
-              {/* 1. Learn Dropdown */}
+            <div className="flex items-center rounded-full px-1 py-1">
               <NavDropdown label="Learn" items={learnItems} active={isLearnActive} />
 
-              {/* 2. Self-Check - Standalone (elevated per request) */}
               <Link
                 to="/self-check"
-                className={`relative text-[13px] transition-all duration-200 px-3.5 py-1.5 rounded-full ${
-                  location.pathname === "/self-check"
-                    ? 'text-primary bg-white shadow-sm'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-white/80 hover:shadow-sm'
+                className={`relative text-[13px] transition-colors duration-200 px-3.5 py-1.5 rounded-full ${
+                  isSelfCheckActive ? "text-ink" : "text-ink-muted hover:text-ink"
                 }`}
                 style={{ fontWeight: 500 }}
               >
-                Self-Check
+                {isSelfCheckActive && (
+                  <motion.span
+                    layoutId="nav-active-pill"
+                    className="absolute inset-0 rounded-full bg-ink/[0.07]"
+                    transition={spring}
+                  />
+                )}
+                <span className="relative z-10">Self-Check</span>
               </Link>
 
-              {/* 3. Tools & Help Dropdown */}
               <NavDropdown label="Tools & Help" items={toolsItems} active={isToolsActive} />
-
-              {/* 4. Community Dropdown */}
               <NavDropdown label="Community" items={communityItems} active={isCommunityActive} />
             </div>
           </div>
 
-          {/* Theme Toggle + Font Toggle + CTA */}
-          <div className="hidden lg:flex items-center gap-2">
+          {/* Toggles + CTA */}
+          <div className="hidden lg:flex items-center gap-1.5">
             <ThemeToggle />
             <FontToggle />
-            <Link to="/ebook">
-              <Button className="bg-primary hover:bg-primary/90 text-white text-[13px] px-5 py-2 h-9 rounded-full shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 group">
+            <Link to="/ebook" className="ml-1">
+              <Button className="bg-ink hover:bg-ink-soft text-white text-[13px] px-5 h-9 rounded-full shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 group">
                 Get the Guide
-                <ArrowRight className="ml-1.5 h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
+                <MdArrowForward className="ml-1.5 h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
               </Button>
             </Link>
           </div>
@@ -235,88 +261,88 @@ export function Navigation() {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+            className="lg:hidden p-2 rounded-full text-ink-muted hover:text-ink hover:bg-ink/5 transition-colors"
             aria-label={isOpen ? "Close menu" : "Open menu"}
             aria-expanded={isOpen}
           >
-            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {isOpen ? <MdClose className="h-5 w-5" /> : <MdMenu className="h-5 w-5" />}
           </button>
         </div>
 
-        {/* Mobile Navigation - Collapsible sections with headers */}
-        {isOpen && (
-          <div className="lg:hidden py-3 bg-white/95 backdrop-blur-xl mt-1 rounded-2xl border border-border/50 shadow-elevated animate-fade-in mx-1 mb-2 max-h-[70vh] overflow-y-auto">
-            {/* Learn Section */}
-            <MobileSection title="Learn">
-              <MobileLink href={isHome ? "#understand" : "/#understand"} isHash={isHome}>What is Dyscalculia?</MobileLink>
-              <MobileLink href="/blog">Blog</MobileLink>
-              <MobileLink href={isHome ? "#books" : "/#books"} isHash={isHome}>Books</MobileLink>
-              <MobileLink href="/free-resources">Free Resources</MobileLink>
-            </MobileSection>
+        {/* Mobile Navigation */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -8, scale: 0.99 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -8, scale: 0.99 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:hidden mt-2 py-3 bg-white/95 backdrop-blur-xl rounded-3xl border border-ink/10 shadow-elevated max-h-[70vh] overflow-y-auto origin-top"
+            >
+              <MobileSection title="Learn">
+                <MobileLink href={isHome ? "#understand" : "/#understand"} isHash={isHome}>What is Dyscalculia?</MobileLink>
+                <MobileLink href="/blog">Blog</MobileLink>
+                <MobileLink href={isHome ? "#books" : "/#books"} isHash={isHome}>Books</MobileLink>
+                <MobileLink href="/free-resources">Free Resources</MobileLink>
+              </MobileSection>
 
-            <div className="section-divider mx-5 my-2" />
+              <div className="section-divider mx-5 my-2" />
 
-            {/* Self-Check - Prominent */}
-            <div className="px-5 py-1">
-              <MobileLink href="/self-check" highlight>Self-Check</MobileLink>
-            </div>
+              <div className="px-5 py-1">
+                <MobileLink href="/self-check" highlight>Self-Check</MobileLink>
+              </div>
 
-            <div className="section-divider mx-5 my-2" />
+              <div className="section-divider mx-5 my-2" />
 
-            {/* Tools & Help Section */}
-            <MobileSection title="Tools & Help">
-              <MobileLink href="/tools">Apps & Tools</MobileLink>
-              <MobileLink href={isHome ? "#accommodations" : "/#accommodations"} isHash={isHome}>Accommodations</MobileLink>
-              <MobileLink href="/get-assessed">Get Assessed</MobileLink>
-            </MobileSection>
+              <MobileSection title="Tools & Help">
+                <MobileLink href="/tools">Apps & Tools</MobileLink>
+                <MobileLink href={isHome ? "#accommodations" : "/#accommodations"} isHash={isHome}>Accommodations</MobileLink>
+                <MobileLink href="/get-assessed">Get Assessed</MobileLink>
+              </MobileSection>
 
-            <div className="section-divider mx-5 my-2" />
+              <div className="section-divider mx-5 my-2" />
 
-            {/* Community Section */}
-            <MobileSection title="Community">
-              <MobileLink href="/stories">Stories</MobileLink>
-              <MobileLink href="/about">About</MobileLink>
-              <MobileLink href="/contact">Contact</MobileLink>
-            </MobileSection>
+              <MobileSection title="Community">
+                <MobileLink href="/stories">Stories</MobileLink>
+                <MobileLink href="/about">About</MobileLink>
+                <MobileLink href="/contact">Contact</MobileLink>
+              </MobileSection>
 
-            <div className="px-4 pt-3 pb-2 mx-2">
-              <Link to="/ebook" onClick={() => setIsOpen(false)}>
-                <Button className="w-full bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-full shadow-sm">
-                  Get the Guide
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-            </div>
-          </div>
-        )}
+              <div className="px-4 pt-3 pb-2 mx-2">
+                <Link to="/ebook" onClick={() => setIsOpen(false)}>
+                  <Button className="w-full bg-ink hover:bg-ink-soft text-white px-6 py-2.5 rounded-full shadow-sm">
+                    Get the Guide
+                    <MdArrowForward className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-    </nav>
+    </motion.nav>
   );
 }
 
-// Mobile section component
 function MobileSection({ title, children }: { title: string; children: ReactNode }) {
   return (
     <div className="px-5 py-1">
-      <span className="text-[10px] text-muted-foreground/50 uppercase tracking-widest mb-1 block" style={{ fontWeight: 600 }}>
+      <span className="text-[10px] text-ink-muted/50 uppercase tracking-widest mb-1 block" style={{ fontWeight: 600 }}>
         {title}
       </span>
-      <div className="space-y-0.5">
-        {children}
-      </div>
+      <div className="space-y-0.5">{children}</div>
     </div>
   );
 }
 
-// Mobile link component
-function MobileLink({ 
-  href, 
-  children, 
-  isHash = false, 
-  highlight = false 
-}: { 
-  href: string; 
-  children: ReactNode; 
+function MobileLink({
+  href,
+  children,
+  isHash = false,
+  highlight = false,
+}: {
+  href: string;
+  children: ReactNode;
   isHash?: boolean;
   highlight?: boolean;
 }) {
@@ -324,10 +350,10 @@ function MobileLink({
 
   const baseClasses = `block px-3 py-2 text-sm rounded-xl transition-colors duration-200 ${
     highlight
-      ? 'text-primary bg-primary/5 font-medium'
+      ? "text-primary bg-primary/5 font-medium"
       : location.pathname === href
-        ? 'text-primary bg-primary/5'
-        : 'text-muted-foreground hover:text-foreground hover:bg-muted/40'
+        ? "text-primary bg-primary/5"
+        : "text-ink-muted hover:text-ink hover:bg-ink/[0.04]"
   }`;
 
   if (isHash) {

@@ -1,7 +1,7 @@
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
-import { ExternalLink } from "lucide-react";
+import { MdOutlineOpenInNew as ExternalLink } from "react-icons/md";
 
 export function GetAssessedSection() {
   const providers = [

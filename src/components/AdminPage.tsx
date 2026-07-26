@@ -4,22 +4,22 @@ import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 import { Badge } from "./ui/badge";
 import {
-  Lock,
-  BookOpen,
-  ShoppingCart,
-  Plus,
-  Pencil,
-  Trash2,
-  ArrowLeft,
-  Save,
-  X,
-  GripVertical,
-  ExternalLink,
-  Eye,
-  EyeOff,
-  LogOut,
-  AlertTriangle,
-} from "lucide-react";
+  MdOutlineLock as Lock,
+  MdOutlineMenuBook as BookOpen,
+  MdOutlineShoppingCart as ShoppingCart,
+  MdAdd as Plus,
+  MdOutlineEdit as Pencil,
+  MdOutlineDelete as Trash2,
+  MdArrowBack as ArrowLeft,
+  MdOutlineSave as Save,
+  MdClose as X,
+  MdDragIndicator as GripVertical,
+  MdOutlineOpenInNew as ExternalLink,
+  MdOutlineVisibility as Eye,
+  MdOutlineVisibilityOff as EyeOff,
+  MdOutlineLogout as LogOut,
+  MdOutlineWarningAmber as AlertTriangle,
+} from "react-icons/md";
 import {
   type Book,
   type StoreProduct,

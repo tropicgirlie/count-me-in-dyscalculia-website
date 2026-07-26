@@ -1,9 +1,9 @@
 import { useState, useRef } from "react";
 import { Button } from "./ui/button";
 import {
-  Briefcase, GraduationCap, Home, Clock, DollarSign, MapPin,
-  ChevronDown, ChevronUp, CheckCircle, Smartphone, Lightbulb, Sparkles
-} from "lucide-react";
+  MdOutlineWork as Briefcase, MdOutlineSchool as GraduationCap, MdOutlineHome as Home, MdOutlineSchedule as Clock, MdOutlineAttachMoney as DollarSign, MdOutlinePlace as MapPin,
+  MdExpandMore as ChevronDown, MdExpandLess as ChevronUp, MdOutlineCheckCircle as CheckCircle, MdOutlineSmartphone as Smartphone, MdOutlineLightbulb as Lightbulb, MdOutlineAutoAwesome as Sparkles
+} from "react-icons/md";
 
 function useInView(_threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null);
@@ -157,7 +157,7 @@ export function AccommodationsSection() {
 
   return (
     <section className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[#F6EFE2]/35" />
+      <div className="absolute inset-0 bg-[#EBF2EE]/35" />
       <div className="container-custom relative z-10">
         {/* Section Header */}
         <div

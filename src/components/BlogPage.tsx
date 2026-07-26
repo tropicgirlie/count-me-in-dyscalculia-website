@@ -1,17 +1,16 @@
 import { useState } from "react";
-import { Link } from "react-router";
-import { Badge } from "./ui/badge";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./ui/button";
-import { Card, CardContent } from "./ui/card";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import {
-  ArrowRight,
-  Clock,
-  Tag,
-  Search,
-  BookOpen,
-} from "lucide-react";
+  MdArrowForward as ArrowRight,
+  MdOutlineSchedule as Clock,
+  MdOutlineSearch as Search,
+  MdOutlineMenuBook as BookOpen,
+} from "react-icons/md";
 import { usePageMeta } from "../lib/usePageMeta";
+
+const ease = [0.16, 1, 0.3, 1] as const;
 
 interface BlogPost {
   id: string;
@@ -109,6 +108,14 @@ const posts: BlogPost[] = [
 
 const allCategories = ["All", ...new Set(posts.map((p) => p.category))];
 
+function CategoryChip({ label }: { label: string }) {
+  return (
+    <span className="inline-flex items-center rounded-full bg-primary/10 text-primary px-3 py-1 text-xs" style={{ fontWeight: 600 }}>
+      {label}
+    </span>
+  );
+}
+
 export function BlogPage() {
   usePageMeta({
     title: "Dyscalculia Blog: Articles & Strategies | Count Me In",
@@ -129,56 +136,62 @@ export function BlogPage() {
   });
 
   const featuredPosts = posts.filter((p) => p.featured);
-  const regularPosts = filtered.filter((p) => !p.featured || selectedCategory !== "All");
+  const isDefaultView = selectedCategory === "All" && searchQuery === "";
 
   return (
     <div>
       {/* Hero */}
-      <section className="pt-24 pb-16 relative overflow-hidden">
-        <div className="absolute inset-0 gradient-mesh" />
+      <section className="pt-36 pb-16 relative overflow-hidden bg-paper">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_55%_45%_at_70%_15%,rgba(0,150,136,0.07),transparent_65%)]" />
         <div className="container-custom relative z-10">
-          <div className="text-center space-y-5 max-w-2xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/[0.08] border border-primary/15">
-              <BookOpen className="h-3.5 w-3.5 text-primary" />
-              <span className="text-[13px] text-primary" style={{ fontWeight: 500 }}>Blog & Articles</span>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease }}
+            className="text-center space-y-6 max-w-2xl mx-auto"
+          >
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full tape-label">
+              <BookOpen className="h-3.5 w-3.5 text-ink" />
+              <span className="text-[13px] text-ink" style={{ fontWeight: 500 }}>Blog & Articles</span>
             </div>
 
-            <h1 className="text-[2.5rem] lg:text-[3.25rem] leading-[1.05] tracking-tight">
-              <span className="text-gradient">Insights & Strategies</span>
+            <h1 className="font-display text-[clamp(2.5rem,6vw,4rem)] leading-[1.03] tracking-tight text-ink" style={{ fontWeight: 520 }}>
+              Insights & <span className="italic" style={{ fontWeight: 420 }}>strategies</span>
             </h1>
 
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <p className="text-lg text-ink-muted leading-relaxed">
               Articles about dyscalculia, ADHD, neurodiversity, and practical
               strategies for daily life. Written with clarity and care.
             </p>
 
             {/* Search */}
             <div className="max-w-md mx-auto relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-ink-muted" />
               <input
                 type="text"
                 placeholder="Search articles..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-11 pr-4 py-3 bg-card border border-border/60 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                className="w-full pl-11 pr-4 py-3 bg-white border border-ink/12 rounded-full text-sm text-ink shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/25 focus:border-primary transition-all"
               />
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Category Filter */}
-      <section className="py-4 border-b border-border/30 sticky top-[72px] z-40 bg-background/95 backdrop-blur-sm">
+      <section className="py-3 border-b border-ink/8 sticky top-20 z-40 bg-background/85 backdrop-blur-md">
         <div className="container-custom">
           <div className="flex flex-wrap justify-center gap-2">
             {allCategories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
+                aria-pressed={selectedCategory === cat}
                 className={`px-4 py-2 rounded-full text-sm transition-all duration-200 ${
                   selectedCategory === cat
-                    ? "bg-primary text-white shadow-lg"
-                    : "bg-card border text-foreground/80 hover:text-foreground hover:border-primary/40"
+                    ? "bg-ink text-white shadow-md"
+                    : "bg-white border border-ink/10 text-ink-muted hover:text-ink hover:border-ink/30"
                 }`}
                 style={{ fontWeight: 500 }}
               >
@@ -190,15 +203,27 @@ export function BlogPage() {
       </section>
 
       {/* Featured Posts */}
-      {selectedCategory === "All" && searchQuery === "" && (
-        <section className="py-16">
+      {isDefaultView && (
+        <section className="py-16 lg:py-20">
           <div className="container-custom">
-            <h2 className="text-2xl mb-8">Featured Articles</h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              {featuredPosts.map((post) => (
-                <Card
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6, ease }}
+              className="font-display text-2xl lg:text-3xl text-ink mb-8" style={{ fontWeight: 520 }}
+            >
+              Featured articles
+            </motion.h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              {featuredPosts.map((post, i) => (
+                <motion.article
                   key={post.id}
-                  className="shadow-custom hover:shadow-hover transition-all duration-300 overflow-hidden group cursor-pointer"
+                  initial={{ opacity: 0, y: 28 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.65, ease, delay: i * 0.08 }}
+                  className="paper-card rounded-3xl overflow-hidden group cursor-pointer transition-all duration-300 hover:shadow-custom hover:-translate-y-1"
                 >
                   <div className="aspect-[16/9] overflow-hidden">
                     <ImageWithFallback
@@ -207,36 +232,27 @@ export function BlogPage() {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-                  <CardContent className="p-8">
+                  <div className="p-8">
                     <div className="flex items-center gap-3 mb-3">
-                      <Badge
-                        variant="outline"
-                        className="text-primary border-primary/30"
-                      >
-                        {post.category}
-                      </Badge>
-                      <span className="text-xs text-foreground/70 flex items-center gap-1">
+                      <CategoryChip label={post.category} />
+                      <span className="text-xs text-ink-muted flex items-center gap-1">
                         <Clock className="h-3 w-3" />
                         {post.readTime}
                       </span>
-                      <span className="text-xs text-foreground/70">
-                        {post.date}
-                      </span>
+                      <span className="text-xs text-ink-muted">{post.date}</span>
                     </div>
-                    <h3 className="text-xl mb-3 group-hover:text-primary transition-colors">
+                    <h3 className="font-display text-xl lg:text-2xl text-ink mb-3 group-hover:text-primary transition-colors" style={{ fontWeight: 520 }}>
                       {post.title}
                     </h3>
-                    <p className="text-foreground/80 leading-relaxed">
-                      {post.excerpt}
-                    </p>
+                    <p className="text-ink-muted leading-relaxed">{post.excerpt}</p>
                     <div className="mt-4">
-                      <span className="text-sm text-primary group-hover:underline" style={{ fontWeight: 500 }}>
+                      <span className="inline-flex items-center gap-1 text-sm text-primary group-hover:underline" style={{ fontWeight: 500 }}>
                         Read article
-                        <ArrowRight className="inline ml-1 h-3.5 w-3.5" />
+                        <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
                       </span>
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                </motion.article>
               ))}
             </div>
           </div>
@@ -244,21 +260,20 @@ export function BlogPage() {
       )}
 
       {/* All/Filtered Posts */}
-      <section className="py-16 bg-muted/20 border-y border-border/30">
+      <section className="py-16 lg:py-20 bg-paper/35 border-y border-ink/8">
         <div className="container-custom">
-          <h2 className="text-2xl mb-8">
-            {selectedCategory === "All" && searchQuery === ""
-              ? "All Articles"
+          <h2 className="font-display text-2xl lg:text-3xl text-ink mb-8" style={{ fontWeight: 520 }}>
+            {isDefaultView
+              ? "All articles"
               : `${filtered.length} ${filtered.length === 1 ? "article" : "articles"} found`}
           </h2>
 
           {filtered.length === 0 ? (
             <div className="text-center py-16">
-              <p className="text-lg text-foreground/80 mb-4">
-                No articles match your search.
-              </p>
+              <p className="text-lg text-ink-muted mb-4">No articles match your search.</p>
               <Button
                 variant="outline"
+                className="border-ink/20 text-ink hover:bg-ink/5 rounded-full"
                 onClick={() => {
                   setSelectedCategory("All");
                   setSearchQuery("");
@@ -268,51 +283,48 @@ export function BlogPage() {
               </Button>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {(selectedCategory === "All" && searchQuery === ""
-                ? posts
-                : filtered
-              ).map((post) => (
-                <Card
-                  key={post.id}
-                  className="shadow-custom hover:shadow-hover transition-all duration-300 overflow-hidden group cursor-pointer"
-                >
-                  <div className="aspect-[16/10] overflow-hidden">
-                    <ImageWithFallback
-                      src={post.image}
-                      alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                  <CardContent className="p-6">
-                    <div className="flex items-center gap-2 mb-3">
-                      <Badge
-                        variant="outline"
-                        className="text-xs text-primary border-primary/30"
-                      >
-                        {post.category}
-                      </Badge>
-                      <span className="text-xs text-foreground/70 flex items-center gap-1">
-                        <Clock className="h-3 w-3" />
-                        {post.readTime}
-                      </span>
+            <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <AnimatePresence mode="popLayout">
+                {(isDefaultView ? posts : filtered).map((post) => (
+                  <motion.article
+                    layout
+                    key={post.id}
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.97 }}
+                    transition={{ duration: 0.45, ease }}
+                    className="paper-card rounded-3xl overflow-hidden group cursor-pointer transition-all duration-300 hover:shadow-custom hover:-translate-y-1"
+                  >
+                    <div className="aspect-[16/10] overflow-hidden">
+                      <ImageWithFallback
+                        src={post.image}
+                        alt={post.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
                     </div>
-                    <h3 className="text-base mb-2 group-hover:text-primary transition-colors" style={{ fontWeight: 600 }}>
-                      {post.title}
-                    </h3>
-                    <p className="text-sm text-foreground/80 leading-relaxed line-clamp-3">
-                      {post.excerpt}
-                    </p>
-                    <div className="mt-3">
-                      <span className="text-xs text-primary" style={{ fontWeight: 500 }}>
-                        Read more
-                        <ArrowRight className="inline ml-1 h-3 w-3" />
-                      </span>
+                    <div className="p-6">
+                      <div className="flex items-center gap-2 mb-3">
+                        <CategoryChip label={post.category} />
+                        <span className="text-xs text-ink-muted flex items-center gap-1">
+                          <Clock className="h-3 w-3" />
+                          {post.readTime}
+                        </span>
+                      </div>
+                      <h3 className="font-display text-lg text-ink mb-2 group-hover:text-primary transition-colors" style={{ fontWeight: 520 }}>
+                        {post.title}
+                      </h3>
+                      <p className="text-sm text-ink-muted leading-relaxed line-clamp-3">{post.excerpt}</p>
+                      <div className="mt-3">
+                        <span className="inline-flex items-center gap-1 text-xs text-primary" style={{ fontWeight: 500 }}>
+                          Read more
+                          <ArrowRight className="h-3 w-3" />
+                        </span>
+                      </div>
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                  </motion.article>
+                ))}
+              </AnimatePresence>
+            </motion.div>
           )}
         </div>
       </section>
@@ -320,9 +332,15 @@ export function BlogPage() {
       {/* Newsletter CTA */}
       <section className="py-20">
         <div className="container-custom">
-          <div className="text-center p-12 bg-gradient-to-r from-primary/5 to-accent/5 rounded-2xl border">
-            <h2 className="text-3xl mb-4">Stay in the Loop</h2>
-            <p className="text-foreground/80 mb-8 max-w-2xl mx-auto text-lg leading-relaxed">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.7, ease }}
+            className="text-center p-12 paper-surface rounded-3xl"
+          >
+            <h2 className="font-display text-3xl lg:text-4xl text-ink mb-4" style={{ fontWeight: 520 }}>Stay in the loop</h2>
+            <p className="text-ink-muted mb-8 max-w-2xl mx-auto text-lg leading-relaxed">
               New articles, strategies, and resources, delivered with care and
               zero spam. Join the Count Me In community.
             </p>
@@ -330,16 +348,14 @@ export function BlogPage() {
               <input
                 type="email"
                 placeholder="your@email.com"
-                className="flex-1 px-5 py-3 bg-card border rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                className="flex-1 px-5 py-3 bg-white border border-ink/12 rounded-full text-sm text-ink focus:outline-none focus:ring-2 focus:ring-primary/25 focus:border-primary"
               />
-              <Button className="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-full shadow-lg">
+              <Button className="bg-ink hover:bg-ink-soft text-white px-8 h-12 rounded-full shadow-lg">
                 Subscribe
               </Button>
             </div>
-            <p className="text-xs text-foreground/70 mt-3">
-              No spam, ever. Unsubscribe anytime.
-            </p>
-          </div>
+            <p className="text-xs text-ink-muted mt-3">No spam, ever. Unsubscribe anytime.</p>
+          </motion.div>
         </div>
       </section>
     </div>

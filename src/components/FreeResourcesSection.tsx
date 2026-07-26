@@ -1,5 +1,5 @@
 import { Button } from "./ui/button";
-import { ExternalLink, Download, BookOpen, Users, Globe, Lightbulb } from "lucide-react";
+import { MdOutlineOpenInNew as ExternalLink, MdOutlineDownload as Download, MdOutlineMenuBook as BookOpen, MdOutlineGroups as Users, MdOutlinePublic as Globe, MdOutlineLightbulb as Lightbulb } from "react-icons/md";
 
 export function FreeResourcesSection() {
   const resources = [

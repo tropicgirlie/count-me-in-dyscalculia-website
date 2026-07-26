@@ -1,7 +1,12 @@
 import { Link } from "react-router";
+import { motion } from "framer-motion";
 import { Button } from "./ui/button";
-import { CheckCircle, BookOpen, Clock, Mail, PenLine, Sparkles } from "lucide-react";
+import { MdOutlineCheckCircle as CheckCircle, MdOutlineMenuBook as BookOpen, MdOutlineSchedule as Clock, MdOutlineMail as Mail, MdOutlineRateReview as PenLine, MdOutlineAutoAwesome as Sparkles } from "react-icons/md";
 import { usePageMeta, useJsonLd } from "../lib/usePageMeta";
+
+const ease = [0.16, 1, 0.3, 1] as const;
+
+const roman = ["I", "II", "III", "IV", "V"];
 
 export function EbookPage() {
   usePageMeta({
@@ -91,54 +96,57 @@ export function EbookPage() {
 
   return (
     <div className="bg-background">
-      <section className="relative overflow-hidden bg-[#F6EFE2] pt-28 pb-20">
-        <div className="absolute inset-0 opacity-60">
-          <img src="/abstracthero.png" alt="" className="h-full w-full object-cover object-center" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#F6EFE2] via-[#F6EFE2]/90 to-[#F6EFE2]/45" />
-          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent" />
-        </div>
+      {/* Hero */}
+      <section className="relative overflow-hidden bg-paper pt-36 pb-24">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_55%_45%_at_75%_20%,rgba(0,150,136,0.08),transparent_65%),radial-gradient(ellipse_45%_40%_at_10%_90%,rgba(240,98,93,0.05),transparent_60%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
 
         <div className="container-custom relative z-10">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-            <div className="space-y-7">
+            <motion.div
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.75, ease }}
+              className="space-y-7"
+            >
               <div className="flex flex-wrap items-center gap-2.5">
-                <div className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 tape-label">
-                  <PenLine className="h-3.5 w-3.5 text-primary" />
-                  <span className="text-[13px] text-primary" style={{ fontWeight: 500 }}>Currently Writing</span>
+                <div className="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 tape-label">
+                  <PenLine className="h-3.5 w-3.5 text-ink" />
+                  <span className="text-[13px] text-ink" style={{ fontWeight: 500 }}>Currently Writing</span>
                 </div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-accent/15 bg-white/70 px-3 py-1.5 shadow-sm">
+                <div className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-white/70 px-3.5 py-1.5 shadow-sm">
                   <Clock className="h-3.5 w-3.5 text-accent" />
                   <span className="text-[13px] text-accent" style={{ fontWeight: 500 }}>July 2026</span>
                 </div>
               </div>
 
-              <div className="space-y-3">
-                <p className="text-lg text-[#496568]" style={{ fontWeight: 500 }}>I am writing a book.</p>
-                <h1 className="text-[2.75rem] leading-[1.02] tracking-[-0.03em] text-[#173F46] lg:text-[4.5rem]">
-                  Numbers Out of Place
+              <div className="space-y-4">
+                <p className="text-lg text-ink-muted" style={{ fontWeight: 500 }}>I am writing a book.</p>
+                <h1 className="font-display text-[clamp(2.75rem,7vw,4.75rem)] leading-[1.0] tracking-[-0.015em] text-ink" style={{ fontWeight: 520 }}>
+                  Numbers Out of <span className="italic" style={{ fontWeight: 420 }}>Place</span>
                 </h1>
-                <p className="text-xl text-[#496568]" style={{ fontWeight: 500 }}>
+                <p className="text-xl text-ink-soft" style={{ fontWeight: 500 }}>
                   A guide to dyscalculia in adulthood
                 </p>
               </div>
 
-              <p className="max-w-lg text-lg leading-relaxed text-[#2F4F52]">
+              <p className="max-w-lg text-lg leading-relaxed text-ink-soft">
                 A deeply personal and practical guide for adults navigating dyscalculia and ADHD.
                 From late diagnosis stories to everyday strategies. Everything I wish someone had told me.
               </p>
 
-              <p className="text-sm italic text-[#496568]/80">
+              <p className="text-sm italic text-ink-muted/80">
                 Having enough Concerta to finish this, probably launching July 2026.
               </p>
 
-              <div className="flex flex-wrap items-center gap-3 text-sm text-[#496568]">
+              <div className="flex flex-wrap items-center gap-3 text-sm text-ink-muted">
                 {[
                   { icon: BookOpen, label: "~170 pages" },
                   { icon: Sparkles, label: "Evidence-based" },
                   { icon: Clock, label: "July 2026" },
                 ].map(({ icon: Icon, label }) => (
                   <div key={label} className="flex items-center gap-1.5 rounded-full bg-white/70 px-3 py-1.5 shadow-sm">
-                    <Icon className="h-4 w-4 text-primary/60" />
+                    <Icon className="h-4 w-4 text-primary/70" />
                     <span>{label}</span>
                   </div>
                 ))}
@@ -146,116 +154,163 @@ export function EbookPage() {
 
               <div className="flex flex-col gap-3 sm:flex-row">
                 <a href="mailto:info@momops.org?subject=Numbers%20Out%20of%20Place%20interest%20list">
-                  <Button className="h-12 bg-[#173F46] px-7 text-white hover:bg-[#225966]">
+                  <Button className="h-12 bg-ink px-7 text-white hover:bg-ink-soft shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5">
                     <Mail className="mr-2 h-4 w-4" />
                     Join the interest list
                   </Button>
                 </a>
                 <Link to="/contact">
-                  <Button variant="outline" className="h-12 border-primary/25 bg-white/70 px-7 text-primary hover:bg-white">
+                  <Button variant="outline" className="h-12 border-ink/20 bg-white/70 px-7 text-ink hover:bg-white">
                     Share a story
                   </Button>
                 </Link>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="relative flex items-center justify-center">
-              <div className="relative rotate-[-1.5deg] overflow-hidden rounded-3xl p-3 paper-surface">
+            <motion.div
+              initial={{ opacity: 0, y: 32, rotate: -3 }}
+              animate={{ opacity: 1, y: 0, rotate: -1.5 }}
+              transition={{ duration: 0.9, ease, delay: 0.15 }}
+              className="relative flex items-center justify-center"
+            >
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="relative overflow-hidden rounded-3xl p-3 paper-card"
+              >
                 <img
                   src="/bookcover.png"
                   alt="Numbers Out of Place book cover by Luana Micheau"
                   className="mx-auto aspect-square w-full max-w-md rounded-2xl object-cover shadow-elevated"
                 />
-              </div>
+              </motion.div>
               <div className="absolute -top-4 -right-4">
                 <span className="inline-block rotate-2 rounded-full bg-accent px-4 py-2 text-xs text-white shadow-lg" style={{ fontWeight: 600 }}>
                   Coming July 2026
                 </span>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
+      {/* What's planned */}
       <section className="py-20 lg:py-24">
         <div className="container-custom">
-          <div className="mb-12 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.7, ease }}
+            className="mb-12 text-center"
+          >
             <p className="mx-auto mb-3 inline-flex rounded-full px-3 py-1.5 text-xs uppercase tracking-widest tape-label" style={{ fontWeight: 600 }}>
               Contents
             </p>
-            <h2 className="mb-4 text-3xl tracking-tight text-[#173F46] lg:text-4xl">What's planned</h2>
-            <p className="mx-auto max-w-md text-muted-foreground">
+            <h2 className="font-display mb-4 text-3xl tracking-tight text-ink lg:text-4xl" style={{ fontWeight: 520 }}>What's planned</h2>
+            <p className="mx-auto max-w-md text-ink-muted">
               From personal experience to practical strategies
             </p>
-          </div>
+          </motion.div>
 
           <div className="mx-auto grid max-w-4xl gap-3 md:grid-cols-2">
-            {features.map((feature) => (
-              <div key={feature} className="relative flex items-center gap-3 rounded-xl p-4 transition-all duration-300 hover:shadow-custom paper-card">
+            {features.map((feature, i) => (
+              <motion.div
+                key={feature}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.5, ease, delay: (i % 2) * 0.08 }}
+                className="flex items-center gap-3 rounded-xl p-4 transition-all duration-300 hover:shadow-custom hover:-translate-y-0.5 paper-card"
+              >
                 <CheckCircle className="h-4 w-4 flex-shrink-0 text-primary" />
-                <span className="relative z-10 text-sm text-[#2F4F52]">{feature}</span>
-              </div>
+                <span className="text-sm text-ink-soft">{feature}</span>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#F6EFE2]/35 py-20 lg:py-24">
+      {/* Table of Contents — editorial */}
+      <section className="bg-paper/35 py-20 lg:py-24">
         <div className="container-custom">
-          <div className="mb-12 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.7, ease }}
+            className="mb-14 text-center"
+          >
             <p className="mx-auto mb-3 inline-flex rounded-full px-3 py-1.5 text-xs uppercase tracking-widest tape-label" style={{ fontWeight: 600 }}>
               Structure
             </p>
-            <h2 className="mb-4 text-3xl tracking-tight text-[#173F46] lg:text-4xl">Table of Contents</h2>
-            <p className="mx-auto max-w-md text-muted-foreground">
+            <h2 className="font-display mb-4 text-3xl tracking-tight text-ink lg:text-4xl" style={{ fontWeight: 520 }}>Table of contents</h2>
+            <p className="mx-auto max-w-md text-ink-muted">
               Five comprehensive parts covering dyscalculia in adulthood
             </p>
-          </div>
+          </motion.div>
 
-          <div className="mx-auto max-w-3xl overflow-hidden rounded-3xl paper-surface">
-            <div className="space-y-8 p-8">
-              {tableOfContents.map((part) => (
-                <div key={part.part} className="space-y-3">
-                  <div className="flex items-center gap-3 border-b border-[#173F46]/10 pb-2">
-                    <span className="rounded-full bg-primary/[0.08] px-2.5 py-1 text-[11px] text-primary" style={{ fontWeight: 600 }}>
+          <div className="mx-auto max-w-3xl space-y-4">
+            {tableOfContents.map((part, i) => (
+              <motion.div
+                key={part.part}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.6, ease, delay: i * 0.05 }}
+                className="paper-card rounded-3xl p-7 sm:p-8"
+              >
+                <div className="flex items-baseline gap-5 mb-4">
+                  <span className="numeral text-4xl sm:text-5xl text-primary/70 leading-none" style={{ fontWeight: 480 }}>
+                    {roman[i]}
+                  </span>
+                  <div>
+                    <span className="block text-[10px] uppercase tracking-[0.2em] text-ink-muted/60" style={{ fontWeight: 700 }}>
                       {part.part}
                     </span>
-                    <span className="text-[15px] text-[#173F46]" style={{ fontWeight: 600 }}>{part.title}</span>
-                  </div>
-                  <div className="ml-1 space-y-1.5">
-                    {part.chapters.map((chapter) => (
-                      <div key={chapter} className="flex items-start gap-2.5 py-1 text-sm text-[#496568]">
-                        <span className="mt-0.5 text-primary/40">.</span>
-                        <span>{chapter}</span>
-                      </div>
-                    ))}
+                    <span className="font-display text-lg sm:text-xl text-ink" style={{ fontWeight: 540 }}>{part.title}</span>
                   </div>
                 </div>
-              ))}
-            </div>
+                <ul className="space-y-2 sm:pl-14">
+                  {part.chapters.map((chapter) => (
+                    <li key={chapter} className="flex items-start gap-2.5 text-sm text-ink-muted leading-relaxed">
+                      <span className="mt-[9px] h-1 w-1 rounded-full bg-primary/50 flex-shrink-0" />
+                      <span>{chapter}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
+      {/* Audience CTA */}
       <section className="py-20">
         <div className="container-custom">
-          <div className="rounded-3xl p-10 text-center paper-surface lg:p-14">
-            <h2 className="mb-3 text-2xl tracking-tight text-[#173F46] lg:text-3xl">This book is for you if...</h2>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.7, ease }}
+            className="rounded-3xl p-10 text-center paper-surface lg:p-14"
+          >
+            <h2 className="font-display mb-6 text-2xl tracking-tight text-ink lg:text-3xl" style={{ fontWeight: 520 }}>This book is for you if…</h2>
             <div className="mx-auto mb-8 max-w-xl space-y-2.5">
               {audience.map((item) => (
                 <div key={item} className="flex items-start gap-3 text-left">
                   <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
-                  <span className="text-sm text-[#496568]">{item}</span>
+                  <span className="text-sm text-ink-muted">{item}</span>
                 </div>
               ))}
             </div>
             <a href="mailto:info@momops.org?subject=Numbers%20Out%20of%20Place%20interest%20list">
-              <Button className="rounded-xl bg-primary px-7 py-3 text-white shadow-sm transition-all duration-300 hover:bg-primary/90 hover:shadow-lg">
+              <Button className="rounded-full bg-ink px-8 h-12 text-white shadow-sm transition-all duration-300 hover:bg-ink-soft hover:shadow-lg hover:-translate-y-0.5">
                 <Mail className="mr-2 h-4 w-4" />
                 Join the interest list
               </Button>
             </a>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Users, Brain, Clock, CheckCircle } from "lucide-react";
+import { MdOutlineGroups as Users, MdOutlinePsychology as Brain, MdOutlineSchedule as Clock, MdOutlineCheckCircle as CheckCircle } from "react-icons/md";
 
 function useCountUp(target: string, isVisible: boolean) {
   const [display, setDisplay] = useState(target);
@@ -68,7 +68,7 @@ export function TrustStrip() {
 
   return (
     <section className="py-20 relative overflow-hidden" ref={ref}>
-      <div className="absolute inset-0 bg-[#F6EFE2]/35" />
+      <div className="absolute inset-0 bg-[#EBF2EE]/35" />
       <div className="container-custom relative z-10">
         <div className={`text-center mb-14 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
           <p className="mx-auto mb-3 inline-flex rounded-full px-3 py-1.5 text-xs uppercase tracking-widest tape-label" style={{ fontWeight: 600 }}>The facts</p>

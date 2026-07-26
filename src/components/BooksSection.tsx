@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { Star, ExternalLink, BookOpen, Users, GraduationCap, Library } from "lucide-react";
+import { MdOutlineStar as Star, MdOutlineOpenInNew as ExternalLink, MdOutlineMenuBook as BookOpen, MdOutlineGroups as Users, MdOutlineSchool as GraduationCap, MdOutlineLocalLibrary as Library } from "react-icons/md";
 import { getBooks, type Book } from "../lib/data-store";
 
 function useInView(_threshold = 0.1) {
@@ -38,7 +38,7 @@ export function BooksSection() {
 
   return (
     <section className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[#F6EFE2]/25" />
+      <div className="absolute inset-0 bg-[#EBF2EE]/25" />
       <div className="container-custom relative z-10">
         {/* Section Header */}
         <div

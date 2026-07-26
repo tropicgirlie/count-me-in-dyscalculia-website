@@ -1,18 +1,43 @@
 import { Link } from "react-router";
-import { Mail, ArrowUpRight } from "lucide-react";
+import { MdOutlineMail, MdArrowOutward } from "react-icons/md";
 import logo from "figma:asset/7df1fcf1a964339a60566b3dcb8f4a1327784680.png";
 
 export function Footer() {
   const linkClass = "text-background/50 hover:text-background/90 transition-colors duration-200 flex items-center gap-1 group";
 
   return (
-    <footer className="relative bg-foreground text-background overflow-hidden">
+    <footer className="relative bg-ink text-background overflow-hidden">
       {/* Decorative gradient */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
 
+      {/* Editorial sign-off */}
+      <div className="container-custom relative z-10 pt-20 pb-4">
+        <p className="text-[11px] uppercase tracking-[0.22em] text-background/35 mb-6" style={{ fontWeight: 600 }}>
+          Count Me In
+        </p>
+        <p className="font-display text-[clamp(2rem,5.5vw,4.25rem)] leading-[1.05] tracking-[-0.01em] text-background/95 max-w-4xl" style={{ fontWeight: 480 }}>
+          Numbers can move.
+          <br />
+          <span className="text-background/55 italic" style={{ fontWeight: 380 }}>Support can hold them still.</span>
+        </p>
+
+        {/* Numeral motif */}
+        <div aria-hidden="true" className="mt-10 flex gap-8 overflow-hidden select-none opacity-[0.16]">
+          {"274815963078312549".split("").map((n, i) => (
+            <span
+              key={i}
+              className="numeral text-5xl shrink-0"
+              style={{ transform: `translateY(${(i % 5) * 6 - 12}px) rotate(${(i % 7) * 4 - 12}deg)` }}
+            >
+              {n}
+            </span>
+          ))}
+        </div>
+      </div>
+
       <div className="container-custom relative z-10">
-        <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
+        <div className="py-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 border-t border-background/10">
           {/* Brand column */}
           <div className="lg:col-span-4 space-y-5">
             <Link to="/" className="flex items-center space-x-2.5 group w-fit">
@@ -34,9 +59,9 @@ export function Footer() {
               className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors group"
               aria-label="Send us an email"
             >
-              <Mail className="h-4 w-4" />
+              <MdOutlineMail className="h-4 w-4" />
               Get in touch
-              <ArrowUpRight className="h-3 w-3 opacity-0 -translate-y-0.5 translate-x-0.5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+              <MdArrowOutward className="h-3 w-3 opacity-0 -translate-y-0.5 translate-x-0.5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
             </a>
           </div>
 

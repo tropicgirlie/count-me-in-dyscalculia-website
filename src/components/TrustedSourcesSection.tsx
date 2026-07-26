@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { Badge } from "./ui/badge";
-import { ExternalLink, FileText, Globe, GraduationCap, Building2, Shield } from "lucide-react";
+import { MdOutlineOpenInNew as ExternalLink, MdOutlineDescription as FileText, MdOutlinePublic as Globe, MdOutlineSchool as GraduationCap, MdOutlineBusiness as Building2, MdOutlineShield as Shield } from "react-icons/md";
 
 export function TrustedSourcesSection() {
   const ref = useRef<HTMLDivElement>(null);
@@ -56,7 +56,7 @@ export function TrustedSourcesSection() {
 
   return (
     <section className="py-24 relative overflow-hidden" ref={ref}>
-      <div className="absolute inset-0 bg-[#F6EFE2]/35" />
+      <div className="absolute inset-0 bg-[#EBF2EE]/35" />
       <div className="container-custom relative z-10">
         {/* Section Header */}
         <div className={`text-center mb-14 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>

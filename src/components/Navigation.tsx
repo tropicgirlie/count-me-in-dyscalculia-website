@@ -112,7 +112,7 @@ function NavDropdown({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 4, scale: 0.98 }}
             transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute top-full left-0 mt-3 w-60 bg-white/95 backdrop-blur-xl border border-ink/10 rounded-2xl shadow-elevated p-2 z-50 origin-top"
+            className="absolute top-full left-0 mt-3 w-60 bg-card/95 backdrop-blur-xl border border-ink/10 rounded-2xl shadow-elevated p-2 z-50 origin-top"
           >
             {items.map((item) => (
               <NavDropdownLink key={item.name} item={item} />
@@ -201,8 +201,8 @@ export function Navigation() {
           className={`
             flex items-center justify-between h-14 pl-4 pr-2 rounded-full border transition-all duration-500
             ${scrolled
-              ? "bg-white/85 backdrop-blur-xl border-ink/10 shadow-elevated"
-              : "bg-white/55 backdrop-blur-md border-ink/[0.06]"
+              ? "bg-card/85 backdrop-blur-xl border-ink/10 shadow-elevated"
+              : "bg-card/55 backdrop-blur-md border-ink/[0.06]"
             }
           `}
         >
@@ -277,7 +277,7 @@ export function Navigation() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -8, scale: 0.99 }}
               transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:hidden mt-2 py-3 bg-white/95 backdrop-blur-xl rounded-3xl border border-ink/10 shadow-elevated max-h-[70vh] overflow-y-auto origin-top"
+              className="lg:hidden mt-2 py-3 bg-card/95 backdrop-blur-xl rounded-3xl border border-ink/10 shadow-elevated max-h-[70vh] overflow-y-auto origin-top"
             >
               <MobileSection title="Learn">
                 <MobileLink href={isHome ? "#understand" : "/#understand"} isHash={isHome}>What is Dyscalculia?</MobileLink>

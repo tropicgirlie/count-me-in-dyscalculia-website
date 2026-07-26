@@ -157,7 +157,7 @@ export function AccommodationsSection() {
 
   return (
     <section className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[#EBF2EE]/35" />
+      <div className="absolute inset-0 bg-paper/35" />
       <div className="container-custom relative z-10">
         {/* Section Header */}
         <div
@@ -202,7 +202,7 @@ export function AccommodationsSection() {
                   }`}
               >
                 <div className={`p-2 rounded-lg transition-colors ${
-                  expandedCategory === cat.id ? 'bg-white/20' : cat.color
+                  expandedCategory === cat.id ? 'bg-card/20' : cat.color
                 }`}>
                   <cat.icon className={`h-4 w-4 ${expandedCategory === cat.id ? 'text-white' : ''}`} />
                 </div>
@@ -242,7 +242,7 @@ export function AccommodationsSection() {
                             <div className="flex flex-wrap items-center gap-1.5">
                               <Smartphone className="h-3.5 w-3.5 text-muted-foreground/40 mr-0.5" />
                               {strategy.tools.map((tool, tIdx) => (
-                                <span key={tIdx} className="text-[11px] text-[#496568] bg-white/60 px-2.5 py-1 rounded-full border border-[#173F46]/10">
+                                <span key={tIdx} className="text-[11px] text-ink-muted bg-card/60 px-2.5 py-1 rounded-full border border-ink/10">
                                   {tool}
                                 </span>
                               ))}

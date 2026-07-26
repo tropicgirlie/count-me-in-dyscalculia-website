@@ -56,7 +56,7 @@ export function TrustedSourcesSection() {
 
   return (
     <section className="py-24 relative overflow-hidden" ref={ref}>
-      <div className="absolute inset-0 bg-[#EBF2EE]/35" />
+      <div className="absolute inset-0 bg-paper/35" />
       <div className="container-custom relative z-10">
         {/* Section Header */}
         <div className={`text-center mb-14 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
@@ -64,7 +64,7 @@ export function TrustedSourcesSection() {
             <Shield className="h-3.5 w-3.5 text-primary" />
             <span className="text-[13px] text-primary" style={{ fontWeight: 500 }}>Evidence-Based Information</span>
           </div>
-          <h2 className="text-3xl lg:text-4xl tracking-tight mb-4 text-[#173F46]">Trusted Sources</h2>
+          <h2 className="text-3xl lg:text-4xl tracking-tight mb-4 text-ink">Trusted Sources</h2>
           <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed">
             Our content is based on peer-reviewed research and guidelines from leading healthcare organizations.
           </p>

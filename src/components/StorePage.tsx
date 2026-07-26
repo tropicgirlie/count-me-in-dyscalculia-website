@@ -76,8 +76,8 @@ export function StorePage() {
   return (
     <div className="bg-background">
       {/* Affiliate disclaimer banner */}
-      <div className="bg-amber-50/80 border-b border-amber-200/40">
-        <div className="container-custom py-2.5 flex items-center justify-center gap-2 text-[11px] text-amber-700">
+      <div className="bg-amber-50/80 border-b border-amber-200/40 dark:bg-amber-950/50 dark:border-amber-800/30">
+        <div className="container-custom py-2.5 flex items-center justify-center gap-2 text-[11px] text-amber-700 dark:text-amber-300">
           <Info className="h-3.5 w-3.5 flex-shrink-0" />
           <span><strong>Affiliate disclaimer:</strong> This page contains Amazon affiliate links. Purchases support Count Me In at no extra cost to you.</span>
         </div>

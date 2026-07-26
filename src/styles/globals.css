@@ -77,6 +77,13 @@
   --border: #262626;
   --input: #1C1C1C;
   --ring: #26A69A;
+
+  /* Editorial tokens — dark adaptations (sage stays, ink flips to light) */
+  --ink: #E8F0EB;
+  --ink-soft: #C2D2CA;
+  --ink-muted: #9AAEA5;
+  --paper: #101D1B;
+  --paper-warm: #152422;
 }
 
 @theme inline {
@@ -527,4 +534,69 @@ html {
 /* Increase letter spacing and line height for better readability */
 .font-dyslexia * {
   letter-spacing: 0.02em;
+}
+
+/* ------------------------------------------------------------------
+   Dark-mode adaptations for hardcoded editorial utility classes.
+   Unlayered on purpose: these must beat the @layer utilities rules.
+------------------------------------------------------------------- */
+
+.dark .paper-card {
+  background: #17201F;
+  border-color: rgba(232, 240, 235, 0.10);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.35),
+    0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.dark .paper-surface {
+  background: #182524;
+  border-color: rgba(232, 240, 235, 0.08);
+}
+
+.dark .tape-label {
+  background: rgba(38, 84, 78, 0.45);
+  color: #BFE3DC;
+  border-color: rgba(191, 227, 220, 0.16);
+  box-shadow: none;
+}
+
+.dark .ink-label {
+  color: #E8F0EB;
+  background: rgba(23, 32, 31, 0.75);
+  border-color: rgba(232, 240, 235, 0.14);
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.3);
+}
+
+.dark .glass-effect {
+  background: rgba(16, 20, 20, 0.82);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark .card-modern {
+  background: #17201F;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark .btn-secondary {
+  color: #26A69A;
+  border-color: rgba(38, 166, 154, 0.35);
+}
+
+.dark .btn-secondary:hover {
+  background: rgba(38, 166, 154, 0.10);
+  border-color: #26A69A;
+}
+
+.dark .shadow-custom,
+.dark .shadow-elevated,
+.dark .shadow-hover:hover {
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* Ink buttons/pills flip light in dark mode, so their text flips dark */
+.dark .bg-ink.text-white {
+  color: #173F46;
 }

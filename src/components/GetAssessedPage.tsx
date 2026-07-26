@@ -233,7 +233,7 @@ export function GetAssessedPage() {
                 <a href="#providers">
                   <Button
                     variant="outline"
-                    className="border-ink/20 text-ink hover:bg-white/70 px-7 rounded-full transition-all duration-300 h-12"
+                    className="border-ink/20 text-ink hover:bg-card/70 px-7 rounded-full transition-all duration-300 h-12"
                   >
                     View Providers
                   </Button>
@@ -315,7 +315,7 @@ export function GetAssessedPage() {
                 className={`px-4 py-2 rounded-full text-sm transition-all duration-200 ${
                   selectedRegion === region
                     ? "bg-ink text-white shadow-md"
-                    : "bg-white border border-ink/10 text-ink-muted hover:text-ink hover:border-ink/30"
+                    : "bg-card border border-ink/10 text-ink-muted hover:text-ink hover:border-ink/30"
                 }`}
                 style={{ fontWeight: 500 }}
               >

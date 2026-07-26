@@ -59,7 +59,7 @@ export function HomePage() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-                className="inline-flex items-center gap-2 rounded-full border border-ink/15 bg-white/70 px-3.5 py-1.5 shadow-sm backdrop-blur"
+                className="inline-flex items-center gap-2 rounded-full border border-ink/15 bg-card/70 px-3.5 py-1.5 shadow-sm backdrop-blur"
               >
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary/60 opacity-75"></span>
@@ -108,7 +108,7 @@ export function HomePage() {
                   variant="outline"
                   onClick={() => setHeld((v) => !v)}
                   aria-pressed={held}
-                  className="h-12 w-full border-ink/20 bg-white/65 px-7 text-ink backdrop-blur transition-all duration-300 hover:bg-white sm:w-auto"
+                  className="h-12 w-full border-ink/20 bg-card/65 px-7 text-ink backdrop-blur transition-all duration-300 hover:bg-card sm:w-auto"
                 >
                   {held ? <MdOutlineAir className="mr-2 h-4 w-4" /> : <MdOutlinePanTool className="mr-2 h-4 w-4" />}
                   {held ? "Let them move again" : "Hold the numbers still"}
@@ -129,7 +129,7 @@ export function HomePage() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  className="max-w-sm rounded-2xl border border-ink/12 bg-white/85 p-4 shadow-elevated backdrop-blur"
+                  className="max-w-sm rounded-2xl border border-ink/12 bg-card/85 p-4 shadow-elevated backdrop-blur"
                 >
                   <audio
                     src="/narration-audio.mp3"
@@ -151,7 +151,7 @@ export function HomePage() {
                 className="flex flex-wrap items-center gap-3 pt-1"
               >
                 {["Gentle explanation", "Practical scaffolds", "Adult neurodivergent support"].map((label) => (
-                  <span key={label} className="inline-flex items-center gap-1.5 rounded-full bg-white/70 px-3 py-1.5 text-xs text-ink-muted shadow-sm backdrop-blur">
+                  <span key={label} className="inline-flex items-center gap-1.5 rounded-full bg-card/70 px-3 py-1.5 text-xs text-ink-muted shadow-sm backdrop-blur">
                     <span className="w-1 h-1 rounded-full bg-accent" />
                     {label}
                   </span>

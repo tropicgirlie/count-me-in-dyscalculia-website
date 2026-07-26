@@ -58,7 +58,7 @@ function DriftingDigit({
       className={`
         numeral inline-flex items-center justify-center text-5xl sm:text-6xl
         ${colorClass}
-        ${bounded ? "rounded-2xl border border-ink/15 bg-white/80 shadow-sm w-16 h-20 sm:w-20 sm:h-24" : "w-12 sm:w-14"}
+        ${bounded ? "rounded-2xl border border-ink/15 bg-card/80 shadow-sm w-16 h-20 sm:w-20 sm:h-24" : "w-12 sm:w-14"}
       `}
       style={{ fontWeight: 480 }}
       layout
@@ -303,7 +303,7 @@ export function WorkingMemorySimulator() {
                             hidden: { opacity: 0, x: -14 },
                             show: { opacity: 1, x: 0, transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] } },
                           }}
-                          className="flex items-center gap-4 rounded-xl bg-white/75 border border-ink/10 px-4 py-3"
+                          className="flex items-center gap-4 rounded-xl bg-card/75 border border-ink/10 px-4 py-3"
                         >
                           <span className="text-[10px] uppercase tracking-[0.16em] text-ink-muted w-14 shrink-0" style={{ fontWeight: 700 }}>
                             {step.label}

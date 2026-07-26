@@ -127,7 +127,7 @@ export function AboutPage() {
                   </Button>
                 </Link>
                 <Link to="/stories">
-                  <Button variant="outline" className="border-ink/20 text-ink hover:bg-white/70 px-7 rounded-full transition-all duration-300 h-12">
+                  <Button variant="outline" className="border-ink/20 text-ink hover:bg-card/70 px-7 rounded-full transition-all duration-300 h-12">
                     Read Stories
                   </Button>
                 </Link>

@@ -114,7 +114,7 @@ export function EbookPage() {
                   <PenLine className="h-3.5 w-3.5 text-ink" />
                   <span className="text-[13px] text-ink" style={{ fontWeight: 500 }}>Currently Writing</span>
                 </div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-white/70 px-3.5 py-1.5 shadow-sm">
+                <div className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-card/70 px-3.5 py-1.5 shadow-sm">
                   <Clock className="h-3.5 w-3.5 text-accent" />
                   <span className="text-[13px] text-accent" style={{ fontWeight: 500 }}>July 2026</span>
                 </div>
@@ -145,7 +145,7 @@ export function EbookPage() {
                   { icon: Sparkles, label: "Evidence-based" },
                   { icon: Clock, label: "July 2026" },
                 ].map(({ icon: Icon, label }) => (
-                  <div key={label} className="flex items-center gap-1.5 rounded-full bg-white/70 px-3 py-1.5 shadow-sm">
+                  <div key={label} className="flex items-center gap-1.5 rounded-full bg-card/70 px-3 py-1.5 shadow-sm">
                     <Icon className="h-4 w-4 text-primary/70" />
                     <span>{label}</span>
                   </div>
@@ -160,7 +160,7 @@ export function EbookPage() {
                   </Button>
                 </a>
                 <Link to="/contact">
-                  <Button variant="outline" className="h-12 border-ink/20 bg-white/70 px-7 text-ink hover:bg-white">
+                  <Button variant="outline" className="h-12 border-ink/20 bg-card/70 px-7 text-ink hover:bg-card">
                     Share a story
                   </Button>
                 </Link>

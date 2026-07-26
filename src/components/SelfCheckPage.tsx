@@ -530,7 +530,7 @@ export function SelfCheckPage() {
                       Question <span className="text-ink tabular-nums" style={{ fontWeight: 600 }}>{currentIndex + 1}</span>
                       <span className="tabular-nums"> / {questions.length}</span>
                     </span>
-                    <span className="inline-flex rounded-full bg-white/80 border border-ink/10 px-3 py-1 text-xs text-ink" style={{ fontWeight: 500 }}>
+                    <span className="inline-flex rounded-full bg-card/80 border border-ink/10 px-3 py-1 text-xs text-ink" style={{ fontWeight: 500 }}>
                       {question.category}
                     </span>
                   </div>
@@ -570,7 +570,7 @@ export function SelfCheckPage() {
                               px-5 py-2.5 rounded-full text-sm border transition-all duration-200
                               ${selected
                                 ? "bg-ink text-white border-ink shadow-md scale-[1.03]"
-                                : "bg-white/80 text-ink-muted border-ink/15 hover:border-ink/40 hover:text-ink hover:-translate-y-0.5"
+                                : "bg-card/80 text-ink-muted border-ink/15 hover:border-ink/40 hover:text-ink hover:-translate-y-0.5"
                               }
                             `}
                             style={{ fontWeight: 500 }}

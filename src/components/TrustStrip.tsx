@@ -68,11 +68,11 @@ export function TrustStrip() {
 
   return (
     <section className="py-20 relative overflow-hidden" ref={ref}>
-      <div className="absolute inset-0 bg-[#EBF2EE]/35" />
+      <div className="absolute inset-0 bg-paper/35" />
       <div className="container-custom relative z-10">
         <div className={`text-center mb-14 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
           <p className="mx-auto mb-3 inline-flex rounded-full px-3 py-1.5 text-xs uppercase tracking-widest tape-label" style={{ fontWeight: 600 }}>The facts</p>
-          <h2 className="text-3xl lg:text-4xl tracking-tight mb-4 text-[#173F46]">What you need to know</h2>
+          <h2 className="text-3xl lg:text-4xl tracking-tight mb-4 text-ink">What you need to know</h2>
           <p className="text-muted-foreground max-w-md mx-auto">
             Evidence-based facts from leading researchers and healthcare providers
           </p>

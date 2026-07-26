@@ -38,7 +38,7 @@ export function BooksSection() {
 
   return (
     <section className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[#EBF2EE]/25" />
+      <div className="absolute inset-0 bg-paper/25" />
       <div className="container-custom relative z-10">
         {/* Section Header */}
         <div
@@ -49,7 +49,7 @@ export function BooksSection() {
             <Library className="h-3.5 w-3.5 text-primary" />
             <span className="text-[13px] text-primary" style={{ fontWeight: 500 }}>Essential Reading</span>
           </div>
-          <h2 className="text-3xl lg:text-4xl tracking-tight mb-5 text-[#173F46]">Essential Reading on Dyscalculia</h2>
+          <h2 className="text-3xl lg:text-4xl tracking-tight mb-5 text-ink">Essential Reading on Dyscalculia</h2>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
             Carefully curated selection of valuable books, from academic research to practical guides.
           </p>
@@ -72,7 +72,7 @@ export function BooksSection() {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-3 left-3">
-                    <span className="bg-white/90 backdrop-blur-sm text-foreground text-[11px] px-2.5 py-1 rounded-full" style={{ fontWeight: 600 }}>
+                    <span className="bg-card/90 backdrop-blur-sm text-foreground text-[11px] px-2.5 py-1 rounded-full" style={{ fontWeight: 600 }}>
                       #{index + 1}
                     </span>
                   </div>

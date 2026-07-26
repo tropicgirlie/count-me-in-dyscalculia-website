@@ -172,7 +172,7 @@ export function BlogPage() {
                 placeholder="Search articles..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-11 pr-4 py-3 bg-white border border-ink/12 rounded-full text-sm text-ink shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/25 focus:border-primary transition-all"
+                className="w-full pl-11 pr-4 py-3 bg-card border border-ink/12 rounded-full text-sm text-ink shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/25 focus:border-primary transition-all"
               />
             </div>
           </motion.div>
@@ -191,7 +191,7 @@ export function BlogPage() {
                 className={`px-4 py-2 rounded-full text-sm transition-all duration-200 ${
                   selectedCategory === cat
                     ? "bg-ink text-white shadow-md"
-                    : "bg-white border border-ink/10 text-ink-muted hover:text-ink hover:border-ink/30"
+                    : "bg-card border border-ink/10 text-ink-muted hover:text-ink hover:border-ink/30"
                 }`}
                 style={{ fontWeight: 500 }}
               >
@@ -348,7 +348,7 @@ export function BlogPage() {
               <input
                 type="email"
                 placeholder="your@email.com"
-                className="flex-1 px-5 py-3 bg-white border border-ink/12 rounded-full text-sm text-ink focus:outline-none focus:ring-2 focus:ring-primary/25 focus:border-primary"
+                className="flex-1 px-5 py-3 bg-card border border-ink/12 rounded-full text-sm text-ink focus:outline-none focus:ring-2 focus:ring-primary/25 focus:border-primary"
               />
               <Button className="bg-ink hover:bg-ink-soft text-white px-8 h-12 rounded-full shadow-lg">
                 Subscribe

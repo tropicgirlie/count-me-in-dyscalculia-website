@@ -136,7 +136,7 @@ export function TimePerceptionDemo() {
         {phase === "done" && (
           <button
             onClick={start}
-            className="inline-flex items-center gap-2 h-11 px-7 rounded-full border border-ink/20 bg-white/70 text-ink text-sm transition-all duration-300 hover:bg-white"
+            className="inline-flex items-center gap-2 h-11 px-7 rounded-full border border-ink/20 bg-card/70 text-ink text-sm transition-all duration-300 hover:bg-card"
             style={{ fontWeight: 500 }}
           >
             <MdOutlineRefresh className="h-4 w-4" />

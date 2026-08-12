@@ -13,6 +13,7 @@ import {
   MdArrowForward as ArrowRight,
 } from "react-icons/md";
 import { usePageMeta } from "../lib/usePageMeta";
+import { ListenButton } from "./ListenButton";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -174,6 +175,12 @@ export function StoriesPage() {
                       </div>
                       <p className="text-sm text-ink-muted leading-relaxed">{person.note}</p>
                       <p className="text-xs text-ink-muted/60 italic">{person.source}</p>
+                      <div className="pt-1.5">
+                        <ListenButton
+                          text={`${person.name}, ${person.role}. "${person.quote}" ${person.note}`}
+                          ariaLabel={`Listen to ${person.name}'s story`}
+                        />
+                      </div>
                     </div>
                   </figcaption>
                 </motion.figure>

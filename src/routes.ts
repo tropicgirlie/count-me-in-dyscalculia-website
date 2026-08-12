@@ -22,6 +22,9 @@ const StoriesPage = lazy(() =>
 const BlogPage = lazy(() =>
   import("./components/BlogPage").then((m) => ({ default: m.BlogPage }))
 );
+const MathLearningDisabilityVsAnxietyPost = lazy(() =>
+  import("./components/blog/MathLearningDisabilityVsAnxietyPost").then((m) => ({ default: m.MathLearningDisabilityVsAnxietyPost }))
+);
 const EbookPage = lazy(() =>
   import("./components/EbookPage").then((m) => ({ default: m.EbookPage }))
 );
@@ -52,6 +55,7 @@ export const router = createBrowserRouter([
       { path: "get-assessed", Component: GetAssessedPage },
       { path: "stories", Component: StoriesPage },
       { path: "blog", Component: BlogPage },
+      { path: "blog/math-learning-disability-vs-anxiety", Component: MathLearningDisabilityVsAnxietyPost },
       { path: "tools", Component: ToolsAppsPage },
       { path: "ebook", Component: EbookPage },
       { path: "free-resources", Component: FreeResourcesPage },

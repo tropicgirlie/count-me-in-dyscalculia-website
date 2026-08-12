@@ -1,7 +1,9 @@
-import { usePageMeta, useJsonLd } from "../lib/usePageMeta";
-import { Badge } from "./ui/badge";
-import { Card, CardContent } from "./ui/card";
-import { Button } from "./ui/button";
+import { useRef } from "react";
+import { ListenButton } from "../ListenButton";
+import { usePageMeta, useJsonLd } from "../../lib/usePageMeta";
+import { Badge } from "../ui/badge";
+import { Card, CardContent } from "../ui/card";
+import { Button } from "../ui/button";
 import { Link } from "react-router";
 import { 
   MdArrowBack as ArrowLeft, 
@@ -15,6 +17,7 @@ import {
 } from "react-icons/md";
 
 export function MathLearningDisabilityVsAnxietyPost() {
+  const articleRef = useRef<HTMLElement>(null);
   usePageMeta({
     title: "Math Learning Disability vs Math Anxiety: Understanding the Difference | Count Me In",
     description: "Is it dyscalculia or math anxiety? Learn the key differences between a math learning disability and anxiety about numbers, and why getting the right diagnosis matters.",
@@ -59,9 +62,11 @@ export function MathLearningDisabilityVsAnxietyPost() {
           Back to all articles
         </Link>
 
+        {/* Readable region: everything the Listen button reads aloud */}
+        <article ref={articleRef}>
         {/* Header */}
         <div className="mb-10">
-          <div className="flex items-center gap-3 mb-4">
+          <div className="flex flex-wrap items-center gap-3 mb-4">
             <Badge variant="outline" className="text-primary border-primary/30">
               Understanding
             </Badge>
@@ -69,6 +74,7 @@ export function MathLearningDisabilityVsAnxietyPost() {
               <Clock className="h-3.5 w-3.5" />
               8 min read
             </span>
+            <ListenButton contentRef={articleRef} label="Listen to article" ariaLabel="Listen to this article aloud" />
           </div>
           
           <h1 className="text-3xl lg:text-4xl leading-tight mb-4">
@@ -285,6 +291,7 @@ export function MathLearningDisabilityVsAnxietyPost() {
           </p>
         </div>
 
+        </article>
         {/* CTA */}
         <div className="mt-12 pt-8 border-t border-border/30">
           <Card className="bg-gradient-to-br from-primary/[0.06] to-accent/[0.04]">

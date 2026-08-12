@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
@@ -246,10 +247,21 @@ export function BlogPage() {
                     </h3>
                     <p className="text-ink-muted leading-relaxed">{post.excerpt}</p>
                     <div className="mt-4">
-                      <span className="inline-flex items-center gap-1 text-sm text-primary group-hover:underline" style={{ fontWeight: 500 }}>
-                        Read article
-                        <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
-                      </span>
+                      {post.id === "math-learning-disability-vs-anxiety" ? (
+                        <Link
+                          to={`/blog/${post.id}`}
+                          className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
+                          style={{ fontWeight: 500 }}
+                        >
+                          Read article
+                          <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
+                        </Link>
+                      ) : (
+                        <span className="inline-flex items-center gap-1 text-sm text-primary group-hover:underline" style={{ fontWeight: 500 }}>
+                          Read article
+                          <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
+                        </span>
+                      )}
                     </div>
                   </div>
                 </motion.article>
@@ -315,10 +327,21 @@ export function BlogPage() {
                       </h3>
                       <p className="text-sm text-ink-muted leading-relaxed line-clamp-3">{post.excerpt}</p>
                       <div className="mt-3">
-                        <span className="inline-flex items-center gap-1 text-xs text-primary" style={{ fontWeight: 500 }}>
-                          Read more
-                          <ArrowRight className="h-3 w-3" />
-                        </span>
+                        {post.id === "math-learning-disability-vs-anxiety" ? (
+                          <Link
+                            to={`/blog/${post.id}`}
+                            className="inline-flex items-center gap-1 text-xs text-primary hover:underline"
+                            style={{ fontWeight: 500 }}
+                          >
+                            Read more
+                            <ArrowRight className="h-3 w-3" />
+                          </Link>
+                        ) : (
+                          <span className="inline-flex items-center gap-1 text-xs text-primary" style={{ fontWeight: 500 }}>
+                            Read more
+                            <ArrowRight className="h-3 w-3" />
+                          </span>
+                        )}
                       </div>
                     </div>
                   </motion.article>

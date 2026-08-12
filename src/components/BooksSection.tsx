@@ -67,9 +67,9 @@ export function BooksSection() {
                 {/* Book Cover */}
                 <div className="md:w-44 h-56 md:h-auto relative overflow-hidden bg-[#D7E6E3] flex-shrink-0">
                   <ImageWithFallback
-                    src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400"
+                    src={book.image}
                     alt={`${book.title} book cover`}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-contain bg-white group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-3 left-3">
                     <span className="bg-card/90 backdrop-blur-sm text-foreground text-[11px] px-2.5 py-1 rounded-full" style={{ fontWeight: 600 }}>

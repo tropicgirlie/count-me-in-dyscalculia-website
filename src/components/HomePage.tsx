@@ -8,8 +8,9 @@ import { BooksSection } from "./BooksSection";
 import { AccommodationsSection } from "./AccommodationsSection";
 import { WorkingMemorySimulator } from "./WorkingMemorySimulator";
 import { NumberField } from "./hero/NumberField";
+import { AudioWelcome } from "./AudioWelcome";
 import { Button } from "./ui/button";
-import { MdArrowForward, MdOutlineMenuBook, MdOutlineLightbulb, MdOutlineFavoriteBorder, MdOutlineHandyman, MdOutlinePsychology, MdOutlinePlayCircle, MdOutlineSmartphone, MdOutlinePanTool, MdOutlineAir } from "react-icons/md";
+import { MdArrowForward, MdOutlineMenuBook, MdOutlineLightbulb, MdOutlineFavoriteBorder, MdOutlineHandyman, MdOutlinePsychology, MdOutlineSmartphone, MdOutlinePanTool, MdOutlineAir } from "react-icons/md";
 import { usePageMeta, useJsonLd } from "../lib/usePageMeta";
 
 const reveal = {
@@ -39,7 +40,6 @@ export function HomePage() {
   });
 
   const [held, setHeld] = useState(false);
-  const [showNarration, setShowNarration] = useState(false);
 
   return (
     <>
@@ -113,36 +113,8 @@ export function HomePage() {
                   {held ? <MdOutlineAir className="mr-2 h-4 w-4" /> : <MdOutlinePanTool className="mr-2 h-4 w-4" />}
                   {held ? "Let them move again" : "Hold the numbers still"}
                 </Button>
-                <button
-                  type="button"
-                  onClick={() => setShowNarration((v) => !v)}
-                  aria-expanded={showNarration}
-                  className="inline-flex h-12 items-center justify-center gap-2 px-3 text-sm text-ink-muted underline-offset-4 transition-colors hover:text-ink hover:underline"
-                >
-                  <MdOutlinePlayCircle className="h-4 w-4" />
-                  Listen to guided version
-                </button>
+                <AudioWelcome />
               </motion.div>
-
-              {showNarration && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  className="max-w-sm rounded-2xl border border-ink/12 bg-card/85 p-4 shadow-elevated backdrop-blur"
-                >
-                  <audio
-                    src="/narration-audio.mp3"
-                    controls
-                    preload="metadata"
-                    className="w-full"
-                    aria-label="Optional narration for the Count Me In hero experience"
-                  />
-                  <p className="mt-2 text-xs leading-relaxed text-ink-muted">
-                    Optional audio. Use the controls above to play, pause, or adjust volume.
-                  </p>
-                </motion.div>
-              )}
 
               <motion.div
                 initial={{ opacity: 0 }}

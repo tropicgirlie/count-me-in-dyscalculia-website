@@ -11,13 +11,13 @@ Count Me In is a free, independent resource hub for adults navigating dyscalculi
 
 ## What's inside
 
-- **Home** — introduction with an optional narrated audio welcome.
+- **Home** — introduction with an optional narrated audio welcome, a working-memory demo, and a ten-second time-perception experiment.
 - **About** — what dyscalculia is (and isn't), with sourced information.
 - **Self-Check** — a reflective questionnaire; not a diagnostic test.
 - **Get Assessed** — guidance on pursuing a formal assessment.
 - **Tools & Apps** — accessibility tools and assistive apps that help with numbers, time, and working memory.
 - **Free Resources** — printable guides and strategies.
-- **Blog** — long-form posts on topics like math anxiety vs. dyscalculia, ADHD overlap, time blindness, and workplace accommodations.
+- **Blog** — long-form posts on math anxiety vs. dyscalculia, ADHD overlap, time blindness, workplace accommodations, and more.
 - **Stories** — lived experiences from the community.
 - **Books** — a verified bibliography with Amazon affiliate links.
 - **Ebook & Store** — curated downloads.
@@ -30,6 +30,19 @@ Count Me In is a free, independent resource hub for adults navigating dyscalculi
 - Full keyboard navigation and skip links.
 - Adaptive light/dark tokens tested for contrast.
 - Interactive working-memory and time-perception demos designed to be experienced, not quizzed.
+- Inline `<cite>` source attribution on every statistical claim.
+
+## SEO & AI-citation readiness
+
+The site is built to be cited by both search engines and AI answer engines.
+
+- **Sitemap** — `public/sitemap.xml` covers every route.
+- **robots.txt** — `public/robots.txt` explicitly welcomes GPTBot, ClaudeBot, Claude-Web, PerplexityBot, Google-Extended, CCBot, and Applebot-Extended.
+- **llms.txt** — `public/llms.txt` gives AI engines a Markdown index of the site, condition facts (ICD-11 `6A03.2`, prevalence, co-occurrence rates), a page and blog index, trusted sources, and citation guidance.
+- **Structured data** — `index.html` ships three JSON-LD blocks: `Organization`, `WebSite`, and a `MedicalWebPage` describing dyscalculia as a `MedicalCondition` with typical assessment, treatments, and citations to NHS, BDA, DAI, CUH, and Butterworth 2019.
+- **Social share previews** — Open Graph and Twitter card tags with `abstracthero.png` as the preview image.
+- **Favicon** — theme-aware SVG at `public/favicon.svg` that inverts under `prefers-color-scheme: dark`.
+- **Canonical URL** — set in `index.html`.
 
 ## Tech stack
 

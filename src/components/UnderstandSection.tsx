@@ -62,10 +62,38 @@ export function UnderstandSection() {
   const visibleMisconceptions = showAllMisconceptions ? misconceptions : misconceptions.slice(0, 4);
 
   const comorbidities = [
-    { name: "ADHD", percentage: "40–60%", bar: 50, description: "Attention and executive function challenges" },
-    { name: "Dyslexia", percentage: "30–40%", bar: 35, description: "Reading and language processing differences" },
-    { name: "Anxiety", percentage: "50–70%", bar: 60, description: "Often secondary to academic struggles" },
-    { name: "Depression", percentage: "20–30%", bar: 25, description: "Can develop from prolonged difficulties" },
+    {
+      name: "ADHD",
+      percentage: "40–60%",
+      bar: 50,
+      description: "Attention and executive function challenges",
+      source: "Cleveland Clinic",
+      sourceUrl: "https://my.clevelandclinic.org/health/diseases/23949-dyscalculia",
+    },
+    {
+      name: "Dyslexia",
+      percentage: "30–40%",
+      bar: 35,
+      description: "Reading and language processing differences",
+      source: "British Dyslexia Association",
+      sourceUrl: "https://www.bdadyslexia.org.uk/dyslexia/neurodiversity-and-co-occurring-differences/dyscalculia",
+    },
+    {
+      name: "Anxiety",
+      percentage: "50–70%",
+      bar: 60,
+      description: "Often secondary to academic struggles",
+      source: "Understood.org",
+      sourceUrl: "https://www.understood.org/en/articles/dyscalculia-and-anxiety",
+    },
+    {
+      name: "Depression",
+      percentage: "20–30%",
+      bar: 25,
+      description: "Can develop from prolonged difficulties",
+      source: "WebMD",
+      sourceUrl: "https://www.webmd.com/add-adhd/childhood-adhd/dyscalculia-facts",
+    },
   ];
 
   const treatments = [
@@ -249,6 +277,16 @@ export function UnderstandSection() {
                 </div>
                 <h4 className="text-sm text-ink mb-1.5" style={{ fontWeight: 600 }}>{condition.name}</h4>
                 <p className="text-xs text-ink-muted">{condition.description}</p>
+                <a
+                  href={condition.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 mt-2.5 text-[11px] text-primary/70 hover:text-primary transition-colors"
+                  aria-label={`Source: ${condition.source} (opens in new tab)`}
+                >
+                  <cite className="not-italic">{condition.source}</cite>
+                  <ExternalLink className="h-3 w-3" aria-hidden="true" />
+                </a>
               </motion.div>
             ))}
           </div>

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { MdOutlineGroups as Users, MdOutlinePsychology as Brain, MdOutlineSchedule as Clock, MdOutlineCheckCircle as CheckCircle } from "react-icons/md";
+import { MdOutlineGroups as Users, MdOutlinePsychology as Brain, MdOutlineSchedule as Clock, MdOutlineCheckCircle as CheckCircle, MdOpenInNew as ExternalLink } from "react-icons/md";
 
 function useCountUp(target: string, isVisible: boolean) {
   const [display, setDisplay] = useState(target);
@@ -44,25 +44,33 @@ export function TrustStrip() {
       icon: Users,
       number: "1 in 20",
       label: "people have dyscalculia",
-      description: "More common than you think"
+      description: "More common than you think",
+      source: "British Dyslexia Association",
+      sourceUrl: "https://www.bdadyslexia.org.uk/dyslexia/neurodiversity-and-co-occurring-differences/dyscalculia"
     },
     {
       icon: Brain,
       number: "Lifelong",
       label: "neurological difference",
-      description: "Not a learning disability"
+      description: "Not a learning disability",
+      source: "Cleveland Clinic",
+      sourceUrl: "https://my.clevelandclinic.org/health/diseases/23949-dyscalculia"
     },
     {
       icon: Clock,
       number: "Early",
       label: "recognition matters",
-      description: "Better outcomes with support"
+      description: "Better outcomes with support",
+      source: "Cambridge University Hospitals NHS",
+      sourceUrl: "https://www.cuh.nhs.uk/"
     },
     {
       icon: CheckCircle,
       number: "100%",
       label: "treatable with support",
-      description: "Accommodations work"
+      description: "Accommodations work",
+      source: "Understood.org",
+      sourceUrl: "https://www.understood.org/en/articles/treatment-options-for-dyscalculia"
     }
   ];
 
@@ -93,6 +101,16 @@ export function TrustStrip() {
                 <div className="relative z-10 text-2xl lg:text-3xl text-primary tracking-tight" style={{ fontWeight: 700 }}>{stat.number}</div>
                 <h3 className="text-sm text-foreground" style={{ fontWeight: 600 }}>{stat.label}</h3>
                 <p className="text-xs text-muted-foreground">{stat.description}</p>
+                <a
+                  href={stat.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 pt-2 text-[11px] text-primary/70 hover:text-primary transition-colors"
+                  aria-label={`Source: ${stat.source} (opens in new tab)`}
+                >
+                  <cite className="not-italic">{stat.source}</cite>
+                  <ExternalLink className="h-3 w-3" aria-hidden="true" />
+                </a>
               </div>
             </div>
           ))}

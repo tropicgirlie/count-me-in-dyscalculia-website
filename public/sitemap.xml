@@ -2,102 +2,102 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Homepage -->
   <url>
-    <loc>https://countmein.site/</loc>
+    <loc>https://www.countmein.luana.systems/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <!-- Main Pages -->
   <url>
-    <loc>https://countmein.site/about</loc>
+    <loc>https://www.countmein.luana.systems/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://countmein.site/self-check</loc>
+    <loc>https://www.countmein.luana.systems/self-check</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://countmein.site/tools</loc>
+    <loc>https://www.countmein.luana.systems/tools</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://countmein.site/blog</loc>
+    <loc>https://www.countmein.luana.systems/blog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://countmein.site/get-assessed</loc>
+    <loc>https://www.countmein.luana.systems/get-assessed</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://countmein.site/free-resources</loc>
+    <loc>https://www.countmein.luana.systems/free-resources</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://countmein.site/stories</loc>
+    <loc>https://www.countmein.luana.systems/stories</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://countmein.site/store</loc>
+    <loc>https://www.countmein.luana.systems/store</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://countmein.site/ebook</loc>
+    <loc>https://www.countmein.luana.systems/ebook</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://countmein.site/contact</loc>
+    <loc>https://www.countmein.luana.systems/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <!-- Blog Posts -->
   <url>
-    <loc>https://countmein.site/blog/math-learning-disability-vs-anxiety</loc>
+    <loc>https://www.countmein.luana.systems/blog/math-learning-disability-vs-anxiety</loc>
     <lastmod>2025-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://countmein.site/blog/what-is-dyscalculia</loc>
+    <loc>https://www.countmein.luana.systems/blog/what-is-dyscalculia</loc>
     <lastmod>2025-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://countmein.site/blog/adhd-dyscalculia-overlap</loc>
+    <loc>https://www.countmein.luana.systems/blog/adhd-dyscalculia-overlap</loc>
     <lastmod>2025-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://countmein.site/blog/time-blindness-strategies</loc>
+    <loc>https://www.countmein.luana.systems/blog/time-blindness-strategies</loc>
     <lastmod>2025-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://countmein.site/blog/women-dyscalculia-gender-gap</loc>
+    <loc>https://www.countmein.luana.systems/blog/women-dyscalculia-gender-gap</loc>
     <lastmod>2025-02-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://countmein.site/blog/workplace-accommodations-guide</loc>
+    <loc>https://www.countmein.luana.systems/blog/workplace-accommodations-guide</loc>
     <lastmod>2025-02-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://countmein.site/blog/cooking-with-dyscalculia</loc>
+    <loc>https://www.countmein.luana.systems/blog/cooking-with-dyscalculia</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

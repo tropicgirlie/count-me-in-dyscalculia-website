@@ -1,16 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="description" content="Count Me In — evidence-based dyscalculia resources, tools, and strategies for adults. Numbers can move. Support can hold them still." />
-      <title>Count Me In — Dyscalculia Support & Resources</title>
-    </head>
+    <title>Count Me In — Dyscalculia Support & Resources</title>
+    <meta name="description" content="Count Me In — evidence-based dyscalculia resources, tools, and strategies for adults. Numbers can move. Support can hold them still." />
 
-    <body>
-      <div id="root"></div>
-      <script type="module" src="/src/main.tsx"></script>
-    </body>
-  </html>
-  
+    <link rel="canonical" href="https://www.countmein.luana.systems/" />
+    <meta name="theme-color" content="#4a5d4f" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1a2420" media="(prefers-color-scheme: dark)" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Count Me In" />
+    <meta property="og:title" content="Count Me In — Dyscalculia Support & Resources" />
+    <meta property="og:description" content="Evidence-based dyscalculia resources, tools, and strategies for adults. Numbers can move. Support can hold them still." />
+    <meta property="og:url" content="https://www.countmein.luana.systems/" />
+    <meta property="og:image" content="https://www.countmein.luana.systems/abstracthero.png" />
+    <meta property="og:image:width" content="1672" />
+    <meta property="og:image:height" content="941" />
+    <meta property="og:image:alt" content="Abstract illustration representing dyscalculia support — soft shapes and flowing numbers." />
+    <meta property="og:locale" content="en_GB" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Count Me In — Dyscalculia Support & Resources" />
+    <meta name="twitter:description" content="Evidence-based dyscalculia resources, tools, and strategies for adults. Numbers can move. Support can hold them still." />
+    <meta name="twitter:image" content="https://www.countmein.luana.systems/abstracthero.png" />
+    <meta name="twitter:image:alt" content="Abstract illustration representing dyscalculia support — soft shapes and flowing numbers." />
+
+    <!-- JSON-LD: Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Count Me In",
+      "url": "https://www.countmein.luana.systems/",
+      "logo": "https://www.countmein.luana.systems/abstracthero.png",
+      "description": "Evidence-based dyscalculia resources, tools, and strategies for adults.",
+      "sameAs": []
+    }
+    </script>
+
+    <!-- JSON-LD: WebSite -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Count Me In",
+      "alternateName": "Count Me In — Dyscalculia Support & Resources",
+      "url": "https://www.countmein.luana.systems/",
+      "inLanguage": "en-GB",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Count Me In",
+        "url": "https://www.countmein.luana.systems/"
+      }
+    }
+    </script>
+
+    <!-- JSON-LD: MedicalWebPage about dyscalculia -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MedicalWebPage",
+      "name": "Count Me In — Dyscalculia Support & Resources for Adults",
+      "url": "https://www.countmein.luana.systems/",
+      "description": "Plain-language, evidence-based information about dyscalculia for adults, with practical tools, workplace accommodations, and curated resources.",
+      "inLanguage": "en-GB",
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 18,
+        "healthCondition": {
+          "@type": "MedicalCondition",
+          "name": "Dyscalculia",
+          "alternateName": "Developmental dyscalculia",
+          "description": "A specific learning difference affecting number processing, time perception, and mathematical reasoning. Lifelong, neurological, and unrelated to intelligence.",
+          "code": {
+            "@type": "MedicalCode",
+            "code": "6A03.2",
+            "codingSystem": "ICD-11"
+          }
+        }
+      },
+      "about": {
+        "@type": "MedicalCondition",
+        "name": "Dyscalculia",
+        "typicalTest": {
+          "@type": "MedicalTest",
+          "name": "Dyscalculia assessment",
+          "description": "Formal assessment by an educational psychologist or specialist diagnostician; the site offers a reflective self-check, not a diagnosis."
+        },
+        "possibleTreatment": [
+          {
+            "@type": "TherapeuticProcedure",
+            "name": "Educational accommodations",
+            "description": "Visible place-value supports, extended time, calculators, assistive technology, and scaffolded instruction."
+          },
+          {
+            "@type": "TherapeuticProcedure",
+            "name": "One-to-one tutoring",
+            "description": "Targeted work on number sense, arithmetic, and problem-solving."
+          }
+        ]
+      },
+      "citation": [
+        { "@type": "CreativeWork", "name": "NHS Service Manual — Learning differences", "publisher": "NHS" },
+        { "@type": "CreativeWork", "name": "British Dyslexia Association — Dyscalculia", "publisher": "British Dyslexia Association" },
+        { "@type": "CreativeWork", "name": "Dyslexia Association of Ireland", "publisher": "DAI" },
+        { "@type": "CreativeWork", "name": "Cambridge University Hospitals NHS Foundation Trust", "publisher": "CUH NHS FT" },
+        { "@type": "ScholarlyArticle", "name": "Butterworth et al. — dyscalculia prevalence and neurology", "datePublished": "2019" }
+      ],
+      "lastReviewed": "2025-03-01",
+      "isFamilyFriendly": true,
+      "publisher": {
+        "@type": "Organization",
+        "name": "Count Me In",
+        "url": "https://www.countmein.luana.systems/"
+      }
+    }
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

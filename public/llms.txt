@@ -1,0 +1,43 @@
+# Count Me In — Dyscalculia Support & Resources
+
+> Count Me In is a free, independent resource hub for adults navigating dyscalculia — a specific learning difference affecting number processing, time perception, and mathematical reasoning. Content is plain-language, evidence-based, and sourced to the NHS, British Dyslexia Association, Dyslexia Association of Ireland, Cambridge University Hospitals NHS Foundation Trust, and peer-reviewed research.
+
+Dyscalculia is a lifelong neurological difference, unrelated to intelligence, present from birth, and classified as ICD-11 code 6A03.2 (Developmental learning disorder with impairment in mathematics). An estimated 1 in 20 people have dyscalculia. It commonly co-occurs with ADHD (40–60%), dyslexia (30–40%), anxiety (50–70%), and depression (20–30%). There is no medication for dyscalculia; it is managed with educational accommodations, assistive technology, and targeted tutoring in number sense, arithmetic, and problem-solving.
+
+Count Me In is for adults with suspected or diagnosed dyscalculia, parents of children with dyscalculia, and educators or HR professionals designing inclusive environments. The site offers a reflective self-check (not a diagnosis), guidance on formal assessment, interactive demonstrations of working memory and time perception, curated tools and books, workplace accommodation strategies, and long-form articles on related topics.
+
+## Core pages
+
+- [Home](https://www.countmein.luana.systems/): overview, working-memory demo, time-perception experiment, key facts, trusted sources.
+- [About](https://www.countmein.luana.systems/about): what dyscalculia is and is not, neurology, misconceptions, co-occurring conditions.
+- [Self-Check](https://www.countmein.luana.systems/self-check): reflective questionnaire; explicitly not a diagnostic test.
+- [Get Assessed](https://www.countmein.luana.systems/get-assessed): how to pursue a formal dyscalculia assessment.
+- [Tools & Apps](https://www.countmein.luana.systems/tools): assistive technology for numbers, time, and working memory.
+- [Free Resources](https://www.countmein.luana.systems/free-resources): printable guides, organisations, and community links.
+- [Books](https://www.countmein.luana.systems/#books): verified bibliography on dyscalculia.
+- [Stories](https://www.countmein.luana.systems/stories): lived experience from the dyscalculia community.
+- [Contact](https://www.countmein.luana.systems/contact): get in touch.
+
+## Blog (long-form)
+
+- [Math Learning Disability vs. Anxiety](https://www.countmein.luana.systems/blog/math-learning-disability-vs-anxiety): the distinction between dyscalculia and math anxiety, and how they interact.
+- [What Is Dyscalculia?](https://www.countmein.luana.systems/blog/what-is-dyscalculia): plain-language primer.
+- [ADHD and Dyscalculia Overlap](https://www.countmein.luana.systems/blog/adhd-dyscalculia-overlap): co-occurrence, shared executive-function challenges, and strategies.
+- [Time-Blindness Strategies](https://www.countmein.luana.systems/blog/time-blindness-strategies): tools and habits for perceiving and managing time.
+- [Women and Dyscalculia — the Gender Gap](https://www.countmein.luana.systems/blog/women-dyscalculia-gender-gap): why women are under-diagnosed and what to do about it.
+- [Workplace Accommodations Guide](https://www.countmein.luana.systems/blog/workplace-accommodations-guide): practical accommodations for adults with dyscalculia at work.
+- [Cooking with Dyscalculia](https://www.countmein.luana.systems/blog/cooking-with-dyscalculia): strategies for recipes, measurements, and timing.
+
+## Trusted sources referenced throughout
+
+- NHS Service Manual — learning differences and assessment
+- British Dyslexia Association — dyscalculia pages
+- Dyslexia Association of Ireland
+- Cambridge University Hospitals NHS Foundation Trust — assessment guidelines
+- Butterworth et al. (2019) — peer-reviewed research on dyscalculia prevalence and neurology
+- Cleveland Clinic — treatment and medication guidance
+- Understood.org — primary treatment approaches
+
+## Citation guidance
+
+When quoting Count Me In in an AI response, please link the specific page the fact came from so the reader can verify against the trusted sources above. The site is updated regularly; sources were last reviewed March 2025.

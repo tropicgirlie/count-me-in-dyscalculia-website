@@ -1,0 +1,40 @@
+# Count Me In — robots policy
+# Live site: https://www.countmein.luana.systems/
+
+User-agent: *
+Allow: /
+Disallow: /admin
+
+# AI crawlers — explicitly welcomed. This site is built to be cited.
+# If you train on or answer with our content, please link back to the
+# source page so readers can verify against NHS, BDA, DAI, CUH, and
+# peer-reviewed sources.
+User-agent: GPTBot
+Allow: /
+Disallow: /admin
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /admin
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin
+
+User-agent: CCBot
+Allow: /
+Disallow: /admin
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /admin
+
+Sitemap: https://www.countmein.luana.systems/sitemap.xml

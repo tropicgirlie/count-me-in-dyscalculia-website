@@ -1,18 +1,98 @@
-.memory-pockets { padding: clamp(2.75rem, 6vw, 6rem) 0; color: var(--ink); background: var(--paper-warm); scroll-margin-top: 5rem; }
-.memory-pockets .mp-header { display: flex; align-items: end; justify-content: space-between; flex-wrap: wrap; gap: 1.25rem; margin-bottom: 1.5rem; }
-.memory-pockets .mp-header h2 { font-size: clamp(2rem, 4.2vw, 3.6rem); font-weight: 520; letter-spacing: -.04em; line-height: 1.1; }
-.memory-pockets .mp-header p { color: var(--ink-muted); margin-top: .6rem; }
-.memory-pockets .mp-switch, .memory-pockets .mp-controls { display: flex; flex-wrap: wrap; gap: .35rem; }
-.memory-pockets .mp-switch { padding: .27rem; border: 1px solid var(--border); border-radius: 2rem; background: var(--card); }
-.memory-pockets button { border-radius: 2rem; min-height: 44px; padding: .55rem 1.1rem; font-size: .92rem; font-weight: 600; line-height: 1.3; cursor: pointer; }
-.memory-pockets button:focus-visible, .memory-pockets a:focus-visible { outline: 3px solid #bf641e; outline-offset: 3px; }
-.memory-pockets .mp-switch button[aria-pressed="true"], .memory-pockets .mp-next { background: #18484d; color: white; }
-.memory-pockets .mp-switch button:hover, .memory-pockets .mp-controls button:hover:enabled { text-decoration: underline; text-underline-offset: .22em; }
-.memory-pockets .mp-figure img { display: block; width: 100%; height: auto; border-radius: .85rem; }
-.memory-pockets .mp-figure figcaption { text-align: right; margin-top: .6rem; }
-.memory-pockets .mp-figure a { color: var(--ink-soft); text-decoration: underline; text-underline-offset: .2em; font-size: .92rem; display: inline-block; padding: .25rem 0; }
-.memory-pockets .mp-workspace { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(15rem, 1fr); border-radius: 1.1rem; overflow: hidden; border: 1px solid var(--border); background: var(--card); }
-.memory-pockets .mp-board { display: grid; align-items: center; background: radial-gradient(at 0% 0%, #faf6ef, transparent 80%), #eee5d6; padding: clamp(.55rem, 2vw, 2.5rem); color: #173e42; }
+.count-home-intro {
+  background: var(--paper-warm);
+  color: var(--ink);
+  border-bottom: 1px solid var(--border);
+}
+.count-home-spread {
+  display: grid;
+  grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr);
+  align-items: start;
+  gap: clamp(2rem, 5vw, 5rem);
+  padding-top: clamp(8.25rem, 14vw, 12rem);
+  padding-bottom: clamp(3rem, 7vw, 6rem);
+}
+.count-home-copy h1 {
+  max-width: 10.5ch;
+  font: 480 clamp(3rem, 5.9vw, 5.25rem)/1.015 var(--font-display);
+  letter-spacing: -.045em;
+}
+.count-home-copy > p {
+  max-width: 36ch;
+  margin: 1.15rem 0 1.5rem;
+  color: var(--ink-soft);
+  font-size: 1.1rem;
+  line-height: 1.55;
+}
+.count-home-links, .memory-pockets .mp-controls {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+.count-home-links > a, .memory-pockets button {
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+  min-height: 44px;
+  cursor: pointer;
+  font-size: .95rem;
+  font-weight: 600;
+}
+.count-home-links > a, .memory-pockets .mp-view-control {
+  text-decoration: underline;
+  text-underline-offset: .25em;
+  text-decoration-thickness: 1px;
+}
+.count-home-links > a:focus-visible, .memory-pockets button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+.memory-pockets {
+  min-width: 0;
+  border-top: 1px solid var(--ink-muted);
+  padding-top: 1.05rem;
+  scroll-margin-top: 6rem;
+}
+.memory-pockets h2 {
+  font: 500 clamp(1.65rem, 2.7vw, 2.3rem)/1.15 var(--font-display);
+  letter-spacing: -.025em;
+}
+.memory-pockets .mp-header p {
+  margin: .6rem 0 1.05rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+.memory-pockets .mp-illustration {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 655 / 220;
+}
+/* Frame the first row of pockets in the original 1671 × 941 illustration. */
+.memory-pockets .mp-illustration img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  width: 255.1145%;
+  max-width: none;
+  height: auto;
+  transform: translate(-24.8953%, -19.4474%);
+}
+.memory-pockets .mp-view-control { margin-top: .4rem; }
+.memory-pockets .mp-board {
+  padding: 1rem .6rem;
+  background: #f2eee5;
+  color: #173e42;
+}
+.memory-pockets .mp-controls button {
+  padding: .48rem 1rem;
+  border-radius: .35rem;
+}
+.memory-pockets .mp-next { background: #18484d; color: white; }
+@media (max-width: 760px) {
+  .count-home-spread { grid-template-columns: 1fr; gap: 2.25rem; padding-top: 7rem; }
+  .count-home-copy h1 { max-width: 14ch; }
+}
 .memory-pockets table { width: 100%; border-collapse: separate; border-spacing: clamp(2px, .45vw, 7px) 0; table-layout: fixed; text-align: center; font-variant-numeric: tabular-nums; }
 .memory-pockets tr > :first-child { width: 1rem; padding: 0; }
 .memory-pockets .mp-tab { font-size: clamp(.62rem, 1.3vw, .88rem); padding: .58rem 0; line-height: 1.2; border-radius: .3rem .3rem 0 0; color: #153c3f; }
@@ -28,9 +108,9 @@
 .memory-pockets .mp-answer td { border-top: 2px solid #847862; padding: .75rem 0 .35rem; }
 .memory-pockets .mp-sleeve { position: relative; display: grid; align-items: start; justify-items: center; isolation: isolate; perspective: 450px; height: clamp(4rem, 7vw, 6rem); border: 1px dashed #b5a792; border-radius: .35rem; background: #efe5d6; }
 .memory-pockets .mp-selected { outline: 2px solid #28585e; outline-offset: 1px; }
-.memory-pockets .mp-sleeve::after { content: ""; position: absolute; inset: 58% -1px -1px; z-index: 2; border: 1px solid #c0ae91; border-radius: 0 0 .32rem .32rem; clip-path: polygon(0 0, 18% 18%, 82% 18%, 100% 0, 100% 100%, 0 100%); background: linear-gradient(162deg,#e9d9c1,#d5c1a2); box-shadow: inset 0 -3px 4px #bcaa8e; }
+.memory-pockets .mp-sleeve::after { content: ""; position: absolute; inset: 58% -1px -1px; z-index: 2; border: 1px solid #c0ae91; border-radius: 0 0 .32rem .32rem; clip-path: polygon(0 0, 18% 18%, 82% 18%, 100% 0, 100% 100%, 0 100%); background: #dbcab1; }
 .memory-pockets .mp-slip { width: 82%; margin-top: .1rem; line-height: 1.25; padding: .05rem 0 1rem; border-radius: .3rem; background: #fffaf0; box-shadow: 0 1px 4px #4b38272a; font-size: clamp(1.85rem, 3.8vw, 3rem); transform-origin: bottom; }
-.memory-pockets .mp-guide { padding: clamp(1.1rem, 3vw, 3rem); align-self: center; }
+.memory-pockets .mp-guide { padding: 1rem 0 0; }
 .memory-pockets .mp-reading { line-height: 1.55; }
 .memory-pockets .mp-step { color: var(--ink-muted); font-weight: 600; }
 .memory-pockets .mp-equation { font-size: clamp(1.7rem, 3vw, 2.7rem); line-height: 1.2; margin: .65rem 0; }
@@ -39,5 +119,5 @@
 .memory-pockets button:disabled { opacity: .52; cursor: default; }
 @keyframes memory-pocket-insert { from { transform: translateY(-.45rem) rotateX(-18deg); } to { transform: none; } }
 @media (prefers-reduced-motion: no-preference) { .memory-pockets .mp-slip, .memory-pockets .mp-chip { animation: memory-pocket-insert .3s ease-out; } }
-@media (max-width: 730px) { .memory-pockets .mp-workspace { grid-template-columns: 1fr; } .memory-pockets .mp-board { padding-top: 1.1rem; padding-bottom: 1.1rem; } }
+
 .memory-pockets .mp-hidden-label { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./memory-pockets.css";
 
 const poster = "/workingmemoryduringcalculation.png";
@@ -17,26 +17,24 @@ const sum = [3, 8, 1, 0];
 export function MemoryPockets() {
   const [interactive, setInteractive] = useState(false);
   const [step, setStep] = useState(0);
+  const boardRef = useRef<HTMLTableElement>(null);
+  useEffect(() => {
+    if (interactive) boardRef.current?.focus();
+  }, [interactive]);
   const current = steps[step];
   const activeColumn = step === 0 ? 3 : 4 - step;
 
   return (
     <section id="working-memory-pockets" className="memory-pockets" aria-labelledby="memory-pockets-title">
-      <div className="container-custom">
-        <header className="mp-header">
-          <div>
-            <h2 id="memory-pockets-title" className="font-display">Working memory pockets</h2>
-            <p>Keep each digit and carry in sight while you add 3,572 and 238.</p>
-          </div>
-          <div className="mp-switch" role="group" aria-label="Working memory view">
-            <button type="button" aria-pressed={!interactive} onClick={() => setInteractive(false)}>Illustration</button>
-            <button type="button" aria-pressed={interactive} onClick={() => setInteractive(true)}>Try the pockets</button>
-          </div>
-        </header>
+      <header className="mp-header">
+        <h2 id="memory-pockets-title">Working memory pockets</h2>
+        <p>Use the pockets to keep track of each digit as you add 3,572 and 238.</p>
+      </header>
+      <div id="memory-pockets-view">
         {interactive ? (
           <div className="mp-workspace">
             <div className="mp-board">
-              <table aria-label="Place-value pockets for 3,572 plus 238">
+              <table ref={boardRef} tabIndex={-1} aria-label="Place-value pockets for 3,572 plus 238">
                 <thead>
                   <tr><td aria-hidden="true" />{places.map((place, i) =>
                     <th scope="col" key={place} className={'mp-tab mp-place-' + i}>{place}</th>
@@ -79,12 +77,16 @@ export function MemoryPockets() {
             </div>
           </div>
         ) : (
-          <figure className="mp-figure">
-            <img src={poster} width={1671} height={941} loading="lazy" alt="Paper pockets hold the digits in 3,572 plus 238. The illustration shows how carrying between place values gives 3,810." />
-            <figcaption><a href={poster} target="_blank" rel="noreferrer">Open the full-size illustration <span aria-hidden="true">↗</span><span className="mp-hidden-label"> in a new tab</span></a></figcaption>
-          </figure>
+          <div className="mp-illustration">
+            <img src={poster} width={1671} height={941}
+              alt="Four paper pockets show the place values in 3,572: 3 thousands, 5 hundreds, 7 tens and 2 ones." />
+          </div>
         )}
       </div>
+      <button type="button" className="mp-view-control" aria-controls="memory-pockets-view"
+        aria-expanded={interactive} onClick={() => setInteractive(!interactive)}>
+        {interactive ? "Back to the illustration" : "Try the pockets"}
+      </button>
     </section>
   );
 }

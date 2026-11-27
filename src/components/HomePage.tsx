@@ -6,6 +6,7 @@ import { TrustedSourcesSection } from "./TrustedSourcesSection";
 import { UnderstandSection } from "./UnderstandSection";
 import { BooksSection } from "./BooksSection";
 import { AccommodationsSection } from "./AccommodationsSection";
+import { MemoryPockets } from "./MemoryPockets";
 import { WorkingMemorySimulator } from "./WorkingMemorySimulator";
 import { NumberField } from "./hero/NumberField";
 import { AudioWelcome } from "./AudioWelcome";
@@ -136,6 +137,7 @@ export function HomePage() {
 
       {/* Working Memory — interactive simulator */}
       <WorkingMemorySimulator />
+      <MemoryPockets />
 
       {/* Bento-style Quick Nav */}
       <section className="py-20 lg:py-24">

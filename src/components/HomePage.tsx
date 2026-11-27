@@ -5,6 +5,7 @@ import { TrustedSourcesSection } from "./TrustedSourcesSection";
 import { UnderstandSection } from "./UnderstandSection";
 import { BooksSection } from "./BooksSection";
 import { AccommodationsSection } from "./AccommodationsSection";
+import { EverydayExamples } from "./EverydayExamples";
 import { MemoryPockets } from "./MemoryPockets";
 import { WorkingMemorySimulator } from "./WorkingMemorySimulator";
 import { AudioWelcome } from "./AudioWelcome";
@@ -46,6 +47,7 @@ export function HomePage() {
             <p>Information and practical tools for adults who find numbers, time or calculations difficult.</p>
             <div className="count-home-links">
               <a href="#understand">Understand dyscalculia <MdArrowForward aria-hidden="true" /></a>
+              <a href="#everyday-examples">See everyday examples</a>
               <AudioWelcome />
             </div>
           </div>
@@ -53,6 +55,7 @@ export function HomePage() {
         </div>
       </section>
 
+      <EverydayExamples />
       <WorkingMemorySimulator />
 
       {/* Bento-style Quick Nav */}

@@ -63,6 +63,14 @@ export function Footer() {
               Get in touch
               <MdArrowOutward className="h-3 w-3 opacity-0 -translate-y-0.5 translate-x-0.5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
             </a>
+            <div id="support-count-me-in" className="space-y-2">
+              <p className="text-sm text-background/90 max-w-xs leading-relaxed">
+                If Count Me In has helped you, you can buy me a coffee to support my work on these free resources.
+              </p>
+              <a href="https://buymeacoffee.com/ltuxdub" className="inline-flex items-center gap-1 text-sm text-background underline underline-offset-4">
+                Buy me a coffee <MdArrowOutward aria-hidden="true" />
+              </a>
+            </div>
           </div>
 
           {/* Learn */}

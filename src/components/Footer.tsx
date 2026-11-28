@@ -67,7 +67,7 @@ export function Footer() {
               <p className="text-sm text-background/90 max-w-xs leading-relaxed">
                 If Count Me In has helped you, you can buy me a coffee to support my work on these free resources.
               </p>
-              <a href="https://buymeacoffee.com/ltuxdub" className="inline-flex items-center gap-1 text-sm text-background underline underline-offset-4">
+              <a href="https://buymeacoffee.com/luana.designs" className="inline-flex items-center gap-1 text-sm text-background underline underline-offset-4">
                 Buy me a coffee <MdArrowOutward aria-hidden="true" />
               </a>
             </div>
